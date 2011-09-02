@@ -1,23 +1,19 @@
 {% extends "skeleton/_body.html" %}
 
 {%hyde
-    title: "Hyde : Ready for customization"
+    title: "A blog about my mess"
     created: 2009-02-01 18:09:05
     listing: True
 %}
 
 {% block content_body %}
 
-<h2>Recent Posts</h2>
+    {% recent_posts recents 5 %}
 
-	{%recent_posts recents 5 %}
-
-	<ul>
-		{%for post in recents %}
-			<li>
-				<a href='{{post.url}}'>{{post.title}}</a>
-			</li>
-		{%endfor%}
-	</ul>
+        {%for post in recents %}
+        <h2><a href='{{ post.url }}'>{{ post.title }}</a></h2>
+            {% render_excerpt post 1500000000000000000 %}
+        {%endfor%}
+    </ul>
 
 {%endblock%}
