@@ -8,7 +8,7 @@
             <a href="{{site.listing_url}}">Home</a>
         </li>
 
-        {% for module in site.children %}
+        {% for module in site.children|sort_menu %}
             <li{% ifequal page.module module %} class="selected" {% endifequal %}>
                 <a href="{{module.listing_url}}">
                     {{module.name|unslugify}}
