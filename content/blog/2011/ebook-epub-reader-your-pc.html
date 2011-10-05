@@ -1,0 +1,73 @@
+{% extends "_post.html" %}
+
+{% hyde
+    title: An epurate ebook (epub) reader for your pc
+    created: 2011-03-20 01:16:17
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+<p>From time to time I like to be able to read e-books (epub/mobi) on my pc. I was unsatisfied of fbreader. The interface and customisations possibility are really cools, but the rendering kinda sucks (and doesn't work well for &lt;span&gt; tags that contain source code, this make unreadable most of my home made programming e-books).</p>
+
+<p>After some research I've found <a href="http://www.lucidor.org/lucidor/">lucidor</a>. Doesn't look fantastic from a first view but the rendering is good.</p>
+
+<center>
+<img src="/media/img/lucidor/lucidor1.png" />
+</center>
+
+<p>Problem: I wanted to have a dark background and a grey font and the configuration options doesn't offer that possibility. Solution: use the power of dirty hack <em>and voilà</em>, here is the result:</p>
+
+<center>
+<a href="/media/img/lucidor/lucidor2.png" />
+<img src="/media/img/lucidor/lucidor2_small.png" />
+</a></center>
+
+<p>And after some customisations (using the menu from the right mouse button):</p>
+
+<center>
+<a href="/media/img/lucidor/lucidor3.png" />
+<img src="/media/img/lucidor/lucidor3_small.png" />
+</a></center>
+
+<p>And the diffs for my dirty hack. On the file: <em>/usr/share/lucidor/chrome/content/xhtml.css</em>:</p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+<font color="#f0e68c"><b>4c4, 6</b></font><br>
+<font color="#ffdead">&lt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #ffffff;</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000;</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; color: #BBBBBB;</font><br>
+<font color="#f0e68c"><b>14c16</b></font><br>
+<font color="#ffdead">&lt; /*</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt; </font><br>
+<font color="#f0e68c"><b>16c18</b></font><br>
+<font color="#ffdead">&lt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #ffffff;</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000;</font><br>
+<font color="#f0e68c"><b>18c20</b></font><br>
+<font color="#ffdead">&lt; */</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt; </font><br>
+<font color="#f0e68c"><b>20a23</b></font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000;</font><br>
+</blockquote>
+
+<p>And on <em>/usr/share/lucidor/chrome/content/ordbrand.css</em>:</p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+<font color="#f0e68c"><b>7c7, 8</b></font><br>
+<font color="#ffdead">&lt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #ffffff !important;</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000 !important;</font><br>
+</blockquote>
+
+<p>This still isn't perfect: I didn't managed to find a way to add "j" and "k" for scrolling.</p>
+
+<p>Also, I've made a simple mobi/epub version of the <a href="http://djangobook.com">DjangoBook</a> that you can find <a href="/media/ebooks/djangobook.mobi">here</a> (<a href="/media/ebooks/djangobook.epub">epub version</a>). It doesn't include images (it was boring to do).</p>
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
