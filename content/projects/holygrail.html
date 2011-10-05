@@ -1,0 +1,136 @@
+{% extends "_staticpage.html" %}
+
+{% hyde
+    title: HolyGrail
+%}
+
+{% block article %}
+
+<p><a href="http://pypi.python.org/pypi/HolyGrail/">LAST RELEASE</a></p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+easy_install holygrail
+</blockquote>
+
+<p>Short table of content: <a href="#configuration">Configuration</a> - <a href="#download">Download</a> - <a href="#clients">Clients</a> - <a href="#bugs">Bugs</a> - <a href="#documentation">Documentation</a></p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+&gt;&gt;&gt; import holygrail<br>
+&gt;&gt;&gt; grail = holygrail.Grail()<br>
+Grail: DB doesn't exist, I'll create it<br>
+&gt;&gt;&gt; quest = grail.add_quest(&quot;Find the holygrail !&quot;)<br>
+&gt;&gt;&gt; mission = grail.add_mission(&quot;look in my kitchen&quot;, quest=quest.id)<br>
+&gt;&gt;&gt; realm = grail.add_realm(&quot;meatspace&quot;)<br>
+&gt;&gt;&gt; another_mission = grail.add_mission(&quot;Buy a coconuts to make an horse&quot;, realm=realm.id)<br>
+&gt;&gt;&gt; grail.main_view()<br>
+# will display the main view, a list of lists<br>
+&gt;&gt;&gt; mission.toggle()<br>
+</blockquote>
+
+<h2>Why</h2>
+<p>For the past year, I've tested a lot of todo list softwares. None of them have really satisfied me. Except <a href="http://getontracks.org">Tracks</a>. But Tracks is a webapp and I don't like webapp. Plus, Tracks is in RoR witch is a cool framework but a pain in the ass to deploy.</p>
+<p>Then I discovered that Tracks has a REST API. Great, let's build a ncurse client ! ... Hum, well no. This was clearly a scripting API not aiming to build a full client on it (although you can but you will be really limited). Plus I encountered stupid bugs (ie: webrick, the basic http server, breaks part of the already limited API).</p>
+<p>My answer to this frustrating experience is HolyGrail.</p>
+
+<h2>How</h2>
+<p>I believed that each software should be build as a fully documented high level library and an user interface. This way you can easily script or build your own interface that fit your needs without being limited.</p>
+
+<h2>What</h2>
+<p>HolyGrail is a fully documented high level library. It intent to manage your nexts actions in the <a href="http://en.wikipedia.org/wiki/GTD">GTD</a> way. It behave a lot like Tracks (see Differences with Tracks bellow). If you don't know how Tracks behave, read principle bellow. It's in python (writing a REST API or something similar hangs somewhere on my missions list). And I try to make it really easy to use.</p>
+<p>I also try to keep HolyGrail code simple, documented and strong. HolyGrail has been develop using <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a> so it's full of unit tests.</p>
+
+<h2>Principle</h2>
+<p>HolyGrail (like Tracks) is an implementation of the <a href="http://en.wikipedia.org/wiki/GTD">GTD's</a> next action list. In other word it's some kind of todo list. It is composed of realms (contexts), quests (projects) and missions (todos). A realm regroup missions, it generally represent a location or a situation, ie: "at work", "at home", "code". A missions is a next action, the next physical action to do to complete your goal. A quest is a succession of missions. It represents a goal. Every time what you are planning require more than one next action, create a project.</p>
+<p>Here is an example representation of what this could look like:</p>
+<p><b>Realm: my holy workplace</b></p>
+<ul>
+    <li>Mission: call Tim about the next meetings on chocolate (his phone number is 0123456789)</li>
+    <li>Mission: fix the image rendering bug by adding an exception [Project: the software we are developping]</li>
+</ul>
+<p><b>Realm: at my palace</b></p>
+<ul>
+    <li>Mission: clean my desk</li>
+    <li>Mission: find where I put my screwdriver [Project: fix my throne]</li>
+    <li>Mission: buy a huge laser [Project: world domination]</li>
+</ul>
+<p><b>Realm: reading</b></p>
+<ul>
+    <li>Mission (inactive): The pragmatic programmers, journeyman to master</li>
+    <li>Mission (inactive): Frank Herbert's Dune Tome I</li>
+    <li>Mission: continue [Project: read expert python programing]</li>
+</ul>
+<p><b>Realm: inspiration</b></p>
+<ul>
+    <li>Mission (inactive): learn to draw</li>
+    <li>Mission (inactive): is my cat able to help me dominating the world ?</li>
+</ul>
+
+<h2>Why "HolyGrail" ?</h2>
+<p>Because all the vocabulary todo/project/context wasn't funny and implicitly implicates stuff I didn't like. Plus, I found that considering that organising your life like an epic quest was much more motivating.</p>
+
+<h2>Differences with Tracks</h2>
+<p>HolyGrail</p>
+<ul>
+    <li>is in python, Tracks in <a href="http://rubyonrails.com">RoR</a>.</li>
+    <li>doesn't support notes on missions of quests. I don't find the need to add them but if you <b>really</b> believe this should be added, ask me.</li>
+    <li>doesn't manage recurring missions, use crontab or build your own software for this (and don't hesitate to share it !).</li>
+    <li>uses DateTime for tickling or due date instead of Date. This permit a more detailed management of time.</li>
+    <li>allows to put due date or a tickler on a quest. This will apply to all of his missions. Exception: if a mission have a earlier due date, this due date will be used instead.</li>
+    <li>allows to ask a missions to wait than another mission is completed before showing up.</li>
+    <li>implements nearly every other possibility of Tracks database that I have cited here.</li>
+    <li>allows you to script and to build your own interface really easily. Oh wait ... You already know that.</li>
+</ul>
+
+<h2 id="configuration">Configuration</h2>
+<p>Create a ~/.holygrailrc file. In it create a section "<em>[holygrail]</em>" and add the option <em>uri</em> according to <a href="http://www.sqlobject.org/SQLObject.html#declaring-a-connection">this documentation</a>.</p>
+<p>Sqlite uri <b>must</b> use a absolute path.</p>
+<p>Example:</p>
+<blockquote  style="background-color:#313031; color:#ffffff">
+    <font color="#00ff00"><u>[holygrail]</u></font><br>
+    <font color="#00ff00">uri</font>=<font color="#ffff00">sqlite:/home/USER/.holygrail.db</font><br>
+    </font>
+</blockquote>
+
+
+<h2 id="download">Get it</h2>
+<h3 id="release">Release</h3>
+<p><a href="http://pypi.python.org/pypi/HolyGrail/">On pypi</a>.</p>
+
+<h3>Sources</h3>
+<blockquote  style="background-color:#313031; color:#ffffff">
+<p><em>git clone git://git.worlddomination.be/python/holygrail.git</em></p>
+</blockquote>
+
+<p><a href="http://git.worlddomination.be/?p=python/holygrail.git;a=summary">Git repository</a></p>
+
+<h2 id="bugs">Bugs and feedback</h2>
+<p><em>Testing shows the presence, not the absence of bugs</em> - Edsger W. Dijkstra</p>
+<p>I'm planing to deploy <a href="http://syncwith.us/sd/">sd</a> but haven't take the time for. So, for the moment, send me <a href="../contact/">an email</a> or join <em>irc.freenode.net#holygrail</em>.</p>
+
+<p>I'll really appreciate feedback to make HolyGrail better and have a stronger code.</p>
+
+<h2>Wiki</h2>
+<p>"Coming soon"</p>
+
+<h2 id="clients">Clients</h2>
+<p>For the moment, there isn't any released client.</p>
+<p>I'm working on a ncurse client for the moment, but I haven't released it. Hit me if you want to play with it.</p>
+<p>A friend of mine is developing a web interface on his free time.</p>
+<p>If you are writing a client and want to appears here, just send me <a href="../contact/">an email</a>.</p>
+
+<h2 id="documentation">Documentation</h2>
+<p><a href="http://blog.worlddomination.be/static/holygrail/doc/index.html">Generate from the docstrings</a>.</p>
+
+<h2>Licence</h2>
+<p>HolyGrail is currently in agplv3+.</p>
+<p>"You sir are an extremist !" "Yes."</p>
+
+<h2>What's next</h2>
+<ul>
+    <li>Clients.</li>
+    <li>Consolidation of the code. I want it to be strong.</li>
+    <li>REST API or other stuff that allow to call it from others languages than python.</li>
+</ul>
+
+
+{% endblock %}
