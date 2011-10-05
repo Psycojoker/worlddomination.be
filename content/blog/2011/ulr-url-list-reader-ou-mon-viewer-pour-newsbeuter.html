@@ -1,0 +1,248 @@
+{% extends "_post.html" %}
+
+{% hyde
+    title: "ULR, url list reader ou mon viewer pour newsbeuter"
+    created: 2010-05-18 04:44:21
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+<p><b>MAJ</b>: j'ai déjà reçu mon premier patch (gloire) par taziden qui permet d'ajouter l'url courante dans un fichier "bookmarks" (touche B) donc le code qui suit n'est plus à jours.</p>
+
+<p>Situation: j'utilise <a href="http://www.newsbeuter.com">newsbeuter</a> pour lire mes RSS. C'est véritablement le meilleur lecteur de RSS sur lequel j'ai pu mettre la main, en plus il est en console. Sauf que, pour une fois la console me fait chier. En effet je lis plein de blog bayday et autre webcomics idiot et tout ce joli petit tointoin est rempli d'images ce qui ne fonctionne pas très bien en console. Surtout que j'ai une <i>queryfeed</i> avec des centaines d'éléments.</p>
+
+<p>Dans l'ordre, voici les solutions qui s'offraient à moi:</p>
+
+<ul>
+    <li>utiliser la fonction intégré à newsbeuter pour ouvrir l'url dans mon naviguateur oueb. Ça va un moment, mais c'est lent et vraiment pas efficace.</li>
+    <li>histoire d'automatiser un peu le tout je me suis fait des macro super bourrin qui ouvre 10 20 30 40 80 120 élément dans mon browser. ça marche pas mal, sauf que Ça fait souvent péter firefox, faut attendre que tout est chargé, c'est pénible.</li>
+</ul>
+
+<p>Puis finalement j'en ai eu marre et j'ai décidé de coder ma propre solution et voilà l'arrivé de ULR (vous remarquerez le subtile jeux de mot), un naviguateur web ultra minimaliste.</p>
+
+<p>Le principe est simple: vous rajoutez des urls dans un fichier (ou lui passé en argument, il les rajoutera lui même). Puis vous le lancez le browser qui naviguera dans cette liste d'urls.</p>
+
+<p>C'est du python, ça utilise webkit (le machin pour utiliser gecko était vraiment pourri en comparaison), c'est minimaliste, sans interface, juste des raccourcis clavier. J'aurais pu faire ça avec UZBL mais je n'ai pas eu le courage de chercher à comprendre comment le faire même si cela ne doit pas être bien difficile et puis quand je vois que cela tien sur moins de 200 lignes de python.</p>
+
+<p>Un jouli screenshot:</p>
+
+<center><p><a href="/media/img/ulr/ulr.png"><img src="/media/img/ulr/ulr-prev.png" alt="url screenshot preview" /></a></p></center>
+
+<p>Et parce que c'est toujours pratique pour l'utilisation, les raccourcis:</p>
+
+<ul>
+    <li><b>esc/q</b>: quitter sans modifier la liste</b></li>
+    <li><b>n/espace</b>: passe à l'url suivante (espace fait baisser l'écran aussi, j'ai eu la flemme de corriger ce bug)</li>
+    <li><b>r</b>: fait un refresh de la page courante</b></li>
+    <li><b>s</b>: sauve l'avancement dans la liste des urls (en gros supprime du fichier urls les urls déjà vu)</li>
+    <li><b>S</b>: pareil puis quitte</li>
+    <li><b>y</b>: copie l'url courante dans le clipboard de X (il faut avoir xclip installé)</li>
+    <li><b>f</b>: envoie l'url vers firefox (il faut bien entendu qu'il soit installé)</li>
+</ul>
+
+<p>Pour choper le code, un petit <em>git clone git://git.worlddomination.be/python/ulr.git</em></p>
+
+<p><b>EDIT: Le code qui suit ne correspond plus au master.</b></p>
+
+<p>Et parce qu'il n'est pas très long mais bien dégeux (je n'avais aucun intérêt à le faire propre), voici le code:</p>
+
+<blockquote style="background-color:#313031; color:#ffffff">
+<font color="#ffdfad">#!/usr/bin/python</font><br>
+<font color="#ffdfad"># -*- coding:Utf-8 -*-</font><br>
+<br>
+<font color="#f7e78c"><b>import</b></font>&nbsp;gtk<br>
+<font color="#f7e78c"><b>import</b></font>&nbsp;os<br>
+<font color="#f7e78c"><b>import</b></font>&nbsp;sys<br>
+<br>
+<font color="#f7e78c"><b>import</b></font>&nbsp;webkit<br>
+<font color="#f7e78c"><b>import</b></font>&nbsp;gobject<br>
+<br>
+<font color="#f7e78c"><b>class</b></font>&nbsp;<font color="#9cfb9c">Browser</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">delete_event</font>(self, widget, event, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>return</b></font>&nbsp;<font color="#bdb66b"><b>False</b></font><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">destroy</font>(self, widget, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>main_quit()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">open_list</font>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls = <font color="#9cfb9c">open</font>(<font color="#ffa2a5">&quot;urls&quot;</font>, <font color="#ffa2a5">&quot;r&quot;</font>)<span style="background-color: #313031"><font color="#ffffff">.</font></span>readlines()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;<font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls) == <font color="#ffa2a5">0</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;List empty, fill list before launching&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys<span style="background-color: #313031"><font color="#ffffff">.</font></span>exit(<font color="#ffa2a5">0</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls), self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">__init__</font>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gobject<span style="background-color: #313031"><font color="#ffffff">.</font></span>threads_init()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window = gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>Window(gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>WINDOW_TOPLEVEL)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_resizable(<font color="#bdb66b"><b>True</b></font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window<span style="background-color: #313031"><font color="#ffffff">.</font></span>connect(<font color="#ffa2a5">&quot;delete_event&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>delete_event)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window<span style="background-color: #313031"><font color="#ffffff">.</font></span>connect(<font color="#ffa2a5">&quot;destroy&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>destroy)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window<span style="background-color: #313031"><font color="#ffffff">.</font></span>connect(<font color="#ffa2a5">&quot;key-press-event&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>keyboard_cb)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>open_list()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position = <font color="#ffa2a5">0</font><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#webkit.WebView allows us to embed a webkit browser</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#it takes care of going backwards/fowards/reloading</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#it even handles flash</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view = webkit<span style="background-color: #313031"><font color="#ffffff">.</font></span>WebView()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span><font color="#9cfb9c">open</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[<font color="#ffa2a5">0</font>][:-<font color="#ffa2a5">1</font>])<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#entry bar for typing in and display URLs, when they type in a site</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#and hit enter the on_active function is called</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>url_bar = gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>Entry()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>url_bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>connect(<font color="#ffa2a5">&quot;activate&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>on_active)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>bar = gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>Label()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_single_line_mode(<font color="#bdb66b"><b>True</b></font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_text(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[<font color="#ffa2a5">0</font>][:-<font color="#ffa2a5">1</font>] + <font color="#ffa2a5">&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;</font>&nbsp;+ <font color="#ffa2a5">&quot;</font><font color="#ffdfad">%i</font><font color="#ffa2a5">/</font><font color="#ffdfad">%i</font><font color="#ffa2a5">&quot;</font>&nbsp;% (self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position + <font color="#ffa2a5">1</font>, <font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls)))<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#anytime a site is loaded the update_buttons will be called</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>connect(<font color="#ffa2a5">&quot;load_committed&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>update_buttons)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scroll_window = gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>ScrolledWindow(<font color="#bdb66b"><b>None</b></font>, <font color="#bdb66b"><b>None</b></font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;scroll_window<span style="background-color: #313031"><font color="#ffffff">.</font></span>add(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view)<br>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vbox = gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>VBox(<font color="#bdb66b"><b>False</b></font>, <font color="#ffa2a5">0</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vbox<span style="background-color: #313031"><font color="#ffffff">.</font></span>pack_start(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>bar, <font color="#bdb66b"><b>False</b></font>, <font color="#bdb66b"><b>True</b></font>, <font color="#ffa2a5">0</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vbox<span style="background-color: #313031"><font color="#ffffff">.</font></span>add(scroll_window)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window<span style="background-color: #313031"><font color="#ffffff">.</font></span>add(vbox)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>window<span style="background-color: #313031"><font color="#ffffff">.</font></span>show_all()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">on_active</font>(self, widge, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffa2a5">'''When the user enters an address in the bar, we check to make</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sure they added the <a href="http://">http://</a>, if not we add it for them.&nbsp;&nbsp;Once</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; the url is correct, we just ask webkit to open that site.'''</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url = self<span style="background-color: #313031"><font color="#ffffff">.</font></span>url_bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_text()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>try</b></font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url<span style="background-color: #313031"><font color="#ffffff">.</font></span>index(<font color="#ffa2a5">&quot;://&quot;</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>except</b></font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url = <font color="#ffa2a5">&quot;<a href="http://">http://</a>&quot;</font>+url<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>url_bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_text(url)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span><font color="#9cfb9c">open</font>(url)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">go_back</font>(self, widget, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffa2a5">'''Webkit will remember the links and this will allow us to go</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; backwards.'''</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>go_back()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">go_forward</font>(self, widget, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffa2a5">'''Webkit will remember the links and this will allow us to go</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; forwards.'''</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>go_forward()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">refresh</font>(self, widget, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffa2a5">'''Simple makes webkit reload the current back.'''</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span><font color="#9cfb9c">reload</font>()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">update_buttons</font>(self, widget, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffa2a5">'''Gets the current url entry and puts that into the url bar.</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; It then checks to see if we can go back, if we can it makes the</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; back button clickable.&nbsp;&nbsp;Then it does the same for the foward</font><br>
+<font color="#ffa2a5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; button.'''</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>url_bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_text( widget<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_main_frame()<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_uri() )<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">main</font>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>main()<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">keyboard_cb</font>(self, widget, event, data=<font color="#bdb66b"><b>None</b></font>):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#84cfef">#print &quot;event:&quot;, event</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;keyname = gtk<span style="background-color: #313031"><font color="#ffffff">.</font></span>gdk<span style="background-color: #313031"><font color="#ffffff">.</font></span>keyval_name(event<span style="background-color: #313031"><font color="#ffffff">.</font></span>keyval)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;keyname<br>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;Escape&quot;</font>&nbsp;<font color="#f7e78c"><b>or</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;q&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;call deleting&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>destroy(widget)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;space&quot;</font>&nbsp;<font color="#f7e78c"><b>or</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;n&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;next&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span><font color="#9cfb9c">next</font>()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;r&quot;</font>&nbsp;<font color="#f7e78c"><b>or</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;R&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;reload&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>refresh(<font color="#ffa2a5">&quot;widget&quot;</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;b&quot;</font>&nbsp;<font color="#f7e78c"><b>or</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;p&quot;</font>&nbsp;<font color="#f7e78c"><b>or</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;Backspace&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;previous&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>previous()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;s&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;saving&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>save()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;S&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;saving&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>save()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;destroying&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>destroy(<font color="#ffa2a5">&quot;widget&quot;</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;y&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;copy to clipboard&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;os<span style="background-color: #313031"><font color="#ffffff">.</font></span>system(<font color="#ffa2a5">'echo -n &quot;</font><font color="#ffdfad">%s</font><font color="#ffa2a5">&quot; | xclip -i'</font>&nbsp;% self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_main_frame()<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_uri()):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;#fail&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;keyname == <font color="#ffa2a5">&quot;f&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;go to firefox&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;os<span style="background-color: #313031"><font color="#ffffff">.</font></span>system(<font color="#ffa2a5">&quot;firefox </font><font color="#ffdfad">%s</font><font color="#ffa2a5">&quot;</font>&nbsp;% self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_main_frame()<span style="background-color: #313031"><font color="#ffffff">.</font></span>get_uri()):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;#fail&quot;</font><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">save</font>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;urls = <font color="#9cfb9c">open</font>(<font color="#ffa2a5">&quot;urls&quot;</font>, <font color="#ffa2a5">&quot;w&quot;</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>for</b></font>&nbsp;i <font color="#f7e78c"><b>in</b></font>&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position + <font color="#ffa2a5">1</font>:]:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;urls<span style="background-color: #313031"><font color="#ffffff">.</font></span>write(i)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">next</font>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;was:&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position &lt; <font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls) - <font color="#ffa2a5">1</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;go forwarf&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position + <font color="#ffa2a5">1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position += <font color="#ffa2a5">1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;loading:&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position][:-<font color="#ffa2a5">1</font>]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span><font color="#9cfb9c">open</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position][:-<font color="#ffa2a5">1</font>])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_text(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position][:-<font color="#ffa2a5">1</font>] + <font color="#ffa2a5">&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;</font>&nbsp;+ <font color="#ffa2a5">&quot;</font><font color="#ffdfad">%i</font><font color="#ffa2a5">/</font><font color="#ffdfad">%i</font><font color="#ffa2a5">&quot;</font>&nbsp;% (self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position + <font color="#ffa2a5">1</font>, <font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls)))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position == <font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls) - <font color="#ffa2a5">1</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;show finish&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position + <font color="#ffa2a5">1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = <font color="#ffa2a5">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;Finish&lt;/h1&gt;&lt;h3&gt;One more step forward and the browser will quit and empty the list&lt;/h3&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;'</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>load_string(data, <font color="#ffa2a5">'text/html'</font>, <font color="#ffa2a5">&quot;utf-8&quot;</font>, <font color="#ffa2a5">&quot;about&quot;</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position += <font color="#ffa2a5">1</font><br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>else</b></font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;end ? saving ? destroy&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>save()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>destroy(<font color="#ffa2a5">&quot;widget&quot;</font>)<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>def</b></font>&nbsp;<font color="#9cfb9c">previous</font>(self):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;was:&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position &gt; <font color="#ffa2a5">0</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;go back&quot;</font>, self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position - <font color="#ffa2a5">1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position -= <font color="#ffa2a5">1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span><font color="#9cfb9c">open</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position][:-<font color="#ffa2a5">1</font>])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>bar<span style="background-color: #313031"><font color="#ffffff">.</font></span>set_text(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls[self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position][:-<font color="#ffa2a5">1</font>] + <font color="#ffa2a5">&quot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;</font>&nbsp;+ <font color="#ffa2a5">&quot;</font><font color="#ffdfad">%i</font><font color="#ffa2a5">/</font><font color="#ffdfad">%i</font><font color="#ffa2a5">&quot;</font>&nbsp;% (self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position + <font color="#ffa2a5">1</font>, <font color="#9cfb9c">len</font>(self<span style="background-color: #313031"><font color="#ffffff">.</font></span>urls)))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>elif</b></font>&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position == <font color="#ffa2a5">0</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>position -= <font color="#ffa2a5">1</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>print</b></font>&nbsp;<font color="#ffa2a5">&quot;show begin&quot;</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = <font color="#ffa2a5">'&lt;html&gt;&lt;head&gt;&lt;title&gt;Hello&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;center&gt;&lt;h1&gt;Begin&lt;/h1&gt;&lt;/center&gt;&lt;/body&gt;&lt;/html&gt;'</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self<span style="background-color: #313031"><font color="#ffffff">.</font></span>web_view<span style="background-color: #313031"><font color="#ffffff">.</font></span>load_string(data, <font color="#ffa2a5">'text/html'</font>, <font color="#ffa2a5">&quot;utf-8&quot;</font>, <font color="#ffa2a5">&quot;about&quot;</font>)<br>
+<br>
+<font color="#f7e78c"><b>if</b></font>&nbsp;<font color="#bdb66b"><b>__name__</b></font>&nbsp;== <font color="#ffa2a5">&quot;__main__&quot;</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;<font color="#9cfb9c">len</font>(sys<span style="background-color: #313031"><font color="#ffffff">.</font></span>argv) &gt; <font color="#ffa2a5">1</font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;__dir__ = os<span style="background-color: #313031"><font color="#ffffff">.</font></span>path<span style="background-color: #313031"><font color="#ffffff">.</font></span>dirname(os<span style="background-color: #313031"><font color="#ffffff">.</font></span>path<span style="background-color: #313031"><font color="#ffffff">.</font></span>abspath(<font color="#bdb66b"><b>__file__</b></font>))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#9cfb9c">open</font>(os<span style="background-color: #313031"><font color="#ffffff">.</font></span>path<span style="background-color: #313031"><font color="#ffffff">.</font></span>join(__dir__, <font color="#ffa2a5">&quot;urls&quot;</font>), <font color="#ffa2a5">&quot;a&quot;</font>)<span style="background-color: #313031"><font color="#ffffff">.</font></span>write(sys<span style="background-color: #313031"><font color="#ffffff">.</font></span>argv[<font color="#ffa2a5">1</font>] + <font color="#ffa2a5">&quot;</font><font color="#ffdfad">\
+</font><font color="#ffa2a5">&quot;</font>)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>else</b></font>:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser = Browser()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser<span style="background-color: #313031"><font color="#ffffff">.</font></span>main()<br>
+<br>
+
+</blockquote>
+
+<p>Remarque: rien ne vous empêche de combiner ULR avec rsstail ou n'importe quel autre script ou programme.</p>
+
+<p>Feel free to send patchs</p>
+
+<p>Pour le configurer dans newsbeur, rajouter le simplement en browser, cela ne le lancera mais rajoutera l'url dans la liste des urls à lire, puis pour lire cette liste d'url il faudra lancer ulr manuellement.</p>
+
+<p>Si vous trouvez l'ajout de fichiers lents via ulr.py, rien ne vous empêche de créer un script bash qui fait un <em>echo $1 >> /path/vers/le/fichier/urls</em></p>
+
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
