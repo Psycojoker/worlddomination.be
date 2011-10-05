@@ -1,0 +1,41 @@
+{% extends "_staticpage.html" %}
+
+{% hyde
+    title: "Url List Reader"
+%}
+
+{% block article %}
+
+<h3>Présentation</h3>
+<p>Le principe est simple: vous rajoutez des urls dans un fichier (ou les passé en argument à ULR, il les rajoutera lui même). Puis vous le lancez le browser qui naviguera dans cette liste d'urls.</p>
+
+<h3>Screenshot</h3>
+
+<a href="/media/img/ulr/ulr.png"><img src="/media/img/ulr/ulr-prev.png" alt="url screenshot preview" /></a>
+
+<h3>Raccourcis</h3>
+<ul>
+    <li><b>esc/q</b>: quitter sans modifier la liste</b></li>
+    <li><b>n/espace</b>: passe à l'url suivante (espace fait baisser l'écran aussi, j'ai eu la flemme de corriger ce bug)</li>
+    <li><b>r</b>: fait un refresh de la page courante</b></li>
+    <li><b>s</b>: sauve l'avancement dans la liste des urls (en gros supprime du fichier urls les urls déjà vu)</li>
+    <li><b>S</b>: pareil puis quitte</li>
+    <li><b>y</b>: copie l'url courante dans le clipboard de X (il faut avoir xclip installé)</li>
+    <li><b>f</b>: envoie l'url vers firefox (il faut bien entendu qu'il soit installé)</li>
+    <li><b>B</b>: enregistre l'url courante dans un fichier nomé "bookmarks"</li>
+</ul>
+
+<h3>Get the code</h3>
+<p><em>git clone git://git.worlddomination.be/python/ulr.git</em></p>
+
+<h3>Remarques</h3>
+<ul>
+    <li>Conçu pour être utilisé comme « browser » dans <a href="http://www.newsbeuter.org">newsbeuter</a></li>
+    <li>Rien ne vous empêche de combiner ULR avec rsstail ou n'importe quel autre script ou programme</li>
+</ul>
+
+<h3>Config pour newsbeuter</h3>
+<p>Simplement rajouter ulr comme browser dans le fichier de config de newsbeuter. Quand vous lancerez le browser (o) cela rajoutera l'url à la liste des urls à lire, puis après il faudra lancer ulr manuelement pour pouvoir parcourrir cette liste d'urls.</p>
+
+
+{% endblock %}
