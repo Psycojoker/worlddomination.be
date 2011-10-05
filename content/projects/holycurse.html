@@ -1,0 +1,63 @@
+{% extends "_staticpage.html" %}
+
+{% hyde
+    title: HolyCurse
+%}
+
+{% block article %}
+
+<b>Most important command: h display the commands list</b>
+
+<h3>Commandes</h3>
+<h4>Main view mode</h4>
+<ul>
+    <li><b>q</b> exit</li>
+    <li><b>j/k</b> move up/down (up and down will work to but not in the good way)</li>
+    <li><b>space</b> toggle the current mission<br />If the mission have a question, a new mission description will be ask after the toggling (enter nothing to avoid creating a new mission)</li>
+    <li><b>a</b> append a new mission to the current realm (broken on the "in X time" pseudo-realms, will just take the realm of the current todo)</li>
+    <li><b>n</b> add a new misison to the default realm</li>
+    <li><b>d</b> remove the current mission (<b>warning: NO UNDO)</b></li>
+    <li><b>r</b> rename the current mission</li>
+    <li><b>c</b> add a new completed mission (ie: "I've done that and I want to add it for historic")</li>
+    <li><b>C</b> move current mission to a new realm</li>
+    <li><b>R</b> toggle the current mission and recreate one with the same description</li>
+    <li><b>+</b> tickle a mission for one day</li>
+    <li><b>=</b> tickle a mission for 3 hours</li>
+    <li><b>t</b> set the due date of the mission to today</li>
+    <li><b>T</b> set the due date of the mission for in 3 days</li>
+    <li><b>w</b> set the due date of the mission for in one week</li>
+    <li><b>W</b> remove any due date one the current mission</li>
+    <li><b>p</b> add a quest to the current mission (if a quest with a same description exist, no new quest will be created)</li>
+    <li><b>s</b> "swap". Create a new quest with the mission description and ask for the description of a new mission for this quest</li>
+    <li><b>2</b> move to the realm view</li>
+    <li><b>:</b> will enter command line (useless for the moment)</li>
+</ul>
+
+<h4>Realm view</h4>
+<ul>
+    <li><b>q</b> exit</li>
+    <li><b>1</b> move to the main view</li>
+    <li><b>j/k</b> move up/down (up and down will work to but not in the good way)</li>
+    <li><b>J/K</b> move the position of the current realm up/down</li>
+    <li><b>space</b> toggle if a realm if hidden</li>
+    <li><b>a/n</b> add a new realm</li>
+    <li><b>r</b> rename the current realm</li>
+    <li><b>d</b> delete the current realm. <b>WARNING</b> will not work if the realm still has visible todos. All the ancien todos will me moved to the default realm. You <b>can't</b> remove the default realm</li>
+</ul>
+
+<h4>In user input</h4>
+<ul>
+    <li><b>enter</b> finish the user input</li>
+    <li>most of the time, entering nothing will result in annulation of the current action</li>
+</ul>
+
+<h4>In chosing a realm mode (the C command in main view)</h4>
+<ul>
+    <li><b>q</b> return to the main view (do nothing)</li>
+    <li><b>j/k</b> move up/down (up and down will work to but not in the good way)</li>
+    <li><b>enter</b> select the current realm</li>
+</ul>
+</ul>
+
+
+{% endblock %}
