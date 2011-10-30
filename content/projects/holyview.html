@@ -1,0 +1,36 @@
+{% extends "_staticpage.html" %}
+
+{% hyde
+    title: HolyView
+%}
+
+{% block article %}
+
+<p>Current version is 0.1 (it's a beta).</p>
+
+<p>HolyView is a ncurse tool design for long term organisation. It's purpose is to help you chose what to do now to be the most effective in the long term. It is based on a time management approach describe by Stephen Covey. It's interface is sort of vim-ish.</p>
+
+<p>The principle is simple: take a set of things or sector in which you want to invest yourself (code project, studies, work, saving the world, building a huge lazor, family...). Sort them by importance, then sort them by urgency. Now you can classify them in 4 categories: urgent and import, import, urgent, non-urgent and non-important. In an ideal world you should only focus on important things. Also on important and urgent things, but the purpose on focusing on important things is to complete them before they became urgent. The two others categories should be ignored.</p>
+
+<p>HolyView specific concept: you can add "points" to a thing. I do this when I have worked on this thing. The date a point is add is stored, this will allow the creation of monitoring graphics will be easy.</p>
+
+<p>You can also mark a task as completed, this will hide it from the list and won't show it by default.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/First_Things_First_(book)">More details on this time management method</a>.</p>
+
+<p>Screenshots:</p>
+<center>
+<img src="/media/img/holyview/holyview1.png" />
+<br><br>
+<img src="/media/img/holyview/holyview2.png" />
+</center>
+
+<p>Installation: <em>sudo python setup.py install</em></p>
+
+<p>HolyView is also available on pypi: <em>sudo easy_install holyview</em></p>
+
+<p>Dependencies: louie and urwid (at least 0.9.9)</p>
+
+<p>Data are stored using cPickle.</p>
+
+{% endblock %}
