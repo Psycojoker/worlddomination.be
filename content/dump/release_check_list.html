@@ -1,0 +1,38 @@
+{% extends "_staticpage.html" %}
+
+{% hyde
+    title: Check list pour faire une release
+%}
+
+{% block article %}
+
+TODO: totomatiser tout ça dans un makefile si possible.
+
+<ul>
+    <li><a href="/admin/blog/post/add/">Faire un poste de blog</a></li>
+    <li>Updater sur <a href="http://freshmeat.net/">FreshMeat</a>:
+    <ul>
+        <li><a href="http://freshmeat.net/projects/new">Ajouter un nouveau projet</a></li>
+        <li><a href="http://freshmeat.net/projects/holygrail">HolyGrail</a>, <a href="http://freshmeat.net/projects/holygrail/releases/new">nouvelle release</a></li>
+    </ul>
+    </li>
+    <li><a href="http://pypi.python.org/pypi">PyPI</a>
+    <ul>
+        <li><a href="http://pypi.python.org/pypi?%3Aaction=submit_form">Nouveau projet</a></li>
+        <li><a href="http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=HolyGrail">HolyGrail</a></li>
+        <li><a href="http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=HolyView">HolyView</a></li>
+        <li><a href="http://pypi.python.org/pypi?%3Aaction=pkg_edit&name=PipeTK">PipeTK</a></li>
+    </ul>
+    </li>
+    <li>Faire un tarball (pypi en fournit un chaque fois me semble, celui que j'upload).</li>
+    <li>Avoir fait un joli README en markdown</li>
+    <li>Avoir un projet synchro sur <a href="https://github.com/">github</a> (<a href="https://github.com/repositories/new">nouveau projet</a>) et <a href="https://gitorious.org/">gitorious</a> (<a href="https://gitorious.org/projects/new">ajouter un nouveau projet</a>).</li>
+    <li>L'annoncer sur <a href="http://identi.ca/">identi.ca</a></li>
+    <li>Updater le fichier CHANGELOG</li>
+    <li>Tagger la release dans git</li>
+    <li>Augmenter le release number dans le setup.py (et la constante dans un fichier si y en a une)</li>
+    <li>Mettre à jour la documentation si il y en a une, sinon la générer (avec sphinx)</li>
+</ul>
+
+
+{% endblock %}
