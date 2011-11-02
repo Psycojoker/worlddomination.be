@@ -1,0 +1,27 @@
+{% extends "_staticpage.html" %}
+
+{% hyde
+    title: FeedsTail
+%}
+
+{% block article %}
+
+<p>Feedstail is a software that reads and display a RSS/Atom feed and like a tail -f would do it on a file. This behavior allow a lot of <a href="ungarage.html">stream scripting</a>.</p>
+
+<p>For those who already know it, Feedstail is a python clone of <a href="http://www.vanheusden.com/rsstail/">rsstail</a>.</p>
+
+<p>The main differences are:</p>
+<ul>
+    <li>a much more smaller code base (thanks to python) that allow it to be much more easier to hack</li>
+    <li>a much more powerful output formatting capacity (but more complicated to use, it plays with the .format function of python)</li>
+    <li>the ability to choose any element of the feed as the unique key (therefore avoid displaying an old item only because the title has changed)</li>
+</ul>
+
+<p>To install it just do</p>
+<blockquote  style="background-color:#313031; color:#ffffff">
+sudo easy_install feedstail
+</blockquote>
+
+<p><a href="http://pypi.python.org/pypi/feedstail">More information of the pypi page</a></p>
+
+{% endblock %}
