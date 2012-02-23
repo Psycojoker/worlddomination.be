@@ -11,9 +11,13 @@
     {% recent_posts recents 5 %}
 
         {%for post in recents %}
-        <h2><a href='{{ post.url }}'>{{ post.title }}</a></h2>
+        <h2 style="margin-bottom: 0px; padding-bottom: 0px;"><a href='{{ post.url }}'>{{ post.title }}</a></h2>
+            <!--<p>{{ post.created }}</p>-->
+            <!--<p style="font-size:small; marrin-top: 0px;">{{ post.created }}</p>-->
             {% render_excerpt post 1500000000000000000 %}
         {%endfor%}
     </ul>
+
+<p style="text-align: center"><a href="/blog/atom.xml">Atom feed</a></p>
 
 {%endblock%}
