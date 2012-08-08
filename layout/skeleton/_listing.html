@@ -6,11 +6,13 @@
 {% block content_body %}
 
 <div class="page-listing">
-	{% for node in page.node.walk|dictsortreversed:"name" %}
-		{% include "skeleton/_innerlisting.html" %}
-	{% endfor %}
+    {% for node in page.node.walk|dictsortreversed:"name" %}
+        {% include "skeleton/_innerlisting.html" %}
+    {% endfor %}
 </div>
 
 <div class="clear"></div>
+
+<p style="text-align: center;"><a href="atom.xml">Atom feed</a></p>
 
 {% endblock %}

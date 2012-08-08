@@ -1,1 +1,1 @@
-{%extends "skeleton/_atom.xml"%}
+{% extends "skeleton/_atom.xml" %}

@@ -98,9 +98,11 @@ ul.breadcrumbs {
     margin-bottom:.5em;
 }
 
-.post-date{
-    float:right;
-    font-style:italic;
-    font-size:.8em;
-    
+small.post-details {
+    float: right;
+    padding-top: 5px;
+}
+
+small.post-details a {
+    text-decoration: none;
 }
