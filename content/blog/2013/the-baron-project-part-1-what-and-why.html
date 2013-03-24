@@ -1,0 +1,122 @@
+{% extends "_post.html" %}
+
+{% hyde
+    title: The Baron project, part 1, what and why
+    created: 2013-03-22 00:18:47
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+It appears that since I spend (way too much) time writing code, I apparently
+[should be writing](http://pyvideo.org/video/1786/if-you-code-you-should-write),
+even if I'm apparently not sure that this will interest people. So, let's go
+down this path again fighting my procrastination and my perfectionism daemons
+while sharing what I'm doing and what I'm discovering.
+
+Let's start with why, how and what I'm doing on (one of) my (too many) last project.
+
+The Baron project
+=================
+
+What is it?
+-----------
+
+The Baron project goal is to a create an AST for the python programming
+language that guarantees a lossless conversion between the source code and the
+AST.
+
+Not clear? Let's start with definitions.
+
+AST stands for "abstract syntax tree", it is an abstract representation of what
+some source code file means from the compiler/interpreter point of view.
+
+In general, when you execute (or compile) some source code, for e.g by doing
+"python my_script.py", the interpreter/compiler will parse the source file,
+transform it into an AST, then transform this AST into something he understand
+(bytecode for example). (The reality is more complicated with a lot more steps).
+
+While this is the most frequent use of an AST, this is not the only one: it can
+be use for everything related to code analysis, modification, creating tools,
+modifying the inner representation of code before sending it to the interpreter
+(some libs do that, for e.g. [py.test](http://pytest.org/) does this with the
+asserts) etc... Those are the case that are interesting me.
+
+So Baron is going to offer you an AST for the python language where the
+operation: <code>source code → Baron's AST → source code</code> will give an identical source
+code.
+
+But, some stuff already exist!
+------------------------------
+Yes, python standard lib allows you very easily to play with [python's
+AST](http://docs.python.org/2/library/ast.html) which is very cool. The
+problems are that:
+
+* this AST is made to be compiled afterward into python bytecode
+* there it is dropping useless information for that operation, like the comments and the exact spacing between words, the actual indentation etc...
+* therefor this is not a lossless conversion
+* once you have modified this AST, you can't easily turn it back into source code
+* this makes it a very poor tool to write refactoring operations (since you can't easily go back to a source code version)
+* so you are stuck with code analysis and AST modification (before sending it to the interpreter)
+* which is kinda okay but not very cool, since the recommended way to play with it is with event driven parsers (like SAX vs XPATH) which are cool for bytecode transformation, but not really for the rest
+* you can do this another ways (which a shitload of <code>isinstance</code> everywhere) but none of them are very cool or pleasant to use (I've already done that several times)
+* and there is zero cool features nor cool libs built on top of that (for good reason I think) so this is just not cool to use
+
+There are several other existing tools, but none of them guaranteed a lossless
+conversion. The closest one is [this tokenize lib](http://docs.python.org/2/library/tokenize.html)
+that is [very close to a lossless conversion](http://docs.python.org/2/library/tokenize.html#tokenize.untokenize)
+but which is not made for it (and I was too lazy to hack it for that, and it's "only" the tokenizing part).
+
+Why?
+----
+
+This question is already partially answered, but let's hit the nail one last
+time. So, having an AST with a lossless conversion with the source code will
+allow, among other things:
+
+* solving most of the problems I've talked about with the current python AST (note: this new AST as strictly not the objective of replacing the current one, it's totally for another focus)
+* very easily build refactoring tools
+* increase the chance that other people than me will built them (the current situation in python is very poor)
+* easier write code generation tools
+* easier write code conversion tools (for example, one friend wanted to do a <code>python ←→ javascript</code> tool but the current available tools don't really permit that in a lossless fashion)
+* easier code manipulation and modification (you want to redo smalltalk class browser? This will be way more easier)
+* all the cool things I haven't though about
+
+Also, a fun consequence: once you have this high level AST, if you add a
+conversion between this AST and another format, you'll be able to edit you
+python code in this format and convert it back to its original (or modified)
+source code. For example: if you transform this AST into xml, you'll be able to
+use BeautifulSoup or lxml or xpath or xslt on your python source code. I'm not
+sure if this will useful but I like this idea.
+
+Plan of battle
+--------------
+
+My current strategy can be summarize by one quote from [this very interesting article](http://prog21.dadgum.com/30.html):
+
+<blockquote>
+<i>The details of this paper aren't quite as important as the general concept: a
+compiler is nothing more than a series of transformations of the internal
+representation of a program. The authors promote using <b>dozens or hundreds of
+compiler passes</b>, each being as simple as possible. Don't combine
+transformations; keep them separate.</i>
+</blockquote>
+
+The plan:
+
+* split the source file into what could be tokens ← this part is done, I'll write a post explaining how it works
+* regroup things that can be regroup, the split being simply stupid he'll split "+=" into "+" and "=", we need to regroup those things
+* tokenize every elements
+* decide how I want this AST to be
+* probably do one or two pass (or more) to create this AST from the tokens, maybe I'll use some kind of yacc, dunno yet
+
+You can find the current version of the code [here](https://github.com/Psycojoker/baron).
+
+Next post will probably be on how I've written the splitting part.
+
+Thanks for reading and have a nice day,
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
