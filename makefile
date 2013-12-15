@@ -12,7 +12,7 @@ run:
 stop:
 	killall webfsd
 
-deploy:
+deploy: all
 	[ -e "/usr/local/bin/git-up" ] || (sudo pip install git-up)
 	git up
 	git add .
@@ -21,4 +21,4 @@ deploy:
 	git push
 
 loop:
-	while true; do inotifywait -e modify content/**/*; make; done
+	while true; do make; inotifywait -e modify content/**/*; done
