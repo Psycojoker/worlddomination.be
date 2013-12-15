@@ -19,3 +19,6 @@ deploy:
 	git commit -am "update"
 	rsync -r deploy/* bram@worlddomination.be:www/
 	git push
+
+loop:
+	while true; do inotifywait -e modify content/**/*; make; done
