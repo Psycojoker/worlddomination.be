@@ -17,5 +17,5 @@ deploy:
 	git up
 	git add .
 	git commit -am "update"
-	rsync -r deploy/* bram@vim-fr.org:www/
+	rsync -r deploy/* bram@worlddomination.be:www/
 	git push
