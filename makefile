@@ -13,6 +13,8 @@ stop:
 	killall webfsd
 
 deploy:
+	[ -e "/usr/local/bin/git-up" ] || (sudo pip install git-up)
+	git up
 	git add .
 	git commit -am "update"
 	rsync -r deploy/* bram@vim-fr.org:www/
