@@ -12,11 +12,12 @@ run:
 stop:
 	killall webfsd
 
-deploy: all
+deploy:
 	[ -e "/usr/local/bin/git-up" ] || (sudo pip install git-up)
 	git up
 	git add .
 	git commit -am "update"
+	make all
 	rsync -r deploy/* bram@worlddomination.be:www/
 	git push
 
