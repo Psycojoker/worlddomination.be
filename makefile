@@ -5,8 +5,8 @@ all:
 	hyde/ve/bin/hyde -g
 
 run:
-	[ "$(dpkg -l | grep webfs)" ] || (sudo apt-get install webfs)
-	[ "$(pgrep webfsd)" ] || (cd ./deploy/ && webfsd -p 3957)
+	[ "`dpkg -l | grep webfs`" ] || (sudo apt-get install webfs)
+	[ "`pgrep webfsd`" ] || (cd ./deploy/ && webfsd -p 3957)
 	firefox 0.0.0.0:3957/index.html
 
 stop:
