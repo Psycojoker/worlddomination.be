@@ -1,0 +1,21 @@
+{% extends "_post.html" %}
+
+{% hyde
+    title: Autovenv
+    created: 2013-12-22 11:52:49
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+I've finally took the time to test [autoenv](https://github.com/kennethreitz/autoenv) by kenneth.)
+
+{% H 'bash' %}
+#!/bin/zsh
+[ -e "$(/bin/readlink -f ${0%/*})/ve/bin/activate" ] && source $(/bin/readlink -f ${0%/*})/ve/bin/activate
+{% endH %}
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}

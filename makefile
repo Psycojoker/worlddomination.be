@@ -23,3 +23,9 @@ deploy:
 
 loop:
 	while true; do make; inotifywait -e modify content/**/*; done
+
+push:
+	git up
+	git add .
+	git commit -am "update"
+	git push
