@@ -4,11 +4,13 @@ all: _check_dependancies
 	hyde/ve/bin/hyde -g
 
 run: _check_dependancies
+	(sleep 2 && firefox localhost:8080) &
 	hyde/ve/bin/hyde -w || (hyde/ve/bin/pip install -r hyde/requirements.txt && hyde/ve/bin/hyde -w)
 
 deploy:
 	[ -e "/usr/local/bin/git-up" ] || (sudo pip install git-up)
 	git up
+	cd hyde && git up
 	git add .
 	git commit -am "update"
 	make all
@@ -16,6 +18,7 @@ deploy:
 	git push
 
 loop: _check_dependancies
+	(sleep 2 && firefox localhost:8080) &
 	hyde/ve/bin/hyde -g -k -w || (hyde/ve/bin/pip install -r hyde/requirements.txt && hyde/ve/bin/hyde -g -k -w)
 
 push:

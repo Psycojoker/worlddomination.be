@@ -3,3 +3,4 @@ deploy/*
 *.swp
 *.swo
 hyde
+site.log
