@@ -1,0 +1,215 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<title>
+			
+			WorldDomination.be : blog : An epurate ebook (epub) reader for your pc
+			
+		</title>
+
+		
+
+		<link href="/blog/atom.xml" rel="alternate" title="WorldDomination.be" type="application/atom+xml"/>
+
+		
+
+		
+
+		<link rel="stylesheet" href="/media/css/base.css" type="text/css" media="screen" charset="utf-8">
+
+		
+		
+		
+		
+		
+		
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+		
+		
+		
+		
+
+	</head>
+
+	<body>
+
+		<div id="site">	
+
+			<div id="header">
+    <a href="/index.html">
+        <h1>WorldDomination.be</h1>
+    </a>
+    <p>A blog about my mess</p>
+</div>
+
+
+
+
+<ul class="breadcrumbs">
+	
+		<li>
+			<a href="/index.html">Worlddominationbe</a>
+
+			
+				
+				<span class="separator">&gt;</span>
+				
+			
+		</li>
+	
+		<li>
+			<a href="/blog/blog.html">Blog</a>
+
+			
+				
+				<span class="separator">&gt;</span>
+				
+			
+		</li>
+	
+		<li>
+			<a href="/blog/2011/2011.html">2011</a>
+
+			
+		</li>
+	
+</ul>
+    
+
+
+
+
+
+
+
+
+
+<div id="sitenav">
+    <ul>
+        <li>
+            <a href="/index.html">Home</a>
+        </li>
+
+        
+            <li class="selected" >
+                <a href="/blog/blog.html">
+                    Blog
+                </a>
+            </li>
+        
+            <li>
+                <a href="/about/about.html">
+                    About
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+
+
+
+
+			
+
+
+
+<div id="content-header">
+    <h1>An epurate ebook (epub) reader for your pc</h1>
+</div>
+
+<div id="post-content">
+	
+
+	<!-- Hyde::Article::Begin -->
+
+<!-- Hyde::Excerpt::Begin -->
+
+<p>From time to time I like to be able to read e-books (epub/mobi) on my pc. I wasn't satisfied by fbreader. The interface and customisations possibility are really cools, but the rendering kinda sucks (and doesn't works well for &lt;span&gt; tags that contain source code, this make unreadable most of my home made programming&nbsp;e-books).</p>
+
+<p>After some research I've found <a href="http://www.lucidor.org/lucidor/">lucidor</a>. Doesn't look fantastic from a first view but the rendering is&nbsp;good.</p>
+
+<p><center>
+<img src="/media/img/lucidor/lucidor1.png" />
+</center></p>
+<p>Problem: I wanted to have a dark background and a grey font and the configuration options doesn't offer that possibility. Solution: use the power of dirty hack <em>and voilà</em>, here is the&nbsp;result:</p>
+
+<p><center>
+<a href="/media/img/lucidor/lucidor2.png" />
+<img src="/media/img/lucidor/lucidor2_small.png" />
+</a></center></p>
+<p>And after some customisations (using the menu from the right mouse&nbsp;button):</p>
+
+<p><center>
+<a href="/media/img/lucidor/lucidor3.png" />
+<img src="/media/img/lucidor/lucidor3_small.png" />
+</a></center></p>
+<p>And the diffs for my dirty hack. On the file: <em>/usr/share/lucidor/chrome/content/xhtml.css</em>:</p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+<font color="#f0e68c"><b>4c4, 6</b></font><br>
+<font color="#ffdead">&lt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #ffffff;</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000;</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; color: #BBBBBB;</font><br>
+<font color="#f0e68c"><b>14c16</b></font><br>
+<font color="#ffdead">&lt; /*</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt; </font><br>
+<font color="#f0e68c"><b>16c18</b></font><br>
+<font color="#ffdead">&lt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #ffffff;</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000;</font><br>
+<font color="#f0e68c"><b>18c20</b></font><br>
+<font color="#ffdead">&lt; */</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt; </font><br>
+<font color="#f0e68c"><b>20a23</b></font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000;</font><br>
+</blockquote>
+
+<p>And on <em>/usr/share/lucidor/chrome/content/ordbrand.css</em>:</p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+<font color="#f0e68c"><b>7c7, 8</b></font><br>
+<font color="#ffdead">&lt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #ffffff !important;</font><br>
+<font color="#ffdead">---</font><br>
+<font color="#98fb98">&gt;&nbsp;&nbsp;&nbsp;&nbsp; background-color: #000000 !important;</font><br>
+</blockquote>
+
+<p>This still isn't perfect: I didn't managed to find a way to add "j" and "k" for&nbsp;scrolling.</p>
+
+<p>Also, I've made a simple mobi/epub version of the <a href="http://djangobook.com">DjangoBook</a> that you can find <a href="/media/ebooks/djangobook.mobi">here</a> (<a href="/media/ebooks/djangobook.epub">epub version</a>). It doesn't include images (it was boring to&nbsp;do).</p>
+
+<!-- Hyde::Excerpt::End -->
+
+<!-- Hyde::Article::End -->
+
+	
+</div>
+
+
+
+
+
+			<div id='footer'>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</div>
+
+
+		</div>
+
+	</body>
+
+</html>
+

@@ -1,0 +1,236 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<title>
+			
+			WorldDomination.be : blog : idea n° 21, build a f2f small file sharing network using git annex
+			
+		</title>
+
+		
+
+		<link href="/blog/atom.xml" rel="alternate" title="WorldDomination.be" type="application/atom+xml"/>
+
+		
+
+		
+
+		<link rel="stylesheet" href="/media/css/base.css" type="text/css" media="screen" charset="utf-8">
+
+		
+		
+		
+		
+		
+		
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+		
+		
+		
+		
+
+	</head>
+
+	<body>
+
+		<div id="site">	
+
+			<div id="header">
+    <a href="/index.html">
+        <h1>WorldDomination.be</h1>
+    </a>
+    <p>A blog about my mess</p>
+</div>
+
+
+
+
+<ul class="breadcrumbs">
+	
+		<li>
+			<a href="/index.html">Worlddominationbe</a>
+
+			
+				
+				<span class="separator">&gt;</span>
+				
+			
+		</li>
+	
+		<li>
+			<a href="/blog/blog.html">Blog</a>
+
+			
+				
+				<span class="separator">&gt;</span>
+				
+			
+		</li>
+	
+		<li>
+			<a href="/blog/2012/2012.html">2012</a>
+
+			
+		</li>
+	
+</ul>
+    
+
+
+
+
+
+
+
+
+
+<div id="sitenav">
+    <ul>
+        <li>
+            <a href="/index.html">Home</a>
+        </li>
+
+        
+            <li class="selected" >
+                <a href="/blog/blog.html">
+                    Blog
+                </a>
+            </li>
+        
+            <li>
+                <a href="/about/about.html">
+                    About
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+
+
+
+
+			
+
+
+
+<div id="content-header">
+    <h1>idea n° 21, build a f2f small file sharing network using git annex</h1>
+</div>
+
+<div id="post-content">
+	
+
+	<!-- Hyde::Article::Begin -->
+
+<!-- Hyde::Excerpt::Begin -->
+
+<h4>Why</h4>
+<p>I often want to share small files/documents/others with&nbsp;friends.</p>
+<h4>Problem</h4>
+<p>Currents solutions kinda sucks for this, we&nbsp;have:</p>
+<ul>
+<li>bitorrent/other p2p network: overkill, complex to use, need all the time running&nbsp;software</li>
+<li>central ftp: sucks, centralized, need lot of place, a public server with good bandwidth, access management&nbsp;sucks</li>
+<li>ftp at everyone place: complex to manage, to take care about, access management also&nbsp;sucks</li>
+</ul>
+<h4>Idea</h4>
+<h5>Git&nbsp;annex</h5>
+<p>Normally, to share a common git repository with all the files would be a very
+stupid and inefficient idea. Luckily, <a href="http://joeyh.name/">someone</a> out there has created a
+wonderful tool call <a href="http://git-annex.branchable.com/">git annex</a>.</p>
+<p>Git annex is an extension for git that which purpose is to manage "media-like" files.
+The big concept is that instead of storing the said files in git, you store
+references to those files (symlinks) and git annex handle those files for you.
+This way, the size of your repository isn't going to totally exploded over&nbsp;time.</p>
+<p>A common usage scenario looks like this (without the&nbsp;details):</p>
+<ul>
+<li>create a git&nbsp;repository</li>
+<li>tell git annex to add those big files to the&nbsp;repository</li>
+<li>somewhere else, clone this repository <b>this will only pull the references to those files, no the actual&nbsp;files</b></li>
+<li>now, ask git annex, on the other repository, to get either some or all the files that are referenced &lt;- <b>this is the important part</b> (you obviously need to be able to access this other&nbsp;repository)</li>
+</ul>
+<h5>Usage</h5>
+<p>So, the idea is to have one common central repository where everyone can push
+and that contains all the references. This way, everyone knows what is
+available, the sever doesn't have to store that much, you don't have to store
+everything and when you want to get a file, git annex will pull it directly
+from your friend's&nbsp;place.</p>
+<p>Or, you can simply removed the central component and just share git
+repositories between your&nbsp;friends.</p>
+<p>Advantages:</p>
+<ul>
+<li>can be done right now without coding&nbsp;needed</li>
+<li>easy to use (for&nbsp;nerd)</li>
+<li>very flexible, you can adapt to <a href="http://4.bp.blogspot.com/_D_Z-D2tzi14/S8TRIo4br3I/AAAAAAAACv4/Zh7_GcMlRKo/s1600/ALOT.png">alot</a> of different situations (this is&nbsp;git)</li>
+<li>you can easily plug an external server with good bandwidth to host big&nbsp;files</li>
+<li>you store only what you want and where you&nbsp;want</li>
+<li>no central place&nbsp;needed</li>
+<li>git annex is available in every common *nix distributions and probably even on the other OS of&nbsp;shame</li>
+<li>no (software) server&nbsp;needed!</li>
+<li>you can do access control very easily with ssh keys and all those stuff, that problem is already solved long time ago for git&nbsp;usage</li>
+<li>you'll feel very leet using&nbsp;this</li>
+<li>easily&nbsp;scriptable</li>
+<li>encrypted communications very easy to add (git can talk other&nbsp;ssh)</li>
+<li>and many&nbsp;more!</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>your friends need to be&nbsp;nerd</li>
+<li>your friends need to know at least a bit of&nbsp;git</li>
+<li>your friends need to have a server up if you want to get their files (except if the file is at another&nbsp;place)</li>
+<li>not very easy to share files between different circle of friends, this only scale well for one&nbsp;circle</li>
+<li>downloading/upload won't be split amongs several peers to accelerate the&nbsp;transfer</li>
+<li>this will work well for small files, for big files this might be too slow, but this can be solved by plugging a server with good bandwidth in the&nbsp;middle</li>
+<li>you are still fucked up by&nbsp;NAT</li>
+<li>I don't know if this will be pleasant to&nbsp;use</li>
+</ul>
+<h4>Going&nbsp;further</h4>
+<p>It's not very hard to imagine expending this concept because we always need an
+excuse to code and learn new&nbsp;things.</p>
+<p>I don't think this would be very hard to build a series of scripts to eases the
+usage of this tool, libs for git already exist in several&nbsp;languages.</p>
+<p>Things that can be&nbsp;done:</p>
+<ul>
+<li>a nice interface (web/desktop/ncurse/whatever) that display useful informations like what files are present, from where you can pull other&nbsp;files</li>
+<li>use libinotify/incrontab to automagically detect files modifications in the repository and automagically do a "git annex sync" (git pull/push from every&nbsp;repositories)</li>
+<li>hack git internals to add metadata to&nbsp;files</li>
+<li>build an abstraction layer/automagic tool to handle&nbsp;permissions</li>
+<li>notification system to inform you that new files are available via&nbsp;emails/whatever</li>
+<li>automatically organize the repository/files for you and remove you the burn of sorting/classing&nbsp;things</li>
+<li>find a way to solve the NAT&nbsp;problem</li>
+<li>and, of course, many&nbsp;more!</li>
+</ul>
+<p>Remark: the "git annex sync" part might be problematic for permissions&nbsp;reasons.</p>
+<!-- Hyde::Excerpt::End -->
+
+<!-- Hyde::Article::End -->
+
+	
+</div>
+
+
+
+
+
+			<div id='footer'>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</div>
+
+
+		</div>
+
+	</body>
+
+</html>
+

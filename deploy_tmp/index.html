@@ -1,0 +1,476 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<title>
+			
+			WorldDomination.be : WorldDomination.be : A blog about my mess
+			
+		</title>
+
+		
+
+		<link href="/blog/atom.xml" rel="alternate" title="WorldDomination.be" type="application/atom+xml"/>
+
+		
+
+		
+
+		<link rel="stylesheet" href="/media/css/base.css" type="text/css" media="screen" charset="utf-8">
+
+		
+		
+		
+		
+		
+		
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+
+		
+		
+		
+		
+
+	</head>
+
+	<body>
+
+		<div id="site">	
+
+			<div id="header">
+    <a href="/index.html">
+        <h1>WorldDomination.be</h1>
+    </a>
+    <p>A blog about my mess</p>
+</div>
+
+
+
+
+<ul class="breadcrumbs">
+	
+		<li>
+			<a href="/index.html">Worlddominationbe</a>
+
+			
+		</li>
+	
+</ul>
+    
+
+
+
+
+
+
+
+
+
+<div id="sitenav">
+    <ul>
+        <li class="selected" >
+            <a href="/index.html">Home</a>
+        </li>
+
+        
+            <li>
+                <a href="/blog/blog.html">
+                    Blog
+                </a>
+            </li>
+        
+            <li>
+                <a href="/about/about.html">
+                    About
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+
+
+
+
+			
+
+
+
+    
+
+        
+        <h2 style="margin-bottom: 0px; padding-bottom: 0px;"><a href='/blog/2014/autovenv.html'>Autovenv</a> <small class="post-details"><a href="/blog/blog.html">blog</a> - 2/1/2014</small></h2>
+            
+
+<p>I've finally took the time to test
+<a href="https://github.com/kennethreitz/autoenv">autoenv</a> by kenneth. It's a very nice
+piece of software that allow the automatic execution of the content of a
+<code>.env</code> file if present in the current directory <strong>or</strong> in a
+directory above. It is very usefull to auto activate virtualenv or those kind
+of similar&nbsp;actions.</p>
+<p>It also comes with security mechanism (it asks you to accept a .env file if
+it's the first time you saw it and store an hash of&nbsp;it).</p>
+<p>The <a href="https://github.com/kennethreitz/autoenv#install">installation instructions</a> and <a href="https://github.com/kennethreitz/autoenv#usage">usage informations</a> are clear enough so I won't write about it, but I wanted to share 2 small&nbsp;tips:</p>
+<h2>Deadline with the "in above directory"&nbsp;case</h2>
+<p>Autovenv also work when the <code>.env</code> is located in a directory above,
+the problem is that the <code>CWD</code> passed to the script is the current
+one and not the one in which the <code>.env</code> file exists. Therefor, just
+dropping <code>source ve/bin/activate</code> (assuming your virtualenv is
+called <code>ve</code>) won't work&nbsp;everywhere.</p>
+<div class="highlight"><pre><span class="c">#!/bin/zsh</span>
+<span class="o">[</span> -e <span class="s2">&quot;$(/bin/readlink -f ${0%/*})/ve/bin/activate&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="k">$(</span>/bin/readlink -f <span class="k">${</span><span class="nv">0</span><span class="p">%/*</span><span class="k">})</span>/ve/bin/activate
+</pre></div>
+
+
+        
+        <h2 style="margin-bottom: 0px; padding-bottom: 0px;"><a href='/blog/2013/comment-mettre-a-jours-les-statuts-d-une-asbl-ou-son-ca.html'>Comment mettre a jours les statuts d&#39;une ASBL et/ou son CA et/ou siège social</a> <small class="post-details"><a href="/blog/blog.html">blog</a> - 23/12/2013</small></h2>
+            
+
+<p>Pour <a href="http://neutrinet.be/index.php?title=Main_Page">Neutrinet</a>, j'ai récemment
+été amené à déposer une mis à jours des statuts de l'ASBL. Autant il y a
+énormément de documentation, plus ou moins complète, sur comment fonder une
+ASBL, autant j'ai vraiment eu du mal à trouver quoi que ce soit sur comment
+faire une mis à jours. Ça tombe bien, j'ai fait les 3 opérations&nbsp;classiques:</p>
+<ul>
+<li>changement de siège&nbsp;social</li>
+<li>modification de la composition du conseil&nbsp;d'administration</li>
+<li>modification des&nbsp;statuts.</li>
+</ul>
+<p>Je vais donc essayé de rédiger des instructions relativement clair histoire de
+vous éviter de perdre des matinées&nbsp;inutilement.</p>
+<p><strong>Ce document n'est pas un document officiel, il y a probablement des fautes et
+des manquements, mais c'est ce que j'ai pu trouver de plus complet su internet
+jusqu'à aujourd'hui</strong>.</p>
+<p>N'hésitez pas à me <a href="mailto://cortex%20at
+worlddomination%20dot%20be">contacter</a> si vous avez des corrections/informations
+supplémentaires/commentaires/envie de m'offrir une bière ou du&nbsp;chocolat.</p>
+<p>Si vous connaissez git ou êtes un peu débrouillard, vous pouvez m'envoyer une
+pull request ou un patch, le code source de ce blog <a href="https://github.com/Psycojoker/worlddomination.be">est disponible
+ici</a> (<a href="https://github.com/Psycojoker/worlddomination.be/blob/master/content/blog/2013/comment-mettre-a-jours-des-statuts-asbl.html">lien vers le fichier
+de cet
+article</a>).</p>
+<h2>Informations&nbsp;générale</h2>
+<p>Vous devez déposer ces documents au greffe du tribunal de commerce situatié au
+<a href="http://www.openstreetmap.org/node/2488257302#map=19/50.81747/4.32106">128 Boulebard de la 2ème armée Britannique au 1190 Bruxelles (à
+Forest)</a>.
+Prévoyez du temps pour y aller, c'est assez loin du reste de Bruxelles. Ils ont
+ces 2 numéros de téléphone si vous avez des questions à leur poser 02/346.03.33
+et 02/346.14.53. Ils sont ouvert de <strong>8h30 à 12h30</strong> mais prévoyez quand même
+de la marge. Il y a un parking si vous venez en&nbsp;voiture.</p>
+<p><strong>Astuce</strong>: généralement quand le dépot ne marche pas car il y a eu des
+erreurs, les gens rentrent chez eux et reviennent une matinée suivante,
+cependant, il y avait (je ne sais pas si c'est encore le cas) un cyber café
+avec imprimante <a href="http://www.openstreetmap.org/way/240748318#map=19/50.81242/4.31911">par
+ici</a>, si
+vous avez le temps, vous pouvez aller là bas, faire vos corrections et revenir
+déposer vos documents. <strong>Pensez à prendre vos formulaires en format .odt ou
+.doc sur une clef USB (ou équivalent)</strong>.</p>
+<h2>Argent</h2>
+<ul>
+<li>quoi qu'il arrive, si vous devez faire une de ces 3 modifications, vous allez devoir payer la somme de 121,97&nbsp;€</li>
+<li>c'est la même somme par dépôt, peut importe si il n'y qu'une des 3 opérations ou n'importe quelle combinaison des&nbsp;3</li>
+<li>malheureusement, le greffe du tribunal de commerce n'accepte pas d'argent en liquide ni de carte VISA/autre, ça serait beaucoup trop&nbsp;facile.</li>
+<li>vous devez donc faire un virement et en apporter la&nbsp;preuve</li>
+<li>un screenshot d'un virement sur le site de votre banque&nbsp;marche</li>
+<li>vous pouvez également aller à la poste pour faire un versement, donner la somme (je l'ai fait en liquide avec l'argent des cotisations, je ne sais pas si ils prennent bancontact/VISA/autre, <a href="mailto://cortex%20at%20worlddomination%20dot%20be">envoyez moi un mail si vous le savez</a>) et ils font un versement pour vous et vous donnent une preuve. La poste vous fait payer un surplus de 85 centimes pour&nbsp;l'opération.</li>
+<li>le virement doit autre fait au compte du moniteur: IBAN: BE48 6792 0055 0227 BIC:&nbsp;PCHQBEBB</li>
+<li>la communication n'avait pas l'air d'avoir beaucoup d'importance. Mettez quand même quelque chose qui a du&nbsp;sens.</li>
+</ul>
+<h4>Résumé:</h4>
+<ul>
+<li>faites un virement ou un versement à la poste d'un montant de 121,97 € au compte du moniteur IBAN: BE48 6792 0055 0227 BIC:&nbsp;PCHQBEBB</li>
+<li>apportez un preuve de paiement lorsque vous irez déposer vos&nbsp;documents</li>
+</ul>
+<p>Document d'information donné par l'administration lors du&nbsp;dépot:</p>
+<p><img src="/media/img/asbl/argent.png" /></p>
+<h2>Document de&nbsp;base</h2>
+<p>Quelle que soit l'opération que vous souhaitez faire, vous devez apporter <a href="http://www.ejustice.just.fgov.be/tsv_pub/formulaire1asbl.odt">ce
+document</a>
+complétés avec <strong>le volet B en triple exemplaire</strong>. Vous devez aussi autoriser
+à représenter l'ASBL (ça dépend de vos statuts, généralement le président ou un
+membre du CA est bon, l'AG peut aussi vous conférer ce&nbsp;pouvoir).</p>
+<p><strong>Il est interdit de le remplir de manière&nbsp;manuscrite.</strong></p>
+<h4>À&nbsp;remplir:</h4>
+<ul>
+<li>formulaire 1, volet A: toute la première page (normalement cette partie est&nbsp;simple)</li>
+<li>si vous ne retrouvez plus votre numéro d'entreprise, vous pouvez le retrouver en cherchant des documents relatifs à votre ASBL <a href="http://www.ejustice.just.fgov.be/tsv/tsvf.htm">sur le site du moniteur</a> (remarque: si vous aimez l'informatique, allez voir les urls du dernier frame imbriqué et regardez le champ "Server" du header http renvoyé par ce site ... si si, vraiment, en 2013 ils utilisent vraiment&nbsp;ça)</li>
+<li>formulaire 1, volet B: remplissez l'entête, on verra plus bas pour l'objet de l'acte. Toutes les informations sont retrouvable dans votre acte de&nbsp;constitution.</li>
+<li>formulaire 1, volet C: je pense qu'il ne faut pas le remplir, il concerne la&nbsp;constitution</li>
+</ul>
+<h4>Résumé:</h4>
+<ul>
+<li>remplissez et apporter le <a href="http://www.ejustice.just.fgov.be/tsv_pub/formulaire1asbl.odt">formulaire 1</a> avec son volet B <strong>en triple&nbsp;exemplaire</strong></li>
+<li>interdiction de remplir ces documents de manière&nbsp;manuscrite</li>
+<li>quelqu'un habilité à représenter l'ASBL doit signer les versos des documents, son nom et sa fonction doivent figurer au&nbsp;recto</li>
+</ul>
+<h2>Modification du siège&nbsp;social</h2>
+<ul>
+<li>ajoutez quelque chose comme "modification du siège social" dans l'objet de l'acte (situé dans le volet B du formulaire&nbsp;1)</li>
+<li>indiquez à la suite de l'objet de l'acte quelque chose du genre: "Suite à l'assemblée générale [extraordinaire] du XX XX XXXX, le siège social de l'association est désormait&nbsp;..."</li>
+<li><strong>le siège social dans l'entête du volet B doit être l'ANCIEN siège&nbsp;social</strong></li>
+<li>je ne sais pas si il faut mettre l'ancien ou le nouveau siège social dans le volet A, étant donné la logique je dirai l'ancien, mais on est à l'abris de rien. N'hésitez pas à me <a href="mailto://cortex%20at%20worlddomination%20dot%20be">contacter</a> si vous le&nbsp;savez.</li>
+<li>je ne suis pas sûr si il faut préciser que ce changement modifie un article des&nbsp;statuts</li>
+</ul>
+<h2>Modification des&nbsp;statuts</h2>
+<ul>
+<li>ajoutez quelque chose comme "modification des statuts" dans l'objet de l'acte (situé dans le volet B du formulaire&nbsp;1)</li>
+<li>à la suite de l'objet de l'acte, lister la liste des modifications faites à vos statuts, ou mettre l'ensemble de vos nouveaux statuts&nbsp;dedans</li>
+<li>indiquez quelque chose du genre "suite à l'assemblée générale du ..., les statuts ont été modifié tel que/les nouveaux statuts&nbsp;sont"</li>
+</ul>
+<h2>Modification de la composition du conseil&nbsp;d'administration</h2>
+<p>La partie la plus&nbsp;compliquée.</p>
+<h4>Objet de&nbsp;l'acte</h4>
+<p>Rappel: cela se trouve dans le volet B du formulaire&nbsp;1</p>
+<ul>
+<li>ajoutez, en fonction des modifications du CA, "Démission(s)", "Réélection(s)", "Nomination(s)&nbsp;d'administrateur(s)""</li>
+</ul>
+<h4>À la suite de l'objet de&nbsp;l'acte</h4>
+<ul>
+<li>vous devez le remplir en rajoutant les informations suivantes (en n'ajoutant pas les informations vides ou en précisant, par exemple, qu'il n'y a pas eu de&nbsp;démissions)</li>
+</ul>
+<p><img src="/media/img/asbl/volet_b_cat.png" /></p>
+<h4>Le formulaire <strong>2</strong> volet&nbsp;A</h4>
+<p>Surprise, un formulaire de plus ! Remplissez le volet A avec les informations&nbsp;générale.</p>
+<p><a href="http://www.ejustice.just.fgov.be/tsv_pub/formulaire2asbl.odt">Téléchargez cet autre formulaire ici</a>.</p>
+<p>À nouveau, je ne sais pas si, dans le cas où vous avez changé le siège social,
+vous devez mettre le nouveau ou l'ancien ici. La logique voudrait que ce soit
+l'ancien, mais bon&nbsp;...</p>
+<h4>Le formulaire <strong>2</strong> volet&nbsp;C</h4>
+<p>(Oui, il n'y a pas de volet B, ne me demandez pas&nbsp;pourquoi).</p>
+<ul>
+<li>remplissez les informations classique autour&nbsp;nécessaire</li>
+<li>rajoutez les administrateurs <em>démissionnaires</em> (avec un C dans la première colonne) et <em>només</em> (avec un N dans la première&nbsp;colonne)</li>
+<li>ne mettez <em>pas</em> les administrateurs&nbsp;réélu</li>
+<li>la qualité d'un administrateur est <em>administrateur</em> (et pas son poste au sein de&nbsp;l'ASBL)</li>
+</ul>
+<h4>Autre</h4>
+<p>Voici un document obtenu au greffe reprennant toute la partie sur la modification du&nbsp;CA:</p>
+<p><img src="/media/img/asbl/modif_ca.png" /></p>
+<p>En espérant que cela vous aura&nbsp;aidé.</p>
+
+        
+        <h2 style="margin-bottom: 0px; padding-bottom: 0px;"><a href='/blog/2013/the-baron-project-part-1-what-and-why.html'>The Baron project, part 1, what and why</a> <small class="post-details"><a href="/blog/blog.html">blog</a> - 22/3/2013</small></h2>
+            
+
+<p>It appears that since I spend (way too much) time writing code, I apparently
+<a href="http://pyvideo.org/video/1786/if-you-code-you-should-write">should be writing</a>,
+even if I'm apparently not sure that this will interest people. So, let's go
+down this path again fighting my procrastination and my perfectionism daemons
+while sharing what I'm doing and what I'm&nbsp;discovering.</p>
+<p>Let's start with why, how and what I'm doing on (one of) my (too many) last&nbsp;project.</p>
+<h1>The Baron&nbsp;project</h1>
+<h2>What is&nbsp;it?</h2>
+<p>The Baron project goal is to a create an AST for the python programming
+language that guarantees a lossless conversion between the source code and the&nbsp;AST.</p>
+<p>Not clear? Let's start with&nbsp;definitions.</p>
+<p>AST stands for "abstract syntax tree", it is an abstract representation of what
+some source code file means from the compiler/interpreter point of&nbsp;view.</p>
+<p>In general, when you execute (or compile) some source code, for e.g by doing
+"python my_script.py", the interpreter/compiler will parse the source file,
+transform it into an AST, then transform this AST into something he understand
+(bytecode for example). (The reality is more complicated with a lot more&nbsp;steps).</p>
+<p>While this is the most frequent use of an AST, this is not the only one: it can
+be use for everything related to code analysis, modification, creating tools,
+modifying the inner representation of code before sending it to the interpreter
+(some libs do that, for e.g. <a href="http://pytest.org/">py.test</a> does this with the
+asserts) etc... Those are the case that are interesting&nbsp;me.</p>
+<p>So Baron is going to offer you an AST for the python language where the
+operation: <code>source code → Baron's AST → source code</code> will give an identical source&nbsp;code.</p>
+<h2>But, some stuff already&nbsp;exist!</h2>
+<p>Yes, python standard lib allows you very easily to play with <a href="http://docs.python.org/2/library/ast.html">python's
+AST</a> which is very cool. The
+problems are&nbsp;that:</p>
+<ul>
+<li>this AST is made to be compiled afterward into python&nbsp;bytecode</li>
+<li>there it is dropping useless information for that operation, like the comments and the exact spacing between words, the actual indentation&nbsp;etc...</li>
+<li>therefor this is not a lossless&nbsp;conversion</li>
+<li>once you have modified this AST, you can't easily turn it back into source&nbsp;code</li>
+<li>this makes it a very poor tool to write refactoring operations (since you can't easily go back to a source code&nbsp;version)</li>
+<li>so you are stuck with code analysis and AST modification (before sending it to the&nbsp;interpreter)</li>
+<li>which is kinda okay but not very cool, since the recommended way to play with it is with event driven parsers (like SAX vs XPATH) which are cool for bytecode transformation, but not really for the&nbsp;rest</li>
+<li>you can do this another ways (which a shitload of <code>isinstance</code> everywhere) but none of them are very cool or pleasant to use (I've already done that several&nbsp;times)</li>
+<li>and there is zero cool features nor cool libs built on top of that (for good reason I think) so this is just not cool to&nbsp;use</li>
+</ul>
+<p>There are several other existing tools, but none of them guaranteed a lossless
+conversion. The closest one is <a href="http://docs.python.org/2/library/tokenize.html">this tokenize lib</a>
+that is <a href="http://docs.python.org/2/library/tokenize.html#tokenize.untokenize">very close to a lossless conversion</a>
+but which is not made for it (and I was too lazy to hack it for that, and it's "only" the tokenizing&nbsp;part).</p>
+<h2>Why?</h2>
+<p>This question is already partially answered, but let's hit the nail one last
+time. So, having an AST with a lossless conversion with the source code will
+allow, among other&nbsp;things:</p>
+<ul>
+<li>solving most of the problems I've talked about with the current python AST (note: this new AST as strictly not the objective of replacing the current one, it's totally for another&nbsp;focus)</li>
+<li>very easily build refactoring&nbsp;tools</li>
+<li>increase the chance that other people than me will built them (the current situation in python is very&nbsp;poor)</li>
+<li>easier write code generation&nbsp;tools</li>
+<li>easier write code conversion tools (for example, one friend wanted to do a <code>python ←→ javascript</code> tool but the current available tools don't really permit that in a lossless&nbsp;fashion)</li>
+<li>easier code manipulation and modification (you want to redo smalltalk class browser? This will be way more&nbsp;easier)</li>
+<li>all the cool things I haven't though&nbsp;about</li>
+</ul>
+<p>Also, a fun consequence: once you have this high level AST, if you add a
+conversion between this AST and another format, you'll be able to edit you
+python code in this format and convert it back to its original (or modified)
+source code. For example: if you transform this AST into xml, you'll be able to
+use BeautifulSoup or lxml or xpath or xslt on your python source code. I'm not
+sure if this will useful but I like this&nbsp;idea.</p>
+<h2>Plan of&nbsp;battle</h2>
+<p>My current strategy can be summarize by one quote from <a href="http://prog21.dadgum.com/30.html">this very interesting article</a>:</p>
+<blockquote>
+<i>The details of this paper aren't quite as important as the general concept: a
+compiler is nothing more than a series of transformations of the internal
+representation of a program. The authors promote using <b>dozens or hundreds of
+compiler passes</b>, each being as simple as possible. Don't combine
+transformations; keep them separate.</i>
+</blockquote>
+
+<p>The&nbsp;plan:</p>
+<ul>
+<li>split the source file into what could be tokens ← this part is done, I'll write a post explaining how it&nbsp;works</li>
+<li>regroup things that can be regroup, the split being simply stupid he'll split "+=" into "+" and "=", we need to regroup those&nbsp;things</li>
+<li>tokenize every&nbsp;elements</li>
+<li>decide how I want this AST to&nbsp;be</li>
+<li>probably do one or two pass (or more) to create this AST from the tokens, maybe I'll use some kind of yacc, dunno&nbsp;yet</li>
+</ul>
+<p>You can find the current version of the code <a href="https://github.com/Psycojoker/baron">here</a>.</p>
+<p>Next post will probably be on how I've written the splitting&nbsp;part.</p>
+<p>Thanks for reading and have a nice&nbsp;day,</p>
+
+        
+        <h2 style="margin-bottom: 0px; padding-bottom: 0px;"><a href='/blog/2012/how-to-create-your-custom-virtualenv-installation-that-include-the-packages-of-your-choice.html'>How to create your custom virtualenv installation that include the packages of your choice</a> <small class="post-details"><a href="/blog/blog.html">blog</a> - 15/8/2012</small></h2>
+            
+
+<p>I use <a href="http://www.virtualenv.org/en/latest/index.html">virtualenv</a> all the time, for every new project, for every lib or project I test. I also use <a href="http://ipython.org/">ipython</a> and <a href="https://github.com/gotcha/ipdb">ipdb</a> all the time (and <a href="https://www.djangoproject.com/">django</a> nearly all the&nbsp;time).</p>
+<p>Problem: ipython, ipdb and django aren't shipped by virtualenv and installing them took some time that break my flow when I need&nbsp;them.</p>
+<p>Luckily, mitsuhiko has release <a href="https://github.com/fireteam/virtualenv-tools">virtualenv-tools</a> that allow you to update the path of a copied&nbsp;virtualenv.</p>
+<p>Some small shell scripting later and here is the&nbsp;result:</p>
+<blockquote  style="background-color:#313031; color:#ffffff">
+mkve&nbsp;()<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ -e&nbsp;<font color="#d7afd7">&quot;</font><font color="#d75f5f">$(</font><font color="#ffd787"><b>which</b></font><font color="#d7afd7">&nbsp;pip</font><font color="#d75f5f">)</font><font color="#d7afd7">&quot;</font>&nbsp;]&nbsp;<font color="#ffd787"><b>||</b></font>&nbsp;(<font color="#ffd787"><b>echo</b></font>&nbsp;<font color="#d7afd7">&quot;</font><font color="#d7afd7">installing pip</font><font color="#d7afd7">&quot;</font>;&nbsp;sudo aptitude install python-pip)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ -e&nbsp;<font color="#d7afd7">&quot;</font><font color="#d75f5f">$(</font><font color="#ffd787"><b>which</b></font><font color="#d7afd7">&nbsp;virtualenv</font><font color="#d75f5f">)</font><font color="#d7afd7">&quot;</font>&nbsp;]&nbsp;<font color="#ffd787"><b>||</b></font>&nbsp;(<font color="#ffd787"><b>echo</b></font>&nbsp;<font color="#d7afd7">&quot;</font><font color="#d7afd7">installing pip</font><font color="#d7afd7">&quot;</font>;&nbsp;sudo pip install virtualenv)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ -e&nbsp;<font color="#d7afd7">&quot;</font><font color="#d75f5f">$(</font><font color="#ffd787"><b>which</b></font><font color="#d7afd7">&nbsp;virtualenv-tools</font><font color="#d75f5f">)</font><font color="#d7afd7">&quot;</font>&nbsp;]&nbsp;<font color="#ffd787"><b>||</b></font>&nbsp;(<font color="#ffd787"><b>echo</b></font>&nbsp;<font color="#d7afd7">&quot;</font><font color="#d7afd7">installing virtualenv-tools</font><font color="#d7afd7">&quot;</font>;&nbsp;sudo pip install virtualenv-tools)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>if</b></font>&nbsp;[ ! -e ~/.myvirtualenv/ ]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>then</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;virtualenv --distribute ~/.myvirtualenv/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~/.myvirtualenv/bin/pip install ipdb django django_pdb django_extensions django_debug_toolbar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>fi</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;cp -r ~/.myvirtualenv/ ve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;virtualenv-tools --update-path&nbsp;<font color="#d75f5f">$(</font><font color="#ffd787"><b>pwd</b></font><font color="#d75f5f">)</font>/ve ve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>source</b></font>&nbsp;ve/bin/activate<br>
+}<br>
+</blockquote>
+
+<p>Just type mkve, it will check that you have everything needed installed then build the virtualenv if it isn't there, install the packages in it then copy this virtualenv to your current directory, update its paths and activate&nbsp;it.</p>
+<p>It's even faster than to build a new virtualenv (once the global virtualenv is&nbsp;created).</p>
+
+        
+        <h2 style="margin-bottom: 0px; padding-bottom: 0px;"><a href='/blog/2012/idea-n-21-build-a-f2f-sharing-network-using-git-annex.html'>idea n° 21, build a f2f small file sharing network using git annex</a> <small class="post-details"><a href="/blog/blog.html">blog</a> - 8/8/2012</small></h2>
+            
+
+<h4>Why</h4>
+<p>I often want to share small files/documents/others with&nbsp;friends.</p>
+<h4>Problem</h4>
+<p>Currents solutions kinda sucks for this, we&nbsp;have:</p>
+<ul>
+<li>bitorrent/other p2p network: overkill, complex to use, need all the time running&nbsp;software</li>
+<li>central ftp: sucks, centralized, need lot of place, a public server with good bandwidth, access management&nbsp;sucks</li>
+<li>ftp at everyone place: complex to manage, to take care about, access management also&nbsp;sucks</li>
+</ul>
+<h4>Idea</h4>
+<h5>Git&nbsp;annex</h5>
+<p>Normally, to share a common git repository with all the files would be a very
+stupid and inefficient idea. Luckily, <a href="http://joeyh.name/">someone</a> out there has created a
+wonderful tool call <a href="http://git-annex.branchable.com/">git annex</a>.</p>
+<p>Git annex is an extension for git that which purpose is to manage "media-like" files.
+The big concept is that instead of storing the said files in git, you store
+references to those files (symlinks) and git annex handle those files for you.
+This way, the size of your repository isn't going to totally exploded over&nbsp;time.</p>
+<p>A common usage scenario looks like this (without the&nbsp;details):</p>
+<ul>
+<li>create a git&nbsp;repository</li>
+<li>tell git annex to add those big files to the&nbsp;repository</li>
+<li>somewhere else, clone this repository <b>this will only pull the references to those files, no the actual&nbsp;files</b></li>
+<li>now, ask git annex, on the other repository, to get either some or all the files that are referenced &lt;- <b>this is the important part</b> (you obviously need to be able to access this other&nbsp;repository)</li>
+</ul>
+<h5>Usage</h5>
+<p>So, the idea is to have one common central repository where everyone can push
+and that contains all the references. This way, everyone knows what is
+available, the sever doesn't have to store that much, you don't have to store
+everything and when you want to get a file, git annex will pull it directly
+from your friend's&nbsp;place.</p>
+<p>Or, you can simply removed the central component and just share git
+repositories between your&nbsp;friends.</p>
+<p>Advantages:</p>
+<ul>
+<li>can be done right now without coding&nbsp;needed</li>
+<li>easy to use (for&nbsp;nerd)</li>
+<li>very flexible, you can adapt to <a href="http://4.bp.blogspot.com/_D_Z-D2tzi14/S8TRIo4br3I/AAAAAAAACv4/Zh7_GcMlRKo/s1600/ALOT.png">alot</a> of different situations (this is&nbsp;git)</li>
+<li>you can easily plug an external server with good bandwidth to host big&nbsp;files</li>
+<li>you store only what you want and where you&nbsp;want</li>
+<li>no central place&nbsp;needed</li>
+<li>git annex is available in every common *nix distributions and probably even on the other OS of&nbsp;shame</li>
+<li>no (software) server&nbsp;needed!</li>
+<li>you can do access control very easily with ssh keys and all those stuff, that problem is already solved long time ago for git&nbsp;usage</li>
+<li>you'll feel very leet using&nbsp;this</li>
+<li>easily&nbsp;scriptable</li>
+<li>encrypted communications very easy to add (git can talk other&nbsp;ssh)</li>
+<li>and many&nbsp;more!</li>
+</ul>
+<p>Disadvantages:</p>
+<ul>
+<li>your friends need to be&nbsp;nerd</li>
+<li>your friends need to know at least a bit of&nbsp;git</li>
+<li>your friends need to have a server up if you want to get their files (except if the file is at another&nbsp;place)</li>
+<li>not very easy to share files between different circle of friends, this only scale well for one&nbsp;circle</li>
+<li>downloading/upload won't be split amongs several peers to accelerate the&nbsp;transfer</li>
+<li>this will work well for small files, for big files this might be too slow, but this can be solved by plugging a server with good bandwidth in the&nbsp;middle</li>
+<li>you are still fucked up by&nbsp;NAT</li>
+<li>I don't know if this will be pleasant to&nbsp;use</li>
+</ul>
+<h4>Going&nbsp;further</h4>
+<p>It's not very hard to imagine expending this concept because we always need an
+excuse to code and learn new&nbsp;things.</p>
+<p>I don't think this would be very hard to build a series of scripts to eases the
+usage of this tool, libs for git already exist in several&nbsp;languages.</p>
+<p>Things that can be&nbsp;done:</p>
+<ul>
+<li>a nice interface (web/desktop/ncurse/whatever) that display useful informations like what files are present, from where you can pull other&nbsp;files</li>
+<li>use libinotify/incrontab to automagically detect files modifications in the repository and automagically do a "git annex sync" (git pull/push from every&nbsp;repositories)</li>
+<li>hack git internals to add metadata to&nbsp;files</li>
+<li>build an abstraction layer/automagic tool to handle&nbsp;permissions</li>
+<li>notification system to inform you that new files are available via&nbsp;emails/whatever</li>
+<li>automatically organize the repository/files for you and remove you the burn of sorting/classing&nbsp;things</li>
+<li>find a way to solve the NAT&nbsp;problem</li>
+<li>and, of course, many&nbsp;more!</li>
+</ul>
+<p>Remark: the "git annex sync" part might be problematic for permissions&nbsp;reasons.</p>
+
+        
+    </ul>
+
+<p style="text-align: center"><a href="/atom.xml">Atom feed</a></p>
+
+
+
+
+
+			<div id='footer'>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</div>
+
+
+		</div>
+
+	</body>
+
+</html>
+
