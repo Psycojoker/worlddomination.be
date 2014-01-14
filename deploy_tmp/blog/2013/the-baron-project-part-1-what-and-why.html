@@ -1,0 +1,240 @@
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+	<head>
+
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+		<title>
+			
+			WorldDomination.be : blog : The Baron project, part 1, what and why
+			
+		</title>
+
+		
+
+		<link href="/blog/atom.xml" rel="alternate" title="WorldDomination.be" type="application/atom+xml"/>
+
+		
+
+		
+
+		<link rel="stylesheet" href="/media/css/base.css" type="text/css" media="screen" charset="utf-8">
+
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+
+	</head>
+
+	<body>
+
+		<div id="site">	
+
+			<div id="header">
+    <a href="/index.html">
+        <h1>WorldDomination.be</h1>
+    </a>
+    <p>A blog about my mess</p>
+</div>
+
+
+
+
+<ul class="breadcrumbs">
+	
+		<li>
+			<a href="/index.html">Worlddominationbe</a>
+
+			
+				
+				<span class="separator">&gt;</span>
+				
+			
+		</li>
+	
+		<li>
+			<a href="/blog/blog.html">Blog</a>
+
+			
+				
+				<span class="separator">&gt;</span>
+				
+			
+		</li>
+	
+		<li>
+			<a href="/blog/2013/2013.html">2013</a>
+
+			
+		</li>
+	
+</ul>
+    
+
+
+
+
+
+
+
+
+
+<div id="sitenav">
+    <ul>
+        <li>
+            <a href="/index.html">Home</a>
+        </li>
+
+        
+            <li class="selected" >
+                <a href="/blog/blog.html">
+                    Blog
+                </a>
+            </li>
+        
+            <li>
+                <a href="/about/about.html">
+                    About
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
+
+
+
+
+			
+
+
+
+<div id="content-header">
+    <h1>The Baron project, part 1, what and why</h1>
+</div>
+
+<div id="post-content">
+	
+
+	<!-- Hyde::Article::Begin -->
+
+<!-- Hyde::Excerpt::Begin -->
+
+<p>It appears that since I spend (way too much) time writing code, I apparently
+<a href="http://pyvideo.org/video/1786/if-you-code-you-should-write">should be writing</a>,
+even if I'm apparently not sure that this will interest people. So, let's go
+down this path again fighting my procrastination and my perfectionism daemons
+while sharing what I'm doing and what I'm&nbsp;discovering.</p>
+<p>Let's start with why, how and what I'm doing on (one of) my (too many) last&nbsp;project.</p>
+<h1>The Baron&nbsp;project</h1>
+<h2>What is&nbsp;it?</h2>
+<p>The Baron project goal is to a create an AST for the python programming
+language that guarantees a lossless conversion between the source code and the&nbsp;AST.</p>
+<p>Not clear? Let's start with&nbsp;definitions.</p>
+<p>AST stands for "abstract syntax tree", it is an abstract representation of what
+some source code file means from the compiler/interpreter point of&nbsp;view.</p>
+<p>In general, when you execute (or compile) some source code, for e.g by doing
+"python my_script.py", the interpreter/compiler will parse the source file,
+transform it into an AST, then transform this AST into something he understand
+(bytecode for example). (The reality is more complicated with a lot more&nbsp;steps).</p>
+<p>While this is the most frequent use of an AST, this is not the only one: it can
+be use for everything related to code analysis, modification, creating tools,
+modifying the inner representation of code before sending it to the interpreter
+(some libs do that, for e.g. <a href="http://pytest.org/">py.test</a> does this with the
+asserts) etc... Those are the case that are interesting&nbsp;me.</p>
+<p>So Baron is going to offer you an AST for the python language where the
+operation: <code>source code → Baron's AST → source code</code> will give an identical source&nbsp;code.</p>
+<h2>But, some stuff already&nbsp;exist!</h2>
+<p>Yes, python standard lib allows you very easily to play with <a href="http://docs.python.org/2/library/ast.html">python's
+AST</a> which is very cool. The
+problems are&nbsp;that:</p>
+<ul>
+<li>this AST is made to be compiled afterward into python&nbsp;bytecode</li>
+<li>there it is dropping useless information for that operation, like the comments and the exact spacing between words, the actual indentation&nbsp;etc...</li>
+<li>therefor this is not a lossless&nbsp;conversion</li>
+<li>once you have modified this AST, you can't easily turn it back into source&nbsp;code</li>
+<li>this makes it a very poor tool to write refactoring operations (since you can't easily go back to a source code&nbsp;version)</li>
+<li>so you are stuck with code analysis and AST modification (before sending it to the&nbsp;interpreter)</li>
+<li>which is kinda okay but not very cool, since the recommended way to play with it is with event driven parsers (like SAX vs XPATH) which are cool for bytecode transformation, but not really for the&nbsp;rest</li>
+<li>you can do this another ways (which a shitload of <code>isinstance</code> everywhere) but none of them are very cool or pleasant to use (I've already done that several&nbsp;times)</li>
+<li>and there is zero cool features nor cool libs built on top of that (for good reason I think) so this is just not cool to&nbsp;use</li>
+</ul>
+<p>There are several other existing tools, but none of them guaranteed a lossless
+conversion. The closest one is <a href="http://docs.python.org/2/library/tokenize.html">this tokenize lib</a>
+that is <a href="http://docs.python.org/2/library/tokenize.html#tokenize.untokenize">very close to a lossless conversion</a>
+but which is not made for it (and I was too lazy to hack it for that, and it's "only" the tokenizing&nbsp;part).</p>
+<h2>Why?</h2>
+<p>This question is already partially answered, but let's hit the nail one last
+time. So, having an AST with a lossless conversion with the source code will
+allow, among other&nbsp;things:</p>
+<ul>
+<li>solving most of the problems I've talked about with the current python AST (note: this new AST as strictly not the objective of replacing the current one, it's totally for another&nbsp;focus)</li>
+<li>very easily build refactoring&nbsp;tools</li>
+<li>increase the chance that other people than me will built them (the current situation in python is very&nbsp;poor)</li>
+<li>easier write code generation&nbsp;tools</li>
+<li>easier write code conversion tools (for example, one friend wanted to do a <code>python ←→ javascript</code> tool but the current available tools don't really permit that in a lossless&nbsp;fashion)</li>
+<li>easier code manipulation and modification (you want to redo smalltalk class browser? This will be way more&nbsp;easier)</li>
+<li>all the cool things I haven't though&nbsp;about</li>
+</ul>
+<p>Also, a fun consequence: once you have this high level AST, if you add a
+conversion between this AST and another format, you'll be able to edit you
+python code in this format and convert it back to its original (or modified)
+source code. For example: if you transform this AST into xml, you'll be able to
+use BeautifulSoup or lxml or xpath or xslt on your python source code. I'm not
+sure if this will useful but I like this&nbsp;idea.</p>
+<h2>Plan of&nbsp;battle</h2>
+<p>My current strategy can be summarize by one quote from <a href="http://prog21.dadgum.com/30.html">this very interesting article</a>:</p>
+<blockquote>
+<i>The details of this paper aren't quite as important as the general concept: a
+compiler is nothing more than a series of transformations of the internal
+representation of a program. The authors promote using <b>dozens or hundreds of
+compiler passes</b>, each being as simple as possible. Don't combine
+transformations; keep them separate.</i>
+</blockquote>
+
+<p>The&nbsp;plan:</p>
+<ul>
+<li>split the source file into what could be tokens ← this part is done, I'll write a post explaining how it&nbsp;works</li>
+<li>regroup things that can be regroup, the split being simply stupid he'll split "+=" into "+" and "=", we need to regroup those&nbsp;things</li>
+<li>tokenize every&nbsp;elements</li>
+<li>decide how I want this AST to&nbsp;be</li>
+<li>probably do one or two pass (or more) to create this AST from the tokens, maybe I'll use some kind of yacc, dunno&nbsp;yet</li>
+</ul>
+<p>You can find the current version of the code <a href="https://github.com/Psycojoker/baron">here</a>.</p>
+<p>Next post will probably be on how I've written the splitting&nbsp;part.</p>
+<p>Thanks for reading and have a nice&nbsp;day,</p>
+<!-- Hyde::Excerpt::End -->
+
+<!-- Hyde::Article::End -->
+
+	
+</div>
+
+
+
+
+
+			<div id='footer'>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</div>
+
+
+		</div>
+
+	</body>
+
+</html>
+
