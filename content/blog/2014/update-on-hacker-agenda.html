@@ -1,0 +1,124 @@
+{% extends "_post.html" %}
+
+{% hyde
+title: "Update on the Hackeragenda: new sources, filtering and a new section related to code"
+created: 2014-05-15 10:56:18
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+I've made quite some significant updates to the
+[Hackeragenda](http://hackeragenda.be/) during the previous days, here is the
+mail I've sent to the mailing list announcing the good news:
+
+<img src="/media/img/hackeragenda/update_may_2014.png" />
+
+Ohai folks,
+
+I haven't gave you any news since my first mail about the hacker
+agenda, but that doesn't mean that nothing has changed!
+
+Reminder of what hackeragenda is: it's a website that aggregate the
+events in belgium interesting for hackers of the hackerspace
+community. It does that by fetching data from other website (by
+scraping most of the time ...) *instead* of asking users to submit
+events on it. This is my modest attemp to answer the problem "everyone
+is doing shitload of things and no one is aware of that and that sucks".
+
+(tl;dr at the end)
+
+First of all and starting with the oldest changes: the hackeragenda
+now has a real domain name: http://hackeragenda.be easier to remember,
+such wow
+
+In the mean time, with the help of [Titou](https://github.com/titouanc)
+we've added some new sources, most of them are either hackerspaces,
+hackerspaces-like, fablabs or numerical artists.
+
+[Staz](https://github.com/olethanh) has worked on a json specification
+of a format that an organisation can implement to ease our work to add
+it to the hackeragenda. It's described in the FAQ. Said in another
+way: if you give me an url that provide me with a json document that
+follows the spec, I can add you very easily to the hackeragenda.
+
+But the big news is that I've just coded the possibility of filtering
+events by sources and by tags! The absence of that possiblity is one
+of the reason of my absence of communication/advertissment: I didn't
+wanted to be in a situation where I would have to answer to someone
+"no, your stuff is not ~hacker[space]~ enough to be in it". Now I
+don't care anymore, I just have to not list it in the events by
+default. This also mean that you can do your own selection without
+having me imposing my choices on you :)
+
+To play with filtering click on "customize" or chose one of the
+predefined filter next to it.
+Filtering works this way:
+* each source/tag has three state: active (colour), inactive (grey), excluding (sticked)
+* if all filters are inactive, everything is shown
+* if some filters are active, only those filters are shown
+* if some filters are excluding, those filters are not shown
+* those rules applies *per* type of filter (source or tag)
+* play a bit with it, you'll understand quickly
+* of course, filters modify the url to save your preferences
+This might not be the most intuitive interface, but this is quite
+powerful are your are not the normal users :)
+
+Also, this new filtering interface allows me to introduction sections \o/
+I've put some already:
+* [default](http://hackeragenda.be: this is what everyone is sawing by default, it's nearly the same that it was before: events from hackerspaces/fablabs/hackerspace-like/numeric artists/some stuff in the hackerspace community, the only modification is that now I don't show regular hackerspace meetings like techtuesday, techwednesday etc... to focus more on "more unique" events.
+* [all](https://hackeragenda.be/?section=all): show everything
+* [hackerspaces](https://hackeragenda.be/?section=hackerspaces): show events from what I've identified as hackerspace (it's possible that some are missing)
+
+* /!\ NEW /!\ [Code](http://hackeragenda.be/?section=code ): events related to programming/database/agile that I've found on meetup.com, if you know others don't hesitate to send them to me by email
+
+If you have sections ideas (*with sources*) that can interest
+hackers, don't hesitate to send them to me (or send patchs, the code
+is simple). Same if you have sources (they must be parsable in a more
+or less reliable state).
+
+Also: I still refuse to add events by hand in the hackeragenda, I'm
+extremely lazy and totally hate moderation, I only add new sources.
+The hackeragenda must be able to work without anyone touching it for
+months. However, if someone is willing to build a website where you
+can submit events and that implement the hackeragenda API, I'll add
+this source with pleasure to the hackeragenda and if it's in Django
+I'm ready to contribute to it (but I don't want to do moderation) (I'm
+thinking from time to time about coding this, but I'm not very
+motivated and after I'll need to find responsible and motivated
+moderators which takes time).
+Ohai folks,
+
+Code is available here: https://github.com/Psycojoker/hackeragenda if
+you want to contribute :) It's python (django)/js(mostly jquery) for
+the front end. The code is normally quite simple and clean.
+
+tl;dr
+* it has a real url now: http://hackeragenda.be/
+* new sources added (mostly hackerspaces and numeric artists stuff)
+* a json format has been defined, so if you implement it it's very easy for me to add your organisation to the hackeragenda, see the FAQ
+* new filtering engine, this allows me to put more stuff without overloading the default view
+* filters also apply on rss and ical
+* therefor a new section "Code" with a lot of sources of events that I've found on meetup.com, send me the one I'm missing!  http://hackeragenda.be/?section=code
+* also the default view don't show regular meetings (like techtuesday, techwednesday ...) anymore to focus more on "unique events"
+* I still refuse to add events by hand because I'm lazy and hate moderation
+* if you have sections ideas (*with sources*) that can interest hackers, send them to me (or send patchs, the code is simple)
+* code is (still) here if you want to contribute https://github.com/Psycojoker/hackeragenda
+
+But, most importantly, I'm doing this to solve the problem "everyone
+is doing shitload of things and no one is aware of that and that
+sucks" and to solve it efficiently, well, people need, at least, to
+know that the hackeragenda exists (and I suck at advertisement), so it
+would be very kind of you if you could spread the word of its
+existence around you :) Thanks in advance!
+
+That's all folks!
+
+Cheers,
+
+<3
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
