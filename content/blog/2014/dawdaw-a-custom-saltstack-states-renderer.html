@@ -1,0 +1,92 @@
+{% extends "_post.html" %}
+
+{% hyde
+title: "Release of dawdaw, a custom saltstack states renderer for extremly lazy python devs"
+created: 2014-05-19 08:00:18
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+I've just release [dawdaw](https://github.com/Psycojoker/dawdaw), a custom
+[saltstack](http://saltstack.com) (a config management tool) states render for
+extremely python devs like me.
+
+Here is an extract of the README:
+
+Introduction
+============
+
+Dawdaw is an experiment to make a [SaltStack](http://www.saltstack.com/) custom [renderer](http://docs.saltstack.com/en/latest/ref/renderers/index.html) (the stuff that allows you to write your states in yaml/jinja2/mako/other) in an attempt to solve those problems:
+
+* current states are extremely too verbose to write
+* you often repeat yourself way too much
+* really have a linear states declaration for requires
+* explicit requires on included states, because global sucks
+* namespacing all the things, because global sucks
+* indirectly trying to solve the "salt states totally sucks are being redistributed" problem by going full python, you can now use setup.py and pypi/pip to redistribute you work¹
+
+Disadvantages: you move await from full declarative code (which you were
+already doing in fact with jinja2 templates) to go back to python code. This
+is, on one hand very powerful, on the other hand probably too powerful (and may
+be way less easy to understand for devops that don't come from a programming
+background). That works for me because I'm a python dev and I'm using this for
+my personal usages, but that might not fit your case.
+
+Sample
+======
+
+Move from:
+
+{% H 'yaml' %}
+include:
+  - dotfiles
+
+wyrd-pkgs:
+  pkg.installed:
+    - name: wyrd
+    - require:
+      - sls: dotfiles
+
+reminds.git:
+  git.latest:
+    - name: ssh://git@bitbucket.org/psycojoker/reminds.git
+    - runas: psycojoker
+    - target: /home/psycojoker/reminds/
+    - require:
+      - pkg: git
+
+cd /home/psycojoker/reminds/ && bash init:
+  cmd.run:
+    - unless: ls /home/psycojoker/.reminders /home/psycojoker/.reminders.gcl
+    - user: psycojoker
+    - require:
+      - git: reminds.git
+{% endH %}
+
+To:
+
+{% H 'python' %}
+#!dawdaw_template
+
+from dawdaw.states import pkg, git, cmd, include
+from dawdaw.utils import default, test, debug
+
+dotfiles = include("dotfiles")
+
+with default(user="psycojoker", runas="psycojoker"):
+    pkg.installed("wyrd",
+                  require=[dotfiles.get("pkg", "dotfiles-pkgs")])
+    git.latest("ssh://git@bitbucket.org/psycojoker/reminds.git",
+               target="/home/psycojoker/reminds/")
+
+    if not test("ls /home/psycojoker/.reminders /home/psycojoker/.reminders.gcl"):
+        cmd.run("cd /home/psycojoker/reminds/ && bash init")
+{% endH %}
+
+[Read the rest on github](https://github.com/Psycojoker/dawdaw).
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
