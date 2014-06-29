@@ -99,6 +99,27 @@ start_protoi()
 }
 {% endH %}
 
+And my zsh completion script (I've just RTFM how to make them, it's super easy, I'm making one for everything now /o\):
+
+{% H "bash" %}
+#compdef start_proto
+
+_arguments "1: :($(docker images | awk '{print $1}' | sed '1d' | grep -v "<none>" | sort | uniq))"
+{% endH %}
+
+And
+
+{% H "bash" %}
+#compdef start_protoi
+
+_arguments "1: :($(docker images | awk '{print $1}' | sed '1d' | grep -v "<none>" | sort | uniq))"
+{% endH %}
+
+You need to put them in a _start_proto and _start_protoi files somewhere on the
+path listed by "echo $fpath" (or extend this path: typically
+'fpath=(~/.zsh/completion $fpath)' in your ~/.zshrc and make sure to have
+"autoload -U compinit" and "compinit" in your ~/.zshrc)
+
 {% endexcerpt %}
 {% endarticle %}
 {% endblock %}
