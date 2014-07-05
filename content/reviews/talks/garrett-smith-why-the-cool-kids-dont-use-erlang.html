@@ -1,0 +1,49 @@
+{% extends "_post.html" %}
+
+{% hyde
+    title: "Review: Garrett Smith - Why The Cool Kids Don't Use Erlang"
+    created: 2014-07-05 10:39:45
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+<center>
+<iframe src="//player.vimeo.com/video/98639067" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/98639067">Garrett Smith - Why The Cool Kids Don't Use Erlang</a> from <a href="http://vimeo.com/erlang">Erlang Solutions</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+</center>
+
+In this talk Garrett try to explain why "cool kids" don't use Erlang (instead of Ruby for example). To do so he has made a short survey. He is talking to Erlang people while making this talk.
+
+Questions of the survey (all are open questions):
+
+* What is your general impression of Erlang?
+* For what situations would you consider using Erlang?
+* What challenges do you see in adopting Erlang for a project? [kinda a nice way to ask this]
+* What languages or frameworks would you consider as alternatives to Erlang? [nice way to see where to look for inspiration]
+* What about Erlang or its ecosystem (libraries, community, governance, etc) would you change?
+
+Then more general questions to have an idea of who answered this survey (he didn't say to who he sent the survey).
+
+He had 181 responses, most of the answers came from experienced and influential developers working in team.
+
+Most of the answers are quite expected (hard to learn, people are fanatic about it, hard to find devs) but some of them are quite noticeable:
+
+* Erlang miss documentation of *how* to do things (like tutorial, reference is good). This really remind me the position of the Django devs that forbid reference and only want "how to" guides.
+* It's hard to chose a library to do X (in comparison with python for example) (not to find, to chose between all the alternatives). This really looks like a miss for an authority saying "this is the good one", so you need to learn that (by learning about the preferences of the community) and that makes Erlang harder to learn.
+* Packager manager sucks (a recurring them in every programming languages, ruby and python seems the only language where things are good enough)
+
+Additional informations:
+
+* Erlang seems to be, in term of popularity and usage, in the same group than Haskell, Clojure, Scala etc...
+* A point that come back a lot is that Erlang really solves problems that are outlier of the classical programming problems
+* Joe is in the public and can't stop asking questions
+
+I'm still a bit septic by the fact that to answer this question, the speaker
+asked the Erlang users instead of asking the "cool kids". And by a matter of
+fact, he didn't end up concluding with an answer to his question but more with
+a call for trying to fix this situation and pushing ideas.
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
