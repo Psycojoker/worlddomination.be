@@ -11,7 +11,7 @@ deploy:
 	[ -e "/usr/local/bin/git-up" ] || (sudo pip install git-up)
 	git up
 	cd hyde && git up
-	git add .
+	git add . -A
 	git commit -am "update"
 	make all
 	rsync -r deploy/* bram@worlddomination.be:www/
