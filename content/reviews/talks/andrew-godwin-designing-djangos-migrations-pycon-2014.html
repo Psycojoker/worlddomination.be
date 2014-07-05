@@ -13,7 +13,8 @@
 
 A talk by the developper of the Django [South
 migration](https://south.readthedocs.org/en/latest/index.html#index) explaining
-his work of integrating migrations directly in the core of Django.
+his work of integrating migrations directly in the core of Django 1.7
+(unreleased right now).
 
 Interesting informations:
 
@@ -27,6 +28,7 @@ Interesting informations:
 * of all the databases he has been working on, PosgreSQL is the only one without stranges behavior (for this situation)
 * very cool new feature that allow to magically merging a series of migrations into one. Furthermore, will doing this merging, some atomic operations are compressed together (like a create table followed by a add column will be compressed into one create table, one add column X followed by one remove column X will be nulled, etc...)
 * this works has entirely been financed via a successful Kickstarter campaign, I see more and more things like this happening and this is pretty cool
+* Andrew seems to be responsible for the release of Django 1.7, Django never announce release date but he talks about May 2015
 
 This talk is quite short (20min of speach, 5 of Q&A) so there isn't that much informations but this give a good otherview of what to news migrations will be like and how it has been done.
 
