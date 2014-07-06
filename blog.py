@@ -18,16 +18,16 @@ post_template = """\
 {%% article %%}
 {%% excerpt %%}
 
-<center>%(content)s</center>
-
-
+%(content)s
 
 {%% endexcerpt %%}
 {%% endarticle %%}
 {%% endblock %%}"""
 
 vimeo_iframe_template = """
-<iframe src="//player.vimeo.com/video/%(video_id)s" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/98639067">Garrett Smith - Why The Cool Kids Don't Use Erlang</a> from <a href="http://vimeo.com/erlang">Erlang Solutions</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<center><iframe src="//player.vimeo.com/video/%(video_id)s" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/98639067">Garrett Smith - Why The Cool Kids Don't Use Erlang</a> from <a href="http://vimeo.com/erlang">Erlang Solutions</a> on <a href="https://vimeo.com">Vimeo</a>.</p></center>
+
+
 """
 
 def _vimeo(url):
@@ -60,8 +60,25 @@ def review(url):
         raise Exception("I don't have a method for this website :(")
 
 
+def post(title):
+    file_name = "%s.html" % (slugify(title))
+    file_path = os.path.join("./content/blog/2014/", file_name)
+
+    if os.path.exists(file_path):
+        raise Exception("File already exists")
+
+    post_content = post_template % {
+        "content": "",
+        "title": "Review: " + title,
+        "date": datetime.now().strftime("%F %X"),
+    }
+
+    open(file_path, "w").write(post_content)
+    os.system("vi %s +12" % file_path)
+
+
 parser = argh.ArghParser()
-parser.add_commands([review])
+parser.add_commands([review, post])
 
 if __name__ == '__main__':
     parser.dispatch()
