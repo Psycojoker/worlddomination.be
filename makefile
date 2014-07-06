@@ -4,7 +4,7 @@ all: _check_dependancies
 	hyde/ve/bin/hyde -g
 
 run: _check_dependancies
-	(sleep 0.5 && firefox localhost:8080) &
+	(sleep 1.5 && firefox localhost:8080) &
 	hyde/ve/bin/hyde -w || (hyde/ve/bin/pip install -r hyde/requirements.txt && hyde/ve/bin/hyde -w)
 
 deploy:

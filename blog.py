@@ -69,7 +69,7 @@ def post(title):
 
     post_content = post_template % {
         "content": "",
-        "title": "Review: " + title,
+        "title": title,
         "date": datetime.now().strftime("%F %X"),
     }
 
