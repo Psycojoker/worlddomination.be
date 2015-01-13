@@ -4,3 +4,4 @@ deploy/*
 *.swo
 hyde/
 site.log
+ve/
