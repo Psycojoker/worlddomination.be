@@ -2,5 +2,5 @@
 deploy/*
 *.swp
 *.swo
-hyde
+hyde/
 site.log
