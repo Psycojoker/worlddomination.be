@@ -14,7 +14,7 @@ deploy:
 	git add . -A
 	git commit -am "update"
 	make all
-	rsync -r deploy/* bram@worlddomination.be:www/
+	rsync -r deploy/* root@worlddomination.be:/var/www/my_webapp
 	git push
 
 loop: _check_dependancies
