@@ -8,7 +8,7 @@ run: _check_dependancies
 	hyde/ve/bin/hyde -w || (hyde/ve/bin/pip install -r hyde/requirements.txt && hyde/ve/bin/hyde -w)
 
 deploy:
-	[ -e "/usr/local/bin/git-up" ] || (sudo pip install git-up)
+	which git-up > /dev/null || (sudo pip install git-up)
 	git up
 	cd hyde && git up
 	git add . -A
