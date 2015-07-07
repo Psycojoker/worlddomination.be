@@ -1,0 +1,69 @@
+{% extends "_post.html" %}
+
+{% hyde
+    title: Little utility to add an event to Neutrinet's wiki
+    created: 2015-07-07 05:30:59
+%}
+
+{% block article %}
+{% article %}
+{% excerpt %}
+
+In my broad quest to automatise/optimise everything boring in my life (and
+having great reason to procrastinate doing it), my latest victim was the action
+of adding an event to [Neutrinet's wiki](http://neutrinet.be/index.php).
+
+It's a stupid action, doesn't take that long, but it's plain boring and unfunny
+to do: it's on mediawiki using semantic form which gives a pretty bad UI. So
+it's annoying enough for me to procrastinate it for too long and I was also in
+need of finding a reason to procrastinate the other important things I was in
+need to do. I also wanted to test
+[robobrowser](https://github.com/jmcarp/robobrowser) which is a modern version
+of [mechanize](http://wwwsearch.sourceforge.net/mechanize/) and that uses
+[BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/), a python html
+parsing lib that I really like.
+
+Spoiler: robobrowser has now replaced mechanize for me, it's pretty cool and
+just do what I want in a nicer way than mechanize.
+
+And because the other things I was procrastinating were boring (while kinda
+important), I took the time to make this script super nice and fancy.
+
+Here its help page:
+
+{% H %}
+usage: add_event [-h] -d D [-m M] [--hour HOUR] [-y Y] [--min MIN]
+                 [--location LOCATION] [-t TITLE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d D                  date (default: -)
+  -m M                  month (default: -)
+  --hour HOUR           hour (default: '7')
+  -y Y                  year (default: -)
+  --min MIN             minutes (default: '30')
+  --location LOCATION   location (default: '123 rue royale 1000 Bruxelles
+                        Belgique')
+  -t TITLE, --title TITLE
+{% endH %}
+
+A classical session (the event name is automatically created based on the
+wiki's data because it's also boring to do by hand):
+
+{% H %}
+$ add_event -d 24
+I'm about to create the event 'Meeting 2015/10' on 19:30 24/7/2015 at '123 rue royale 1000 Bruxelles Belgique'
+Continue? [Y/n]: 
+Login into mediawiki:
+Username: bram
+Password: 
+{% endH %}
+
+I've also used [argh](http://pythonhosted.org/argh/#examples) which is, by far,
+my favourite and easier to use python lib to handle cli arguments.
+
+Source code of the script: [https://github.com/psycojoker/neutrinet_add_event](https://github.com/psycojoker/neutrinet_add_event)
+
+{% endexcerpt %}
+{% endarticle %}
+{% endblock %}
