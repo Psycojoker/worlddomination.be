@@ -13,7 +13,7 @@ BACKUP = False
 
 SITE_ROOT = "/"
 #SITE_ROOT = "/home/psycojoker/code/django/hyde/sites/blog/deploy/"
-SITE_WWW_URL = "http://blog.worlddomination.be"
+SITE_WWW_URL = "http://worlddomination.be"
 SITE_NAME = "WorldDomination.be"
 SITE_AUTHOR = "Laurent Peuch"
 
