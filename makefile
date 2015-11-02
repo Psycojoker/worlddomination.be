@@ -17,6 +17,9 @@ deploy:
 	rsync -r deploy/* root@worlddomination.be:/var/www/my_webapp
 	git push
 
+rsync:
+	rsync -r deploy/* bram@worlddomination.be:www/
+
 loop: _check_dependancies
 	(sleep 2 && firefox localhost:8080) &
 	hyde/ve/bin/hyde -g -k -w || (hyde/ve/bin/pip install -r hyde/requirements.txt && hyde/ve/bin/hyde -g -k -w)
