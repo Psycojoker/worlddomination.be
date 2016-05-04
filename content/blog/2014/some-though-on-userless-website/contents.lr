@@ -1,0 +1,113 @@
+title:  Some though on building userless website
+---
+body:
+
+
+Right now, one of my toy project is to build a free software ethical
+alternative to the trio: meetup.com/facebook events/eventbrite (mainly because
+there seems to be strictly no alternatives available).
+
+While thinking on how to do that, my initial idea was simply to "simply" do a
+clone of meetup.com. Not especially exciting. Then I realised that there was a
+funnier and way more interesting way of doing this. My inspiration came from
+etherpad and doodle (well, framadate), two website where to start working you
+just have to click on one big button that say "create to new pad/survey for me"
+and you're done: no user registration, nothing.
+
+Thus came the logical conclusion on making this alternative userless and seeing
+how far that idea can be pushed.
+
+In a world where the vast majority of proprietary services try to get as much
+data as possible in exchange of "free" services and where some governmental
+agencies seems a bit too curious about what we are doing, I think that it's
+worth a try for the free software movement to explore how far can we build
+viable tools while collecting as few personal data as possible (because they
+can't "stole" data you don't have).
+
+And on the other hand, having a tool where you don't have to register an
+account really lowers the barrier of entry, thus the adoption. This could be an
+interesting advantage for free software to offer a attracting alternative
+(in addition to the ethical part).
+
+So, after thinking about it for some time, here are a series of ways that I
+will probably implement this idea in this alternative (some of those are
+already done). The strategy is to ask as few as possible and only ask more when
+"more" is absolutely needed, a "leveraging" strategy (for now, "more" seems
+only to be an email address).
+
+For reference, the workflow of the application is:
+
+* an user create an event with some information about it and can modify it later
+* other users answer to the event on their intention to attend to it
+
+First idea (from doodle): use unique, hard to guess url:
+
+* when the user create an event, give him an administration page with a very hard to guess url (generate an uuid for example or anything else random).
+* -> the user is responsible to bookmark/other this page and will be able to use it to modify the event
+* -> no personal data is stored
+
+* when another user answer to the event, only ask for his "name" (a simple text input, no concept of first/last name/gender/other, the user will put what he wants)
+* again, give him a page with a very hard to guess url where he can modify his answer
+* -> nearly no personal data is stored
+
+Simple additional security idea: allows the event organiser to password protect
+the event administration page. Same for the event page (for private events).
+
+Simple privacy idea: allow the user to hide his nick from the public list of
+attendees (the event organiser will still be able to see it).
+
+Another simple privacy (and also convenient) idea: allow the event organiser to
+not display the attendees list on the public page of the event. This also
+allows to have a more "eventbrite"/ticketing approach to the event
+organisation."
+
+Convenient idea for a minimalist privacy trade-off: temporary link the privates
+page (the ones that have unique hard to guess urls) to the user cookie/session
+and display them somewhere for the user to get them back.
+
+Another convenient idea: have a simple form to allow the user to send himself
+an email containing a link to those uniques pages (after the creation of the
+pages). Something like "send me this link via email". **Do not store the mail
+address**.
+
+First leveraging: ask the user to store his email. Do not expose/share this
+email via anyone, **never**.
+
+This allows to:
+
+* inform the event organiser about event responds
+* send reminders to attendees
+* send informations about the project page modification to the attendees
+* **maybe**: allow the event organiser to send a message (without giving him the emails but via a form) to the attendees
+
+And this adds one very cool feature: add the possibility for the user to have
+on one page all the places where his email is "linked" to something: event
+attending and created event. And of course, give the user links to the "unique
+urls" pages corresponding to those place and to remove his participation/email
+from those places.
+
+The way to gain access to this page is a simple form where the user puts his
+email address, this sends him an email with a link to a "unique url" page valid
+for a certain period of time.
+
+That's all for the big main patterns I've come up with for now (there are small
+variations/details like "possibility to suppress event"/"give a life time to
+events"/"suppress my participation"/"put password at those places" etc... that
+I haven't write down here because I'm lazy and that they don't bring that much).
+
+I'm interested in your opinion and if you have other big main patterns idea on
+this subject.
+
+And to finish, some downside of this userless approach:
+
+* biggest one IMO: it's way harder to protect against spam
+* this approach seems to fit very well "tools" website where you just need one, mostly, temporary discreet/small page to share with not that much people for a not especially long period of time (a pad or a date survey are perfect example of that) with people that generally knows each others and/or are of good will/interested in playing the game on low to medium value activities. I'm not convinced that this will works as well in other situations
+
+While I was more interested in discuting the principles in this post, you can
+find the source code of the project
+[here](https://github.com/psycojoker/wanawana) and a public instance
+[here](http://wanawana.worlddomination.be).
+
+
+---
+pub_date:  2014-12-30

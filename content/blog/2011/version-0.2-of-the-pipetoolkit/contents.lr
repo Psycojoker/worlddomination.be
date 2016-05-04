@@ -1,0 +1,44 @@
+title:  Version 0.2 of the PipeToolKit
+---
+body:
+
+
+I'm proud to announce you a new release of the PipeToolKit.
+
+The [PipeToolKit](/projects/pipetk.html) is a
+collection of small utilities to play with unix pipes and write new one. I use
+it a lot with ii, feedstail and other utilities to build [highly customizable
+irc bots](/projects/ungarage.html).
+
+I've also add some documentation on the python template class I use to build
+those utils in the case you want to code your owns.
+
+Installation:
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+    pip install pipetk
+</blockquote>
+
+[The pypi page](http://pypi.python.org/pypi/PipeTK).
+
+[Code](https://github.com/Psycojoker/pipetk)!
+
+### Changelog
+
+* pdetinyfy now works for urls inside a string
+
+* new script: puniqrt to try to eliminate duplications for tweets
+
+* new template to build pipes utils that works on the urls of a string
+
+* add premoveurls as en example script for the new template
+
+* new script: pcleanurls to remove useless tracking pieces of urls (like utm_* stuff)
+
+* various bug fixs
+
+* add doc on how to write new pipe utils
+
+
+---
+pub_date:  2011-11-02

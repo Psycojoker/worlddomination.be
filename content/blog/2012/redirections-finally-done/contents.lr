@@ -1,0 +1,18 @@
+title:  Redirections finally done
+---
+body:
+
+
+Thanks to my good old friend procrastination, I was finally forced to do
+something way more boring than configuring url redirections to avoid broken
+urls from my older blog engine, hurray \o/
+
+I'll check out the 404 from the logs from time to time to see if something is
+missing.
+
+On a side node, it's always a bit chilling to go through the list of 404 and to
+see all the urls tried by scripts to crack random websites.
+
+
+---
+pub_date:  2012-01-20

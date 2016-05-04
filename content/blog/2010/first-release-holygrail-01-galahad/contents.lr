@@ -1,0 +1,30 @@
+title:  First release of HolyGrail, 0.1 Galahad
+---
+body:
+
+
+<p>Ohai, </p>
+
+<p>I am proud to announce you the first release of HolyGrail ! This is the version 0.1 Galahad (knights of the round table&nbsp;!).</p>
+
+<p>But, what is HolyGrail ? It&#8217;s an hight level lib to manage the holy quest of your life ! In other words, it&#8217;s an hight level lib to manage a next actions list (organisation, todo etc&#8230;) in the sens of the <a href="http://en.wikipedia.org/wiki/GTD"><span class="caps">GTD</span></a>. This way you can easily build your own interface, switch from different interface and write&nbsp;scripts.</p>
+
+<p>This first release&nbsp;manage:</p>
+
+<ul>
+    <li>missions (todos) with description, tickler, due date, wait for previous missions, tags, creation and completion date and&nbsp;other.</li>
+    <li>quests (projects) with description, completion, creation/completion date, due date, hide possibility and other. A quest is composed of&nbsp;missions.</li>
+    <li>realms (contexts) with description, creation date, hide possibility, position organisation and other. A realms is a group of&nbsp;missions.</li>
+</ul>
+
+<p>For a more complete description of HolyGrail (with links to documentations, code, pypi etc&#8230;) go <a href="/projects/holygrail.html">here</a>.</p>
+
+<p>You can install HolyGrail via <a href="http://pypi.python.org/pypi/HolyGrail/">pypi</a>:</p>
+
+<blockquote style="background-color:#313031; color:#ffffff">
+easy_install holygrail
+</blockquote>
+
+
+---
+pub_date:  2010-10-08

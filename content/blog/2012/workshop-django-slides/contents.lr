@@ -1,0 +1,14 @@
+title:  Workshop django, slides
+---
+body:
+
+
+Il y a peut j'ai donné à plusieurs reprise un atelier pour apprendre aux gens le framework web python [django](https://www.djangoproject.com/). Vous pouvez retrouver les slides [ici](https://github.com/Psycojoker/slides-workshop-django/blob/master/slides.pdf?raw=true) (et les sources [ici](https://github.com/Psycojoker/slides-workshop-django)).
+
+Cet atelier donne une introduction à django jusqu'aux applications et permet d'avoir une idée des grosses fonctionnalités avancées présente pour savoir dans quelle direction partir une fois qu'on est à l'aise. Les slides sont aussi pas mal détailler pour pouvoir servir de référence après l'atelier.
+
+Je le redonne ce vendredi à [UrLab](http://urlab.be) (no3.211 campus de la plaine de l'ULB à Bruxelles) à 18h, viendez tous !
+
+
+---
+pub_date:  2012-07-11

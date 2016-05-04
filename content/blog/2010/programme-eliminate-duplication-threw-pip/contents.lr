@@ -1,0 +1,34 @@
+title:  Eliminate duplications through a bash pipe
+---
+body:
+
+
+<p>Problem:<br />
+I receive data from a continuous stream (a tail -f or rsstail output for example). I want to remove duplications. <em>| sort | uniq</em> won't work since it's a non-ending stream (and I don't want to sort them). So much drama.</p>
+
+<p>Solution:
+Launch Vim and code.</p>
+
+<p>Result, tadaaa:</p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+<font color="#ffdfad">#!/usr/bin/python</font><br>
+<br>
+<font color="#f7e78c"><b>import</b></font>&nbsp;sys<br>
+<br>
+anti_doublons <font color="#f7e78c"><b>=</b></font>&nbsp;<font color="#bdb66b"><b>set</b></font>()<br>
+a <font color="#f7e78c"><b>=</b></font>&nbsp;sys.stdin.readline()<br>
+<font color="#f7e78c"><b>while</b></font>&nbsp;a:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>if</b></font>&nbsp;a <font color="#f7e78c"><b>not</b></font>&nbsp;<font color="#f7e78c"><b>in</b></font>&nbsp;anti_doublons:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys.stdout.write(a)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sys.stdout.flush()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;anti_doublons.add(a)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a <font color="#f7e78c"><b>=</b></font>&nbsp;sys.stdin.readline()<br>
+</font>
+</blockquote>
+
+<p>(I will create a pipe/stream toolkit to distribute all this kind of stuff to play with bash pipe in the next days).</p>
+
+
+---
+pub_date:  2010-09-27

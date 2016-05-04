@@ -1,0 +1,28 @@
+title:  pytestator, un script vim pour gérer ses tests unitaires plus facilement
+---
+body:
+
+
+<p>J&#8217;ai (enfin) releasé un petit script vim pour rendre plus agréable l&#8217;utilisations de tests untaires pour python dans&nbsp;vim.</p>
+
+<p>Le principe est assez simple, ce script vous introduit plusieurs nouveaux raccourcis dont voici les deux plus&nbsp;intéressants:</p>
+
+<ul>
+    <li><em>, s</em> qui vous fais passer du fichier de tests au fichier testé et vice versa (<em>s</em> pour <em>swap</em>)</li>
+    <li><em>, tr</em> qui lance le fichier de tests correspondant au fichier que vous êtes en train d&#8217;éditer, que vous soyez dans ce fichier ou dans le fichier de test (<em>tr</em> pour <em>test run</em>)</li>
+</ul>
+
+<p>La page du script avec un peu plus d&#8217;informations et du mauvais anglais: <a href="http://www.vim.org/scripts/script.php?script_id=3151">http://www.vim.org/scripts/script.php?script_id=3151</a></p>
+
+<p>Sinon des mappings que j&#8217;aime bien pour écrire mes tests&nbsp;unitaires:</p>
+
+<blockquote style="background-color:#313031; color:#ffffff">
+imap ,ar self.assertRaises()<font color="#9cfb9c">&lt;</font>left<font color="#9cfb9c">&gt;</font><br>
+imap ,ae self.assertEqual()<font color="#9cfb9c">&lt;</font>left<font color="#9cfb9c">&gt;</font><br>
+imap ,at self.assertTrue()<font color="#9cfb9c">&lt;</font>left<font color="#9cfb9c">&gt;</font><br>
+imap ,af self.assertFalse()<font color="#9cfb9c">&lt;</font>left<font color="#9cfb9c">&gt;</font><br>
+</blockquote>
+
+
+---
+pub_date:  2010-07-16

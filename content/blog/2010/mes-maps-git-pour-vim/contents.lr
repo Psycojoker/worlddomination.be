@@ -1,0 +1,32 @@
+title:  Mes maps git pour vim
+---
+body:
+
+
+<p>Un poste rapide pour vous donner mes maping pour <a href="http://git-scm.com">git</a> dans <a href="http://www.vim.org">vim</a>. J&#8217;ai beau avoir regardé tous les plugins vim pour git, aucun ne m&#8217;a plus, je me suis donc contenté de faire plein de maps pour pouvoir utiliser git dans vim et ce le plus rapidement&nbsp;possible.</p>
+
+<p>Le principe est très simple et surtout facile à retenir: les maps commencent tous par &#8220;, &#8221; (comme tous mes maps ou presque) puis par &#8220;g&#8221; (comme git), après je rajoute une lettre qui est le début de la commande et je la mets parfois en majuscule quand c&#8217;est la même commande avec des options différentes. C&#8217;est tout bête mais ça permet de ne taper que 3 char pour faire n&#8217;importe quelle commande (qui est beaucoup plus longue à écrire), je me retrouve même à ouvrir vim pour utiliser git maintenant&nbsp;-_-&#8220;</p>
+
+<blockquote style="background-color:#313031; color:#ffffff">
+<font color="#f7e78c"><b>map</b></font>&nbsp;, ga&nbsp;:!git add -p<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gA&nbsp;:!git add %<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gf&nbsp;:!git add<br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gs&nbsp;:!git status<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gc&nbsp;:!git commit -m &#8220;&#8221;<font color="#ffdfad">&lt;</font><font color="#ffdfad">left</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gC&nbsp;:!git add %<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font>:!git commit -m &#8220;&#8221;<font color="#ffdfad">&lt;</font><font color="#ffdfad">left</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gd&nbsp;:!git diff<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gD&nbsp;:!git diff &#8212;cached<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gp&nbsp;:!git push<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gP&nbsp;:!git pull<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gb&nbsp;:!git branch<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gB&nbsp;:!git branch<br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gh&nbsp;:!git checkout<br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gi&nbsp;:!git init<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gt&nbsp;:!tig<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+<font color="#f7e78c"><b>map</b></font>&nbsp;, gl&nbsp;:!git log<font color="#ffdfad">&lt;</font><font color="#ffdfad">cr</font><font color="#ffdfad">&gt;</font><br>
+</font></blockquote>
+
+
+
+---
+pub_date:  2010-06-26

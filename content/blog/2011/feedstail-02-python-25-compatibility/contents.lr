@@ -1,0 +1,18 @@
+title:  FeedsTail 0.2 - python 2.5 compatibility
+---
+body:
+
+
+<p>A small post to said that <a href="http://identi.ca/rgauthier">Romain</a> and I just released a new version of <a href="/projects/feedstail.html">FeedsTail</a> that is compatible with python 2.5.</p>
+
+<p>Note that the formating format is the <a href="http://docs.python.org/release/2.5.2/lib/typesseq-strings.html">one of python 2.5</a>. So you'll have to do something like this:</p>
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+feedstail -u http://reddit.com/.rss -f "%(title)s - %(link)s"
+</blockquote>
+
+<p>Except additional releases in the next days.</p>
+
+
+---
+pub_date:  2011-04-28

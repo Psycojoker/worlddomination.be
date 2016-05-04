@@ -1,0 +1,24 @@
+title:  First release of mtpl
+---
+body:
+
+
+I'm proud to announce you the first release of mtpl (as in MyTemplates). This
+is a very simple program that aim to manage a collection of various templates
+files for scripts/licencing/code.
+
+Bored of constantly copypasting the gpl/setup.py/cool shell script from the
+web/your matchin project? Mtpl aim to fix this by providing a simple and
+straightforward cli interface. Git is used for storing files.
+
+All the details can be found on the [pypi page](http://pypi.python.org/pypi/mtpl).
+
+Installation
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+    pip install mtpl
+</blockquote>
+
+
+---
+pub_date:  2011-11-01

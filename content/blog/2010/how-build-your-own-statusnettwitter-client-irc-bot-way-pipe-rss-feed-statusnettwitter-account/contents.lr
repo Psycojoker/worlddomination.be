@@ -1,0 +1,15 @@
+title:  How to build your own statusnet/twitter client with an irc bot + a way to pipe a RSS feed to a status.net/twitter account
+---
+body:
+
+
+<p>I&#8217;ve just finished writing a guide on how to build your own status.net/twitter client using only few lines of&nbsp;bash.</p>
+
+<p><a href="/projects/ungarage.html">Here it&nbsp;is.</a></p>
+
+<p>Bonus: include an easy way to pipe a <span class="caps">RSS</span> feed to a microblogging&nbsp;account.</p>
+
+
+
+---
+pub_date:  2010-12-04

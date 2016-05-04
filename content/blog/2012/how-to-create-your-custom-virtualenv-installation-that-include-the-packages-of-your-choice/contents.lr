@@ -1,0 +1,37 @@
+title:  How to create your custom virtualenv installation that include the packages of your choice
+---
+body:
+
+
+I use [virtualenv](http://www.virtualenv.org/en/latest/index.html) all the time, for every new project, for every lib or project I test. I also use [ipython](http://ipython.org/) and [ipdb](https://github.com/gotcha/ipdb) all the time (and [django](https://www.djangoproject.com/) nearly all the time).
+
+Problem: ipython, ipdb and django aren't shipped by virtualenv and installing them took some time that break my flow when I need them.
+
+Luckily, mitsuhiko has release [virtualenv-tools](https://github.com/fireteam/virtualenv-tools) that allow you to update the path of a copied virtualenv.
+
+Some small shell scripting later and here is the result:
+
+<blockquote  style="background-color:#313031; color:#ffffff">
+mkve&nbsp;()<br>
+{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ -e&nbsp;<font color="#d7afd7">&quot;</font><font color="#d75f5f">$(</font><font color="#ffd787"><b>which</b></font><font color="#d7afd7">&nbsp;pip</font><font color="#d75f5f">)</font><font color="#d7afd7">&quot;</font>&nbsp;]&nbsp;<font color="#ffd787"><b>||</b></font>&nbsp;(<font color="#ffd787"><b>echo</b></font>&nbsp;<font color="#d7afd7">&quot;</font><font color="#d7afd7">installing pip</font><font color="#d7afd7">&quot;</font>;&nbsp;sudo aptitude install python-pip)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ -e&nbsp;<font color="#d7afd7">&quot;</font><font color="#d75f5f">$(</font><font color="#ffd787"><b>which</b></font><font color="#d7afd7">&nbsp;virtualenv</font><font color="#d75f5f">)</font><font color="#d7afd7">&quot;</font>&nbsp;]&nbsp;<font color="#ffd787"><b>||</b></font>&nbsp;(<font color="#ffd787"><b>echo</b></font>&nbsp;<font color="#d7afd7">&quot;</font><font color="#d7afd7">installing pip</font><font color="#d7afd7">&quot;</font>;&nbsp;sudo pip install virtualenv)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[ -e&nbsp;<font color="#d7afd7">&quot;</font><font color="#d75f5f">$(</font><font color="#ffd787"><b>which</b></font><font color="#d7afd7">&nbsp;virtualenv-tools</font><font color="#d75f5f">)</font><font color="#d7afd7">&quot;</font>&nbsp;]&nbsp;<font color="#ffd787"><b>||</b></font>&nbsp;(<font color="#ffd787"><b>echo</b></font>&nbsp;<font color="#d7afd7">&quot;</font><font color="#d7afd7">installing virtualenv-tools</font><font color="#d7afd7">&quot;</font>;&nbsp;sudo pip install virtualenv-tools)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>if</b></font>&nbsp;[ ! -e ~/.myvirtualenv/ ]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>then</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;virtualenv --distribute ~/.myvirtualenv/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~/.myvirtualenv/bin/pip install ipdb django django_pdb django_extensions django_debug_toolbar<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>fi</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;cp -r ~/.myvirtualenv/ ve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;virtualenv-tools --update-path&nbsp;<font color="#d75f5f">$(</font><font color="#ffd787"><b>pwd</b></font><font color="#d75f5f">)</font>/ve ve<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ffd787"><b>source</b></font>&nbsp;ve/bin/activate<br>
+}<br>
+</blockquote>
+
+Just type mkve, it will check that you have everything needed installed then build the virtualenv if it isn't there, install the packages in it then copy this virtualenv to your current directory, update its paths and activate it.
+
+It's even faster than to build a new virtualenv (once the global virtualenv is created).
+
+
+---
+pub_date:  2012-08-15

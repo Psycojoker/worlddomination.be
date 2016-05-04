@@ -1,0 +1,27 @@
+title:  First release of FeedsTail
+---
+body:
+
+
+<p>Ohai, I'm proud to announce you the first release of <a href="/projects/feedstail.html">FeedsTail</a>.</p>
+
+<p>The aim of this program is to read and display a RSS/Atom feed and to display it like a <em>tail -f</em> would do it on a file. This behavior allow a lot of <a href="/projects/ungarage.html">stream scripting</a>.</p>
+
+<p>For those who already know it, Feedstail is a python clone of <a href="http://www.vanheusden.com/rsstail/">rsstail</a>.</p>
+
+<p>The main differences are:</p>
+<ul>
+    <li>a much more smaller code base (thanks to python) that allow it to be much more easier to hack</li>
+    <li>a much more powerful output formatting capacity (but more complicated to use, it plays with the <em>.format</em> function of python)</li>
+    <li>the ability to choose any element of the feed as the unique key (therefore avoid displaying an old item only because the title has changed)</li>
+</ul>
+
+<p>You can find all the technical details and how to install it on the <a href="http://pypi.python.org/pypi/feedstail">pypi page</a>.</p>
+
+<p>Thanks to the excellent <a href="http://feedparser.org/">feedpaser</a> library, Feedstail is already very stable. It won't crash on disconnections or XML errors. If the feed structure doesn't change and your formating string (the <em>-f</em> option) doesn't rely on elements that may not be presents you can expect feedstail to run safely for severals days. But it's still the first release so don't hesitate to send bug report!</p>
+
+<em><p>Feedstail is coded by <a href="http://identi.ca/rgauthier">Romain Gauthier</a> on my demand to solve some problems for <a href="http://laquadrature.net">La Quadrature du Net</a>. Thanks to him!</p></em>
+
+
+---
+pub_date:  2011-04-26

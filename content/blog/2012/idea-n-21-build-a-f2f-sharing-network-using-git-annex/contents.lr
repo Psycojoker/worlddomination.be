@@ -1,0 +1,100 @@
+title:  idea n° 21, build a f2f small file sharing network using git annex
+---
+body:
+
+
+#### Why
+
+I often want to share small files/documents/others with friends.
+
+#### Problem
+
+Currents solutions kinda sucks for this, we have:
+
+* bitorrent/other p2p network: overkill, complex to use, need all the time running software
+* central ftp: sucks, centralized, need lot of place, a public server with good bandwidth, access management sucks
+* ftp at everyone place: complex to manage, to take care about, access management also sucks
+
+#### Idea
+
+##### Git annex
+
+Normally, to share a common git repository with all the files would be a very
+stupid and inefficient idea. Luckily, [someone](http://joeyh.name/) out there has created a
+wonderful tool call [git annex](http://git-annex.branchable.com/).
+
+Git annex is an extension for git that which purpose is to manage "media-like" files.
+The big concept is that instead of storing the said files in git, you store
+references to those files (symlinks) and git annex handle those files for you.
+This way, the size of your repository isn't going to totally exploded over
+time.
+
+A common usage scenario looks like this (without the details):
+
+* create a git repository
+* tell git annex to add those big files to the repository
+* somewhere else, clone this repository <b>this will only pull the references to those files, no the actual files</b>
+* now, ask git annex, on the other repository, to get either some or all the files that are referenced <- <b>this is the important part</b> (you obviously need to be able to access this other repository)
+
+##### Usage
+
+So, the idea is to have one common central repository where everyone can push
+and that contains all the references. This way, everyone knows what is
+available, the sever doesn't have to store that much, you don't have to store
+everything and when you want to get a file, git annex will pull it directly
+from your friend's place.
+
+Or, you can simply removed the central component and just share git
+repositories between your friends.
+
+Advantages:
+
+* can be done right now without coding needed
+* easy to use (for nerd)
+* very flexible, you can adapt to [alot](http://4.bp.blogspot.com/_D_Z-D2tzi14/S8TRIo4br3I/AAAAAAAACv4/Zh7_GcMlRKo/s1600/ALOT.png) of different situations (this is git)
+* you can easily plug an external server with good bandwidth to host big files
+* you store only what you want and where you want
+* no central place needed
+* git annex is available in every common *nix distributions and probably even on the other OS of shame
+* no (software) server needed!
+* you can do access control very easily with ssh keys and all those stuff, that problem is already solved long time ago for git usage
+* you'll feel very leet using this
+* easily scriptable
+* encrypted communications very easy to add (git can talk other ssh)
+* and many more!
+
+Disadvantages:
+
+* your friends need to be nerd
+* your friends need to know at least a bit of git
+* your friends need to have a server up if you want to get their files (except if the file is at another place)
+* not very easy to share files between different circle of friends, this only scale well for one circle
+* downloading/upload won't be split amongs several peers to accelerate the transfer
+* this will work well for small files, for big files this might be too slow, but this can be solved by plugging a server with good bandwidth in the middle
+* you are still fucked up by NAT
+* I don't know if this will be pleasant to use
+
+#### Going further
+
+It's not very hard to imagine expending this concept because we always need an
+excuse to code and learn new things.
+
+I don't think this would be very hard to build a series of scripts to eases the
+usage of this tool, libs for git already exist in several languages.
+
+Things that can be done:
+
+* a nice interface (web/desktop/ncurse/whatever) that display useful informations like what files are present, from where you can pull other files
+* use libinotify/incrontab to automagically detect files modifications in the repository and automagically do a "git annex sync" (git pull/push from every repositories)
+* hack git internals to add metadata to files
+* build an abstraction layer/automagic tool to handle permissions
+* notification system to inform you that new files are available via emails/whatever
+* automatically organize the repository/files for you and remove you the burn of sorting/classing things
+* find a way to solve the NAT problem
+* and, of course, many more!
+
+Remark: the "git annex sync" part might be problematic for permissions reasons.
+
+
+---
+pub_date:  2012-08-08

@@ -1,0 +1,91 @@
+title:  "Qu'est-ce que mon ordinateur est en train de faire ?"
+---
+body:
+
+
+Qu'est-ce que mon ordinateur est en train de faire ? Voici une bien simple
+question à laquelle il est en fait extrêmement difficile de répondre. Pourtant
+un ordinateur est censé être une machine déterministe, complètement conne qui
+fait **exactement** ce qu'on lui demande de faire (et non ce qu'on aimerait
+qu'elle fasse bien malheureusement). Malgré cela, il est aujourd'hui
+extrêmement difficile de savoir ce que sa propre machine est en train de faire,
+on peut regarder comment elle va (consommation de mémoire, utilisation des
+processeurs, espace disque occupé), mais pas ce qu'elle fait et surtout pas
+pourquoi.
+
+Il y a plusieurs raisons à cela, celle qui semble le plus évidente est
+l'immense complexité des ordinateurs, mais c'est une fausse raison : gérer la
+complexité est le métier des gens qui travaillent dans le domaine de
+l'informatique, c'est quelque chose que l'on sait faire, aussi bien au niveau
+de la conception que de l'interface. Non, une des raisons principale est que
+les ordinateurs ont toujours été construit, conçu et programmé pour faire, pas
+pour être observés.
+
+Et C'est compréhensible, les ordinateurs ne sont après tout que d'immenses
+machines à consommer dans le but de transformer des données en autre chose, on
+les a conçu pour cela et on les utilise pour cela, le problème, c'est qu'en
+faisant cela, on a oublier un élément : l'être humain.
+
+> L'être humain conçoit un outil, puis c'est l'outil qui change l'être humain.
+
+Avec la massification de l'informatique, la tendance majeur est de considérer
+les utilisateurs comme des « idiots », l'ordinateur devant permettre à
+l'utilisateur de faire, si possible en l'empêchant de tout casser (car il est «
+idiot ») et cette tendance ne fait que s'accélérer avec les ordinateurs de poche.
+
+Il est intéressant de nous demander comment cela nous change, quelle relation
+nous avons avec ces objets qui changent notre vie et en prennent une part de
+plus en plus importante, ces objets que nous ne comprennont pas, mais surtout
+ces objets qui ne font rien pour être compris, rien pour nous dire ce qu'ils
+font et encore moins pourquoi ils le font.
+
+Nous sommes en train de vivre une dépossession et à une perte de contrôle lente
+mais progressive de plus en plus d'aspects de notre vie pour et une prise de
+contrôle direct ou indirect par les autres être humains qui ont conçu et configurés
+ces ordinateurs. Même dans le monde du libre porté par la célèbre phrase
+Richard Stallman « soit l'utilisateur contrôle l'ordinateur, soit l'ordinateur
+contrôle l'utilisateur » la seule réponse à cette question a touours été « tu
+as accès au code source, tu peux le lire pour le comprendre et le modifier si
+tu veux » ... pas très satisfaisant comme réponse.
+
+Mais, vous allez me demander « après tout, pourquoi est-ce que l'utilisateur
+aurait besoin de cela ? » « il n'en a pas besoin » rajouterons en coeurs le
+membres de ma profession, prennant ainsi la décision, consciente ou non, de ce
+qui est bon ou non pour l'utilisateur, de quelle relation il aura le **droit**
+d'avoir avec ces objets qui dictent de plus en plus sa vie.
+
+Alors pourquoi ? Pour l'utilisateur justement, pour l'être humain qu'il est et
+parce qu'il s'agit de sa vie et que ce n'est pas à nous d'en décider et parce
+que ce n'est pas forcement quelqu'un avec une vie d'occidentale d'un milieu
+aisé, les ordinateurs ne se sont pas arrêtés à nos frontières et sont aussi
+bien utilisés dans nos pays comme dans des dictatures ou des contextes de
+guerres et de résistance.
+
+Aujourd'hui nous demandons aux être humains de sécuriser, et donc de reprendre
+une partie de contrôle, des objets qu'il ne comprend pas, des objets pour
+lesquels il est quasiment impossible de répondre à la question "qu'est-ce qu'il
+est en train de faire" avec assurance, des objets qui ne font **rien** pour que
+le contraire soit possible.
+
+L'être humain a été évolutivement amené à agir en fonction de ce que ses sens
+lui renvoient imédiatement, fonctionner par rapport à des modèles abstraits est
+extrêmement contre intuitif, lui dire : « quand tu utilises HTTPS pour aller
+sur un site web ta connection est sécurisé » est totalement abstrait pour lui,
+en particulier parce qu'il ne **sentira** aucune différence et ne verra aucun
+impact (et ne me parler pas du petit cadena vert) et je ne vous parle même pas
+du fait qu'il est aujourd'hui extrêmement compliqué de voir l'ensemble des
+connections émanant et venant dans son ordinateur et encore moins de voir si
+elles sont sécurisés sans parler du sens (ni des connections qui ont eut lieu).
+
+Et, Loin d'idéaliser l'époque où lorsque l'on achetait un ordinateur il fallait
+coder son propre système d'exploitation car il était livré sans, je pense que
+nous avons manqué un coche, le coche des ordinateurs qui ne sont pas conçu pour
+prendre les utilisateurs pour des « idiots », le coche des ordinateurs et des
+systèmes qui font grandir les êtres humains, qui leurs disent ce qu'ils font
+mais surtout pourquoi ils le font.
+
+Qu'est-ce que serait un ordinateur conçu pour un être humain ?
+
+
+---
+pub_date:  2015-09-17

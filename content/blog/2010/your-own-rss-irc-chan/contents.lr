@@ -1,0 +1,62 @@
+title:  Your own rss-irc chan
+---
+body:
+
+
+<p>This is my new invention to lose time (I've made an expertise about that).</p>
+
+<p>The principle is simple: you have an irc chan with a bot and a simple command <em>!rss</em>. You pass the uri of a rss and it will be now monitored and display on this chan. I've made this to have a news oriented irc chan.</p>
+
+<p>You'll need <a href="http://tools.suckless.org/ii">ii</a> and <a href="http://www.vanheusden.com/rsstail/">rsstail</a>. Set up the ii to put it on an irc chan (I've personally set up my own irc server).</p>
+
+<p>Here is a script to launch and relaunch your ii:</p>
+
+<blockquote style="background-color:#313031; color:#ffffff">
+<font color="#84cfef">#!/bin/bash</font><br>
+<br>
+<font color="#f7e78c"><b>while </b></font><font color="#f7e78c"><b>true</b></font><br>
+<font color="#f7e78c"><b>do</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>(</b></font>sleep <font color="#ffa2a5">7</font><font color="#f7e78c"><b>;</b></font>&nbsp;<font color="#f7e78c"><b>echo</b></font><font color="#ffa2a5">&nbsp;</font><font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">/j #mychan</font><font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">&nbsp;</font><font color="#f7e78c"><b>&gt;</b></font>&nbsp;irc/irc.server.net/in<font color="#f7e78c"><b>)</b></font>&nbsp;<font color="#f7e78c"><b>&amp;</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;./ii \\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>-i</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">irc</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;\\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>-s</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">irc.server.net</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;\\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>-p</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">6667</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;\\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>-n</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">mybotname</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;\\<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>-f</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">mybotname</font><font color="#f7e78c"><b>&quot;</b></font><br>
+<font color="#f7e78c"><b>done</b></font><br>
+</font>
+</blockquote>
+
+<p>Once everything is in place here is the (dirty) script to add the <em>!rss</em> command.<br />
+But <b>before</b>, create a <em>.while_cond</em> file in the same directory where you'll place this script. This will help you kill a rsstail instance. Since this script launch the rsstail instance in a while true loop to make sure it won't be down, you have to use this mecanism to avoid the loop to start again. To kill a rsstail you have to write "<em>false</em>" in the <em>.while_cond</em> file then kill the chosen rsstail (don't forget to change <em>.while_cond</em> back after that).</p>
+
+<blockquote style="background-color:#313031; color:#ffffff">
+<font color="#84cfef">#!/bin/bash</font><br>
+<br>
+<font color="#9cfb9c">CHAN</font>=<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">#mychan</font><font color="#f7e78c"><b>&quot;</b></font><br>
+<br>
+<font color="#84cfef"># no line containing the messages of the bot</font><br>
+tail <font color="#ffdfad">-n</font>&nbsp;<font color="#ffa2a5">0</font>&nbsp;<font color="#ffdfad">-f</font>&nbsp;path/to/<font color="#ce5d5a">$CHAN</font>/out | grep <font color="#ffdfad">-v</font>&nbsp;<font color="#ffdfad">--line-buffered</font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">&lt;mybotname&gt;</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;| grep <font color="#ffdfad">--line-buffered</font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">\\&gt;</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;| <font color="#f7e78c"><b>while </b></font><font color="#f7e78c"><b>read</b></font><font color="#f7e78c"><b>&nbsp;</b></font><font color="#f7e78c"><b>-r</b></font><font color="#f7e78c"><b>&nbsp;line</b></font><br>
+<font color="#f7e78c"><b>do</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>printf</b></font> '%s\\n' <font color="#ffa2a5">&nbsp;</font><font color="#ce5d5a">"$line"</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#9cfb9c">message_text</font>=<font color="#ffdfad">`printf </font>'%s\\n' <font color="#ce5d5a">"$line"</font><font color="#ffdfad">&nbsp;</font><font color="#f7e78c"><b>|</b></font><font color="#ffdfad">&nbsp;sed </font><font color="#f7e78c"><b>'</b></font><font color="#ffa2a5">s/.\\+&gt; //</font><font color="#f7e78c"><b>'</b></font><font color="#ffdfad">`</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>case</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ce5d5a">$message_text</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;<font color="#f7e78c"><b>in</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;!debug<font color="#f7e78c"><b>)</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>echo</b></font><font color="#ffa2a5">&nbsp;</font><font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">I HAZ NO BUGZ</font><font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">&nbsp;</font><font color="#f7e78c"><b>&gt;&gt;</b></font>&nbsp;path/to/<font color="#ce5d5a">$CHAN</font>/in <font color="#f7e78c"><b>;;</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;!rss\\ *<font color="#f7e78c"><b>)</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#9cfb9c">temp</font>=<font color="#ffdfad">`printf </font>'%s\\n' <font color="#f7e78c"><b>&quot;</b></font><font color="#ce5d5a">$message_text</font><font color="#f7e78c"><b>&quot;</b></font><font color="#ffdfad">&nbsp;</font><font color="#f7e78c"><b>|</b></font><font color="#ffdfad">&nbsp;sed </font><font color="#f7e78c"><b>'</b></font><font color="#ffa2a5">s/!rss \\?//</font><font color="#f7e78c"><b>'</b></font><font color="#ffdfad">`</font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>echo</b></font><font color="#ffa2a5">&nbsp;</font><font color="#f7e78c"><b>&quot;</b></font><font color="#ffa2a5">[new RSS] </font><font color="#ce5d5a">$temp</font><font color="#f7e78c"><b>&quot;</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while true<font color="#f7e78c"><b>;</b></font>&nbsp;<font color="#f7e78c"><b>do</b></font>&nbsp;./rsstail <font color="#f7e78c"><b>-u</b></font>&nbsp;<font color="#f7e78c"><b>&quot;</b></font><font color="#ce5d5a">$temp</font><font color="#f7e78c"><b>&quot;</b></font>&nbsp;<font color="#f7e78c"><b>-l</b></font>&nbsp;<font color="#f7e78c"><b>-P</b></font>&nbsp;<font color="#f7e78c"><b>-z</b></font>&nbsp;<font color="#f7e78c"><b>-N</b></font>&nbsp;<font color="#f7e78c"><b>-n</b></font>&nbsp;<font color="#ffa2a5">1</font>&nbsp;<font color="#f7e78c"><b>-i</b></font>&nbsp;<font color="#ffa2a5">60</font>&nbsp;<font color="#f7e78c"><b>&gt;&gt;</b></font>&nbsp;path/to/<font color="#ce5d5a">$CHAN</font>/<span style="background-color: #ff0000"><font color="#ffffff">in</font></span><font color="#f7e78c"><b>;</b></font>&nbsp;<font color="#f7e78c"><b>if </b></font><font color="#f7e78c"><b>[</b></font>&nbsp;<span style="background-color: #ff0000"><font color="#ffffff">$(</font></span><font color="#ffdfad">cat .while_cond</font><span style="background-color: #ff0000"><font color="#ffffff">)</font></span>&nbsp;<font color="#f7e78c"><b>=</b></font>&nbsp;<font color="#ffa2a5">&quot;false&quot;</font>&nbsp;<font color="#f7e78c"><b>]</b></font><font color="#f7e78c"><b>;</b></font>&nbsp;<font color="#f7e78c"><b>then</b></font>&nbsp;<font color="#f7e78c"><b>break</b></font><font color="#f7e78c"><b>;</b></font>&nbsp;<font color="#f7e78c"><b>fi</b></font><font color="#f7e78c"><b>;</b></font>&nbsp;<font color="#f7e78c"><b>done</b></font>&nbsp;<font color="#f7e78c"><b>&amp;</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>;;</b></font><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font color="#f7e78c"><b>esac</b></font><br>
+<font color="#f7e78c"><b>done</b></font><br>
+</font>
+</blockquote>
+
+<p>One other detail: I have remove the carriage return between the title of a rss item and the link by hacking rsstail source code. This is somewhere at line 436. Yes, this is dirty but you should be accustomed now.</p>
+
+<p>I hope you'll lose plenty of time with this script.</p>
+
+
+---
+pub_date:  2010-09-05
