@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    {% set total = 0 %}
+    {% for child in this.pagination.items %}
+        {% if child._data._model == "years" %}
+            {% for year in child.pagination.items %}
+                {% for post in year.pagination.items %}
+                    {% if total + loop.index < 10 %}
+                        <h2>[{{ number }}]{{ post.title }}</h2>
+                    {% endif %}
+                {% endfor %}
+                {% set total = total + loop_index %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}
