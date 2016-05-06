@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
+{% from "macros/blog.html" import render_blog_post %}
 {% block body %}
 
     {% for child in this.pagination.items %}
         {% if child._data._model == "blog" %}
             {% for post in child.pagination.items %}
                 {% if loop.index <= 10 %}
-                    <h2>{{ post.title }}</h2>
+                    {{ render_blog_post(post, from_index=true) }}
                 {% endif %}
             {% endfor %}
         {% endif %}
