@@ -4,7 +4,9 @@
     {% for child in this.pagination.items %}
         {% if child._data._model == "blog" %}
             {% for post in child.pagination.items %}
-                <h2>{{ post.title }}</h2>
+                {% if loop.index <= 10 %}
+                    <h2>{{ post.title }}</h2>
+                {% endif %}
             {% endfor %}
         {% endif %}
     {% endfor %}
