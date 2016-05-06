@@ -1,28 +1,47 @@
 <!doctype html>
-<meta charset="utf-8">
-<link rel="stylesheet" href="{{ '/static/style.css'|url }}">
-<title>{% block title %}Welcome{% endblock %} — worlddomination.be</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>{% block title %}Welcome{% endblock %} — worlddomination.be</title>
+    {# <link href="{{ site.url }}/blog/atom.xml" rel="alternate" title="{{site.name}}" type="application/atom+xml"/> #}
+
+    {# <link rel="stylesheet" href="{{ '/static/style.css'|url }}"> #}
+    <link rel="stylesheet" href="{{ '/static/css/base.css'|url }}" type="text/css" media="screen" charset="utf-8">
+</head>
 <body>
-  <header>
-    <h1>worlddomination.be</h1>
-    <nav>
-      <ul class="nav navbar-nav">
-        <li{% if this._path == '/' %} class="active"{% endif
-          %}><a href="{{ '/'|url }}">Home</a></li>
-        {% for href, title in [
-          ['/blog', 'Blog'],
-          ['/about', 'About']
-        ] %}
-          <li{% if this.is_child_of(href) %} class="active"{% endif
-            %}><a href="{{ href|url }}">{{ title }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
-  </header>
-  <div class="page">
-    {% block body %}{% endblock %}
+  <div id="site">
+      <header>
+        <div id="header">
+            <a href="/">
+                <h1>WorldDomination.be</h1>
+            </a>
+            <p>cd ~/life && git log | head</p>
+        </div>
+        <ul class="breadcrumbs">
+            <li>WorldDomination.be</li>
+        </ul>
+        <nav>
+          <div id="sitenav">
+              <ul class="nav navbar-nav">
+                <li{% if this._path == '/' %} class="selected"{% endif
+                  %}><a href="{{ '/'|url }}">Home</a></li>
+                {% for href, title in [
+                  ['/blog', 'Blog'],
+                  ['/about', 'About']
+                ] %}
+                  <li{% if this.is_child_of(href) %} class="selected"{% endif
+                    %}><a href="{{ href|url }}">{{ title }}</a></li>
+                {% endfor %}
+              </ul>
+          </div>
+        </nav>
+      </header>
+      <div class="page">
+        {% block body %}{% endblock %}
+      </div>
+      <footer>
+      <div id='footer'>
+          This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+      </div>
+      </footer>
   </div>
-  <footer>
-    &copy; Copyright 2016 by Bram.
-  </footer>
 </body>
