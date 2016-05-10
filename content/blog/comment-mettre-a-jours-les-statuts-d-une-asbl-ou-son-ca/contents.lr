@@ -1,4 +1,4 @@
-title:  Comment mettre à jour les statuts d’une ASBL et/ou son CA et/ou le siège social
+title: Comment mettre à jour les statuts d’une ASBL et/ou son CA et/ou le siège social
 ---
 body:
 
@@ -20,15 +20,11 @@ vous éviter de perdre des matinées inutilement.
 des manquements, mais c’est ce que j’ai pu trouver de plus complet sur internet
 jusqu’à aujourd’hui**.
 
-N’hésitez pas à me [contacter](mailto://cortex at
-worlddomination dot be) si vous avez des corrections/informations
-supplémentaires/commentaires/envie de m’offrir une bière ou du chocolat.
-
 Si vous connaissez git ou êtes un peu débrouillard, vous pouvez m’envoyer une
 pull request ou un patch, le code source de ce blog [est disponible
 ici](https://github.com/Psycojoker/worlddomination.be) ([lien vers le fichier
 de cet
-article](https://github.com/Psycojoker/worlddomination.be/blob/master/content/blog/2013/comment-mettre-a-jours-des-statuts-asbl.html)).
+article](https://github.com/Psycojoker/worlddomination.be/blob/master/content/blog/2013/comment-mettre-a-jours-des-statuts-asbl/contents.lr)).
 
 ## Informations générales
 
@@ -67,7 +63,7 @@ déposer vos documents. **Pensez à prendre vos formulaires en format .odt ou
 
 Document d’information donné par l’administration lors du dépôt :
 
-<img src="/media/img/asbl/argent.png" />
+<img src="/static/img/asbl/argent.png" />
 
 ## Document de base
 
@@ -120,7 +116,7 @@ Rappel : cela se trouve dans le volet B du formulaire 1.
 
 * vous devez le remplir en rajoutant les informations suivantes (en n’ajoutant pas les informations vides ou en précisant, par exemple, qu’il n’y a pas eu de démissions)
 
-<img src="/media/img/asbl/volet_b_cat.png" />
+<img src="/static/img/asbl/volet_b_cat.png" />
 
 #### Le formulaire **2** volet A
 
@@ -145,10 +141,10 @@ l’ancien, mais bon…
 
 Voici un document obtenu au greffe reprenant toute la partie sur la modification du CA :
 
-<img src="/media/img/asbl/modif_ca.png" />
+<img src="/static/img/asbl/modif_ca.png" />
 
 En espérant que cela vous aura aidé.
 
 
 ---
-pub_date:  2013-12-23
+pub_date: 2013-12-23

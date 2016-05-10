@@ -33,7 +33,7 @@ Sample
 
 Move from:
 
-{% H 'yaml' %}
+```yaml
 include:
   - dotfiles
 
@@ -57,11 +57,11 @@ cd /home/psycojoker/reminds/ && bash init:
     - user: psycojoker
     - require:
       - git: reminds.git
-{% endH %}
+```
 
 To:
 
-{% H 'python' %}
+```python
 #!dawdaw_template
 
 from dawdaw.states import pkg, git, cmd, include
@@ -77,7 +77,7 @@ with default(user="psycojoker", runas="psycojoker"):
 
     if not test("ls /home/psycojoker/.reminders /home/psycojoker/.reminders.gcl"):
         cmd.run("cd /home/psycojoker/reminds/ && bash init")
-{% endH %}
+```
 
 [Read the rest on github](https://github.com/Psycojoker/dawdaw).
 

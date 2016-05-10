@@ -7,11 +7,11 @@ body:
 
 <p>Here is a example with my configuration:</p>
 
-<center><p><a href="/media/img/readability/readability_before.png"><img src="/media/img/readability/readability_before_small.png" /></a></p></center>
+<center><p><a href="/static/img/readability/readability_before.png"><img src="/static/img/readability/readability_before_small.png" /></a></p></center>
 
 <p><center><b><p>Before</p></b></center></p>
 
-<center><p><a href="/media/img/readability/readability_after.png"><img src="/media/img/readability/readability_after_small.png" /></a></p></center>
+<center><p><a href="/static/img/readability/readability_after.png"><img src="/static/img/readability/readability_after_small.png" /></a></p></center>
 
 <p><center><b><p>After</p></b></center></p>
 

@@ -17,9 +17,9 @@ body:
 
 <p>Screenshots:</p>
 <center>
-<img src="/media/img/holyview/holyview1.png" />
+<img src="/static/img/holyview/holyview1.png" />
 <br><br>
-<img src="/media/img/holyview/holyview2.png" />
+<img src="/static/img/holyview/holyview2.png" />
 </center>
 
 <p>Installation: <em>sudo python setup.py install</em></p>

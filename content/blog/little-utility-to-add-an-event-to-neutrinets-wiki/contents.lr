@@ -25,7 +25,7 @@ important), I took the time to make this script super nice and fancy.
 
 Here its help page:
 
-{% H %}
+```
 usage: add_event [-h] -d D [-m M] [--hour HOUR] [-y Y] [--min MIN]
                  [--location LOCATION] [-t TITLE]
 
@@ -39,19 +39,19 @@ optional arguments:
   --location LOCATION   location (default: '123 rue royale 1000 Bruxelles
                         Belgique')
   -t TITLE, --title TITLE
-{% endH %}
+```
 
 A classical session (the event name is automatically created based on the
 wiki's data because it's also boring to do by hand):
 
-{% H %}
+```
 $ add_event -d 24
 I'm about to create the event 'Meeting 2015/10' on 19:30 24/7/2015 at '123 rue royale 1000 Bruxelles Belgique'
 Continue? [Y/n]: 
 Login into mediawiki:
 Username: bram
 Password: 
-{% endH %}
+```
 
 I've also used [argh](http://pythonhosted.org/argh/#examples) which is, by far,
 my favourite and easier to use python lib to handle cli arguments.

@@ -1,4 +1,4 @@
-title:  ULR, url list reader ou mon viewer pour newsbeuter
+title: ULR, url list reader ou mon viewer pour newsbeuter
 ---
 body:
 
@@ -22,7 +22,7 @@ body:
 
 <p>Un jouli screenshot:</p>
 
-<center><p><a href="/media/img/ulr/ulr.png"><img src="/media/img/ulr/ulr-prev.png" alt="url screenshot preview" /></a></p></center>
+<center><p><a href="/static/img/ulr/ulr.png"><img src="/static/img/ulr/ulr-prev.png" alt="url screenshot preview" /></a></p></center>
 
 <p>Et parce que c'est toujours pratique pour l'utilisation, les raccourcis:</p>
 
@@ -239,4 +239,4 @@ body:
 
 
 ---
-pub_date:  2010-05-18
+pub_date: 2010-05-18

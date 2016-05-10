@@ -1,4 +1,4 @@
-title:  HolyCurse 0.1
+title: HolyCurse 0.1
 ---
 body:
 
@@ -6,10 +6,6 @@ body:
 <p>Ohai, </p>
 
 <p>I'm proud to announce the first release of HolyCurse, a ncurses interface to <a href="/projects/holygrail.html">HolyGrail</a> my <a href="http://en.wikipedia.org/wiki/GTD">GTD</a> lib.</p>
-
-<p>Traditionnal screenshot:</p>
-
-<img src="/" />
 
 <p>Being a first release, not all the feature of holygrail.html are supported. This doesn't prevent me from using it daily. Here is a list of the features:</p>
 
@@ -30,4 +26,4 @@ body:
 
 
 ---
-pub_date:  2011-04-17
+pub_date: 2011-04-17

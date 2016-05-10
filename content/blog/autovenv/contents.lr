@@ -1,4 +1,4 @@
-title:  Some tips for autoenv
+title: Some tips for autoenv
 ---
 body:
 
@@ -25,30 +25,28 @@ called <code>ve</code>) won't work everywhere.
 
 Here is how to get the directory in which the file is in [zsh](http://www.zsh.org/):
 
-{% H 'bash' %}
+```bash
 ${0%/*})
-{% endH %}
+```
 
 Therefor, you can write this in your .env file:
 
-{% H 'bash' %}
+```bash
 #!/bin/zsh
 [ -e "$(/bin/readlink -f ${0%/*})/ve/bin/activate" ] && source $(/bin/readlink -f ${0%/*})/ve/bin/activate
-{% endH %}
+```
 
 ## Auto install for the lazy
 
 You have several computers, your dotfiles are synced but you don't want to care about remembering of installing <code>autoenv</code> everywhere? Just drop this line in your <code>~/.zshrc</code> (should be working for bash to):
 
-{% H 'bash' %}
+```bash
 [ -e $HOME/.local/bin/activate.sh ] || (pip install --user autoenv)
 
 # if you don't have it already, put this line after
 source $HOME/.local/bin/activate.sh
-{% endH %}
+```
 
 This will install <code>autoenv</code>, if it's not already installed, the next time you launch a shell.
-
-
 ---
-pub_date:  2014-01-02
+pub_date: 2014-01-02

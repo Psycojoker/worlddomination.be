@@ -76,7 +76,7 @@ l'étudiant.
 La solution est en fait assez simple et inspirée directement d'un mécanisme
 utilisé par le [djangobook](http://djangobook.com/) (il n'est pas le seul à le faire):
 
-<center><img src="/media/img/entreaide/djangobook.png" /></center>
+<center><img src="/static/img/entreaide/djangobook.png" /></center>
 
 [Page d'aide pour leur système de commentaires](http://djangobook.com/about/comments/).
 

@@ -28,15 +28,15 @@ principale problème rencontré. Ce principale problème est la première des [F
 Geek Social Fallacies](http://www.plausiblydeniable.com/opinion/gsf.html) qui
 est, je cite:
 
-{% H 'text' %}
+```text
 Geek Social Fallacy #1: Ostracizers Are Evil
-{% endH %}
+```
 
 Qui pourrait se réécrire ici de cette manière :
 
-{% H 'text' %}
+```text
 On exclue jamais personne, c'est mal
-{% endH %}
+```
 
 Et c'est le cœur du problème.
 

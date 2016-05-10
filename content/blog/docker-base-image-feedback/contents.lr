@@ -28,7 +28,7 @@ I use this docker for 3 things:
 
 Extract from my DockerFile which install [salt](http://docs.saltstack.com/en/latest/index.html) minion:
 
-{% H 'bash' %}
+```bash
 FROM phusion/baseimage:0.9.11  # choose your version here (just pick the version number)
                                # https://github.com/phusion/baseimage-docker/blob/master/Changelog.md
 
@@ -65,11 +65,11 @@ RUN sed '1s#:[^:]\+:#:put your password string here:#' -i /etc/shadow
 
 # clean stuff
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-{% endH %}
+```
 
 I've also made 2 zsh function because I'm lazy and that I don't like to remember docker commands:
 
-{% H 'bash' %}
+```bash
 # my docker image is tagged/named 'proto'
 
 # usage:
@@ -91,23 +91,23 @@ start_protoi()
 {
     docker run -t -i $([ "$1" ] && echo $1 || echo proto) /sbin/my_init -- zsh -l
 }
-{% endH %}
+```
 
 And my zsh completion script (I've just RTFM how to make them, it's super easy, I'm making one for everything now /o\):
 
-{% H "bash" %}
+```bash
 #compdef start_proto
 
 _arguments "1: :($(docker images | awk '{print $1}' | sed '1d' | grep -v "<none>" | sort | uniq))"
-{% endH %}
+```
 
 And
 
-{% H "bash" %}
+```bash
 #compdef start_protoi
 
 _arguments "1: :($(docker images | awk '{print $1}' | sed '1d' | grep -v "<none>" | sort | uniq))"
-{% endH %}
+```
 
 You need to put them in a _start_proto and _start_protoi files somewhere on the
 path listed by "echo $fpath" (or extend this path: typically

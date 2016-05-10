@@ -70,7 +70,7 @@ And on an exception you'll be dropped on werkzeug debugging page that allow you 
 browse you code and, way more awesome, to launch a python console right there in
 your browser on every part of the stack!
 
-<center><img src="/media/img/werkzeug/screenshot.png" /></center>
+<center><img src="/static/img/werkzeug/screenshot.png" /></center>
 
 This is also very life changing.
 

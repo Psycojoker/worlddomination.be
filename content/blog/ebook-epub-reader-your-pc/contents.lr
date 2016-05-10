@@ -8,21 +8,21 @@ body:
 <p>After some research I've found <a href="http://www.lucidor.org/lucidor/">lucidor</a>. Doesn't look fantastic from a first view but the rendering is good.</p>
 
 <center>
-<img src="/media/img/lucidor/lucidor1.png" />
+<img src="/static/img/lucidor/lucidor1.png" />
 </center>
 
 <p>Problem: I wanted to have a dark background and a grey font and the configuration options doesn't offer that possibility. Solution: use the power of dirty hack <em>and voilà</em>, here is the result:</p>
 
 <center>
-<a href="/media/img/lucidor/lucidor2.png" />
-<img src="/media/img/lucidor/lucidor2_small.png" />
+<a href="/static/img/lucidor/lucidor2.png" />
+<img src="/static/img/lucidor/lucidor2_small.png" />
 </a></center>
 
 <p>And after some customisations (using the menu from the right mouse button):</p>
 
 <center>
-<a href="/media/img/lucidor/lucidor3.png" />
-<img src="/media/img/lucidor/lucidor3_small.png" />
+<a href="/static/img/lucidor/lucidor3.png" />
+<img src="/static/img/lucidor/lucidor3_small.png" />
 </a></center>
 
 <p>And the diffs for my dirty hack. On the file: <em>/usr/share/lucidor/chrome/content/xhtml.css</em>:</p>
@@ -60,7 +60,7 @@ body:
 
 <p>This still isn't perfect: I didn't managed to find a way to add "j" and "k" for scrolling.</p>
 
-<p>Also, I've made a simple mobi/epub version of the <a href="http://djangobook.com">DjangoBook</a> that you can find <a href="/media/ebooks/djangobook.mobi">here</a> (<a href="/media/ebooks/djangobook.epub">epub version</a>). It doesn't include images (it was boring to do).</p>
+<p>Also, I've made a simple mobi/epub version of the <a href="http://djangobook.com">DjangoBook</a> that you can find <a href="/static/ebooks/djangobook.mobi">here</a> (<a href="/static/ebooks/djangobook.epub">epub version</a>). It doesn't include images (it was boring to do).</p>
 
 
 ---
