@@ -6,7 +6,7 @@
 
 {% for child in this.parent.pagination.items %}
     {% if child._data._model == "blog" %}
-        {% for post in child.pagination.items %}
+        {% for post in child.pagination.items|rejectattr("private") %}
             {% if loop.index == 1 %}
                 <updated>{{ post.pub_date }}</updated>
                 <id>http://worlddomination.be</id>

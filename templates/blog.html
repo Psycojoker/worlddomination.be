@@ -9,7 +9,7 @@
   <h2>{{ year.grouper }}</h2>
 
   <ul>
-      {% for post in year.list %}
+      {% for post in year.list|rejectattr("private") %}
       <li>{{ post.pub_date }} <a href="{{ post|url }}">{{ post.title }}</a></li>
       {% endfor %}
   </ul>

@@ -4,7 +4,7 @@
 
     {% for child in this.pagination.items %}
         {% if child._data._model == "blog" %}
-            {% for post in child.pagination.items %}
+            {% for post in child.pagination.items|rejectattr("private") %}
                 {% if loop.index <= 10 %}
                     {{ render_blog_post(post, from_index=true) }}
                 {% endif %}
