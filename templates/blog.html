@@ -3,9 +3,20 @@
 {% from "macros/pagination.html" import render_pagination %}
 {% block title %}Blog{% endblock %}
 {% block body %}
-  {% for child in this.pagination.items %}
-    {{ render_blog_post(child, from_index=true) }}
-  {% endfor %}
 
-  {{ render_pagination(this.pagination) }}
+<div class="page-listing">
+  {% for year in this.pagination.items|groupby('pub_date.year')|sort(attribute="grouper", reverse=True) %}
+  <h2>{{ year.grouper }}</h2>
+
+  <ul>
+      {% for post in year.list %}
+      <li>{{ post.pub_date }} <a href="{{ post|url }}">{{ post.title }}</a></li>
+      {% endfor %}
+  </ul>
+  {% endfor %}
+</div>
+
+<div class="clear"></div>
+
+<p style="text-align: center;"><a href="atom.xml">Atom feed</a></p>
 {% endblock %}
