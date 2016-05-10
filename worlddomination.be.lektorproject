@@ -1,2 +1,5 @@
 [project]
 name = worlddomination.be
+
+[packages]
+lektor-markdown-highlighter = 0.1
