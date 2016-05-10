@@ -1,1 +1,3 @@
 _model: rss_feed
+---
+_slug: blog/atom.xml
