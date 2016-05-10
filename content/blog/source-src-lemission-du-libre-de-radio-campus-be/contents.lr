@@ -1,9 +1,9 @@
-title:  Src (source), l'émission du libre de Radio Campus Bruxelles
+title: Src (source), l'émission du libre de Radio Campus Bruxelles
 ---
 body:
 
 
-<img class="post-img" src="/media/img/src/radiocampus.jpg" alt="radiocampus.jpg" width="100%" />
+<img class="post-img" src="/static/img/src/radiocampus.jpg" alt="radiocampus.jpg" width="100%" />
 
 [Src](http://src.radiocampus.be/) (« source ») est une émission de radio sur le
 thème du logiciel libre, voir du monde du libre, qui passe sur [Radio Campus
@@ -98,4 +98,4 @@ Voici les podcasts des émissions où j'étais présent :
 
 
 ---
-pub_date:  2015-07-14
+pub_date: 2015-07-14
