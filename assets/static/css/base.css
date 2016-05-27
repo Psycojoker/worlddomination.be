@@ -1,6 +1,7 @@
 body {
     padding: 0;
-    margin: 0;
+    margin: auto;
+    max-width: 848px;
     color: #647a90;
 }
 
@@ -14,13 +15,6 @@ ul { margin: 0; }
 }
 
 a { color: #55757B; }
-
-#site {
-    margin: 0 auto;
-    width: 53em;
-    min-height:53em;
-    position: relative;
-}
 
 #header {
     padding: 0;
