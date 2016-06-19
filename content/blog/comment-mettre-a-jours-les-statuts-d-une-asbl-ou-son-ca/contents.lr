@@ -2,6 +2,22 @@ title: Comment mettre à jour les statuts d’une ASBL et/ou son CA et/ou le si�
 ---
 body:
 
+**Update du 19/06/2016** (merci Barbara et Cédric) :
+
+* le lieu est désormais ouvert l'après midi
+* ils ont changé de numéro de téléphone
+* nouveau tarif (il augmenté chaque année indexé sur l'inflation si je me rappel bien)
+* la procédure a changé pour la modification de siège social
+* précision pour le screenshot : il faut que ce soit l'extrait et pas le virement en lui même (le virement peut être refusé si le solde est insuffisant)
+* instructions sur comment envoyer les statuts par la poste au lieu d'y aller en personne
+* il faut mettre le numéro d'entreprise en communication du virement
+* lien vers le document officiel pour les prix
+* précision pour le formulaire 1C
+* rappel pour la date et le lieu de naissance des administrateurs dans le volet 1B
+
+Si vous avez des correctifs ou mis à jours à faire, [n'hésitez pas à m'écrire](mailto://cortex at worlddomination dot be). Je n'ai malheureusement par contre plus du tout le temps de répondre à vos questions. Si vous connaissez Github [vous pouvez m'envoyer une pull request](https://github.com/Psycojoker/worlddomination.be/blob/master/content/blog/comment-mettre-a-jours-les-statuts-d-une-asbl-ou-son-ca/contents.lr).
+
+----
 
 Pour [Neutrinet](http://neutrinet.be/index.php?title=Main_Page), j’ai récemment
 été amené à déposer une mise à jour des statuts de l’ASBL. Autant il y a
@@ -31,10 +47,10 @@ article](https://github.com/Psycojoker/worlddomination.be/blob/master/content/bl
 Vous devez déposer ces documents au greffe du tribunal de commerce situé au
 [128 Boulevard de la 2e armée Britannique au 1190 Bruxelles (à
 Forest)](http://www.openstreetmap.org/node/2488257302#map=19/50.81747/4.32106).
-Prévoyez du temps pour y aller, c’est assez loin du reste de Bruxelles. Ils ont
-ces 2 numéros de téléphone si vous avez des questions à leur poser : 02/346.03.33
-et 02/346.14.53. Ils sont ouverts de **8h30 à 12h30** mais prévoyez quand même
-de la marge. Il y a un parking si vous venez en voiture.
+Prévoyez du temps pour y aller, c’est assez loin du reste de Bruxelles. Il ont
+ce numéro de téléphone si vous avez des questions à leur poser : 02/348.96.70.
+Ils sont ouverts de **8h30 à 12h30** et de **13h30 à 16h00** du lundi au vendredi
+mais prévoyez quand même de la marge. Il y a un parking si vous venez en voiture.
 
 **Astuce** : généralement quand le dépôt ne marche pas car il y a eu des
 erreurs, les gens rentrent chez eux et reviennent une matinée suivante.
@@ -45,25 +61,52 @@ vous avez le temps, vous pouvez aller là-bas, faire vos corrections et revenir
 déposer vos documents. **Pensez à prendre vos formulaires en format .odt ou
 .doc sur une clef USB (ou équivalent)**.
 
+## Par la poste (merci Cédric)
+
+Si vous êtes sûr·e de vous ou que vous y êtes déjà allé et que vous savez
+exactement ce qu'il manque, il est également possible d'envoyer les statuts
+modifiés (voir le dépôt d'une nouvelle ASBL) par la poste. Si jamais il y a des
+manquements il vous les renverront en vous indiquant ce qu'il manque (mais les
+délais ne sont pas forcément rapide).
+
+Prévoyez 3 timbres normaux si l'envoi dépasse 100gr et qu'il est au format non
+normalisé : enveloppe A4, 2 si plus de 100gr et normalisé.
+
+L'adresse : Boulevard de la 2ème armée Britannique 148 1190 Bruxelles (Forest) Belgium
+
+## En ligne
+
+Il est théoriquement possible de faire le dépôt en ligne sur ce site à l'aide de la carte
+d'identité électronique Belge mais je ne connais personne qui l'ai fait.
+
+Cela se passe à l'adresse suivante : https://www.egreffe.be
+
+Si vous avez des informations et voulez contribuer à ce document [n'hésitez pas à m'écrire](mailto://cortex at worlddomination dot be)
+
 ## Argent
 
-* quoi qu’il arrive, si vous devez faire une de ces 3 modifications, vous allez devoir payer la somme de 121,97 €
+* quoi qu’il arrive, si vous devez faire une de ces 3 modifications, vous allez devoir payer la somme de 124,63 € (en 2016: attention ça change chaque année en augmentant très légèrement)
+* cette page web regroupe tous les tarifs est mis à jours : http://www.ejustice.just.fgov.be/tsv_pub/tarif_f.htm **consultez là car cela a pu être modifié depuis que j'ai mis à jours cet article**
 * c’est la même somme par dépôt, peu importe s’il n’y qu’une des 3 opérations ou n’importe quelle combinaison des 3
 * malheureusement, le greffe du tribunal de commerce n’accepte pas d’argent en liquide ni de carte VISA/autre, ça serait beaucoup trop facile.
-* vous devez donc faire un virement et en apporter la preuve
-* un screenshot d’un virement sur le site de votre banque marche
+* vous devez donc faire un virement et en apporter la preuve, mettez le numéro d'entreprise en communication
+* un screenshot **de l'extrait** d’un virement sur le site de votre banque marche
 * vous pouvez également aller à la poste pour faire un versement, donner la somme (je l’ai fait en liquide avec l’argent des cotisations, je ne sais pas s’ils prennent bancontact/VISA/autre, [envoyez-moi un mail si vous le savez](mailto://cortex at worlddomination dot be)), ils font un versement pour vous et vous donnent une preuve. La poste vous fait payer un surplus de 85 centimes pour l’opération.
 * le virement doit être fait au compte du moniteur : IBAN: BE48 6792 0055 0227 BIC: PCHQBEBB
 * la communication n’avait pas l’air d’avoir beaucoup d’importance. Mettez quand même quelque chose qui a du sens.
 
 #### Résumé :
 
-* faites un virement ou un versement à la poste d’un montant de 121,97 € au compte du moniteur IBAN: BE48 6792 0055 0227 BIC: PCHQBEBB
+* faites un virement ou un versement à la poste d’un montant de <u>121,97 €</u> **124,63 €** (en 2016) au compte du moniteur IBAN: BE48 6792 0055 0227 BIC: PCHQBEBB
 * apportez un preuve de paiement lorsque vous irez déposer vos documents.
 
 Document d’information donné par l’administration lors du dépôt :
 
+<b style="color: red">ATTENTION : la somme a été modifié depuis 2013, c'est désormait 124,63€ (en juin 2016) et non 121,97 €</b> (et les numéros de téléphones aussi, c'est désormait 02/348.96.70)
+
 <img src="/static/img/asbl/argent.png" />
+
+<b style="color: red">ATTENTION : la somme a été modifié depuis 2013, c'est désormait 124,63€ (en juin 2016) et non 121,97 €</b> (et les numéros de téléphones aussi, c'est désormait 02/348.96.70)
 
 ## Document de base
 
@@ -80,7 +123,7 @@ membre du CA est bon, l’AG peut aussi vous conférer ce pouvoir).
 * formulaire 1, volet A : toute la première page (normalement cette partie est simple) ;
 * si vous ne retrouvez plus votre numéro d’entreprise, vous pouvez le retrouver en cherchant des documents relatifs à votre ASBL [sur le site du moniteur](http://www.ejustice.just.fgov.be/tsv/tsvf.htm) (remarque : si vous aimez l’informatique, allez voir les urls du dernier frame imbriqué et regardez le champ "Server" du header http renvoyé par ce site… si si, vraiment, en 2013 ils utilisent vraiment ça) ;
 * formulaire 1, volet B : remplissez l’entête, on verra plus bas pour l’objet de l’acte. Toutes les informations sont retrouvables dans votre acte de constitution ;
-* formulaire 1, volet C : je pense qu’il ne faut pas le remplir, il concerne la constitution.
+* formulaire 1, volet C : ne pas le remplir, il ne concerne que la constitution.
 
 #### Résumé :
 
@@ -93,8 +136,9 @@ membre du CA est bon, l’AG peut aussi vous conférer ce pouvoir).
 * ajoutez quelque chose comme "modification du siège social" dans l’objet de l’acte (situé dans le volet B du formulaire 1) ;
 * indiquez à la suite de l’objet de l’acte quelque chose du genre: "Suite à l’assemblée générale [extraordinaire] du XX XX XXXX, le siège social de l’association est désormais…" ;
 * **le siège social dans l’entête du volet B doit être l’ANCIEN siège social** ;
-* je ne sais pas s’il faut mettre l’ancien ou le nouveau siège social dans le volet A, étant donné la logique je dirais l’ancien, mais on est à l’abri de rien. N’hésitez pas à me [contacter](mailto://cortex at worlddomination dot be) si vous le savez ;
-* je ne suis pas sûr s’il faut préciser que ce changement modifie un article des statuts.
+* il faut mettre le nouveau siège social dans le volet A ;
+* cette modification doit être reprise dans le volet B avec toutes les autres modifications;
+* vous pouvez également le mettre dans la case "où envoyer la facture".
 
 ## Modification des statuts
 
@@ -111,6 +155,7 @@ La partie la plus compliquée.
 Rappel : cela se trouve dans le volet B du formulaire 1.
 
 * ajoutez, en fonction des modifications du CA, "Démission(s)", "Réélection(s)", "Nomination(s) d’administrateur(s)""
+* **n'oubliez pas** de mettre le lieu de naissance et la date de naissance des nouveaux administrateurs
 
 #### À la suite de l’objet de l’acte
 
@@ -124,9 +169,8 @@ Surprise, un formulaire de plus ! Remplissez le volet A avec les informations g�
 
 [Téléchargez cet autre formulaire ici](http://www.ejustice.just.fgov.be/tsv_pub/formulaire2asbl.odt).
 
-À nouveau, je ne sais pas si, dans le cas où vous avez changé le siège social,
-vous devez mettre le nouveau ou l’ancien ici. La logique voudrait que ce soit
-l’ancien, mais bon…
+En 2016 vous devez mettre la nouvelle adresse du siège social ici si vous l'avez modifié
+(en 2015 c'était l'inverse, ne me demandez pas pourquoi).
 
 #### Le formulaire **2** volet C
 
@@ -148,3 +192,5 @@ En espérant que cela vous aura aidé.
 
 ---
 pub_date: 2013-12-23
+---
+private: no
