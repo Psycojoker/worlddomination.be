@@ -2,13 +2,9 @@
 {% from "macros/blog.html" import render_blog_post %}
 {% block body %}
 
-    {% for child in this.pagination.items %}
-        {% if child._data._model == "blog" %}
-            {% for post in child.pagination.items|rejectattr("private") %}
-                {% if loop.index <= 10 %}
-                    {{ render_blog_post(post, from_index=true) }}
-                {% endif %}
-            {% endfor %}
+    {% for post in site.query("/blog").limit(10)|rejectattr("private") %}
+        {% if loop.index <= 10 %}
+            {{ render_blog_post(post, from_index=true) }}
         {% endif %}
     {% endfor %}
 
