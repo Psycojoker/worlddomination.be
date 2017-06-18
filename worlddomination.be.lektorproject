@@ -1,11 +1,8 @@
 [project]
 name = worlddomination.be
 
-[packages]
-lektor-markdown-highlighter = 0.1
-
 [servers.cube]
 name = Internet Cube
 enable = yes
 default = yes
-target = rsync://root@worlddomination.be/var/www/my_webapp
+target = rsync://psycojoker@worlddomination.be/var/www/my_webapp

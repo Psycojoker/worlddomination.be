@@ -4,294 +4,104 @@ title: About
 ---
 body:
 
-Ohai, I'm Bram, a free software hacker. Here is a list of stuff I'm doing or have been doing:
+Ohai, I'm Bram. Here is a list of some of the volunteer stuff I'm doing or have been doing:
 
-(*last update 2013-12-15*)
+(*last update 2017-04-24*)
 
-# Currently
+## Internet, self-hosting, net neutrality, privacy
 
-## [Neutrinet](http://neutrinet.be)
+- **2017** co-organized the [Decentralized Internet FOSDEM devroom](https://fosdem.org/2017/schedule/track/decentralised_internet/) with [taziden](https://www.libre-parcours.net/) and [Tristan Nitot](http://standblog.org/blog/)
+- **2015 - now** [YunoHost](https://yunohost.org), a thin layer on top on debian to simplify self-hosting - core developper, organization, support, app packaging (less) and a bit of CM/promotion
+- **2015 - now** [Framasoft](https://framasoft.org), a french "éducation populaire" freesoftware promotion association that has launched the "ungoogleised internet" and the CHATONS movments - haven't been very active in it, mostly doing ambassady works with the other projects
+- **2014 - now** [la Brique Internet/InternetCube](https://labriqueinter.net), a work out-of-the-box self hosting server based on YunoHost and a vpn wifi rooter - member of the collective since the beginning, distributor, promotion, support (a lot), cm, a bit of dev
+- **2010 - now** [Neutrinet](https://neutrinet.be), an adventure to launch a local associative ISP in Belgium/Brussels - initiator, organisation, promotion, driving force, developer
+- **2014 - now** [FFDN](https://ffdn.org), federation of non-profil local associative ISP - indirectly involved with Neutrinet and la Brique Internet
+- **2010 - somehow-not-now** [NURPA](http://nurpa.be), a Belgian citizen group that defend our Fundamental Freedom of the Internet - co-founder, organisation, dev, sysadmin, promotion, I'm not really involved anymore
+- **2009 - 2013** [la Quadrature du Net](https://laquadrature.net), a non-profit association that defends the rights and freedom of citizens on the Internet - I was volunteer doing development, irc bot, dataviz, sysadmin, cm, organisation and a bit of promotion
+- **2010 - 2014** [Political Memory](http://memopol.org), a tool to tract how member of the European Parliament and the French Parliament have voted regarding la Quadrature's positions (ideally it would have been for every association who wants it) - main developer during all this time, promotion, based on the original work of [Gibus](http://pascontent.sedrati-dinet.net/), the project now lives without me
 
-I'm part of Neutrinet, a project to build an associative, non-profit,
-volunteer-based ISP in Belgium (more or less starting by Brussels) where I help
-in the general organisation, promotion and administrative part.
+#### Minor things
 
-I've co-initiated the project and relaunched it in July of this year to change
-its type of organisation into a do-ocracy. We are a small, friendly team and are
-making good progress but the road is very long. Don't hesitate to join us, we
-meet every second Thursday at the [123 rue Royale](http://www.123rueroyale.be/)
-around 19h30.
+- **2017** - I've ported the static website of the [exégètes amateurs](https://exegetes.eu.org) to [lektor](https://getlektor.com) to provide an admin interface, previously only the 3 techs of the groups could edit it and they never have the time, it was frustrating for everyone
+- **2016** - not directly my work (but I was interviewed) Cecilia has made [her master thesis on la Brique Internet](https://labriqueinter.net/files/m1histoire_des_sciences_technologies_societes_la_brique_internet.pdf) and it's very good overview and analysis not there to sell this adventure
+- **2015 - 2016** - I've worked on Neutrinet's backoffice, allowing to do members listing management, basic accounting, public accounting and the [cube ordering](https://cube.neutrinet.be) management
+- **2013** [Toutatis](https://github.com/political-memory/toutatis) and [Compotista](https://github.com/political-memory/compotista) 2 projects extracted from the Political Memory to allow everyone to work with European Parliament representatives data and votes data - done mostly all the work during that time
+- **2012** an [unfinished guide](https://ungarage.readthedocs.io/en/latest/) on how to make an IRC bot with [ii](http://tools.suckless.org/ii/) like the one I've made for la Quadrature du Net (UnGarage)
+- **2011** - [Pas Peur d'hadopi](http://www.numerama.com/magazine/18972-pas-peur-d-hadopi-pourquoi-je-pirate-don-t-make-me-steal.html), a website made to collect reason on why we didn't fear HADOPI for la Quadrature du Net - I helped mathieui finished his work and keeping the website online
+- I was told one day that I was supposed to be a Belgian Telecomix agent. I still don't know what this is supposed to mean.
 
-Neutrinet is member of [Gitoyen](http://www.gitoyen.net/).
+## Hacking
 
-## [Political Memory](http://memopol.org)
+- **2013** [Software Freedom Day 2013](https://hsbxl.be/Software_Freedom_Day_2013), a full day of talks at the hsbxl with 3 differents room and a bbq at the end, - we co-organized this day with sid and jurgen and the help of UrLab and the hsbxl
+- **2013 - now** [HackerAgenda.Be](https://hackeragenda.be) a fully automated agenda that centralized events (using scripts) that could interest hackers in Belgium - launched it, done somehow 80% of the work, don't work that much on it anymore
+- **2011 - 2015** [UrLab](https://urlab.be) the ULB's student hackerspace - co-initiator, done a shitload of administrative procedure, organisation, hacking, promotion and so on
 
-I'm the main developer of the Political Memory. It is a tool whose purpose is
-to allow a NGOs (or anyone in fact) to publish the voting recommendation they
-have sent to elected representatives, the tool then gathers the list of elected
-representatives, their votes and generates a listing of how well those elected
-representatives have been following those voting recommendations. Example: [la
-Quadrature du Net](https://laquadrature.net) told the Members of the European
-Parliament that they should vote against
-[ACTA](https://en.wikipedia.org/wiki/Anti-Counterfeiting_Trade_Agreement)
-because it is destroying our freedom of the Internet (and for many other
-reasons) and [here you can get the
-result](https://memopol.lqdn.fr/europe/parliament/vote/acta_final/) (no, I'm
-not happy by the current display).
+## Python
 
-The whole point of this tool is that if you think, for example, that la
-Quadrature du Net represents you interests on Internet related subjects, you can
-go of the Political Memory of la Quadrature du Net and see how well your
-elected representatives are effectively representing you. This is a very
-valuable information that you don't have for the moment, and that allows you to
-see your representatives through concrete informations that are important for
-you and that YOU have chosen, not through their marketing campaign or what the
-press is saying about them.
+- **2015 - 2016** [PythonFosdem devroom](https://www.python-fosdem.org/), a devroom for python programmers at [FOSDEM](https://fosdem.org) - help doing so sort of stuff: select talks, do the scheduling, took pictures, hold the stand, animate the room
+- **2014 - 2016** [RedBaron](https://github.com/pycqa/redbaron) a python lib that allows to write code that modify source code for custom refactoring, based on Baron - main dev, I've basically done 95% of the job
+- **2013 - 2016** - [Baron](https://github.com/pycqa/baron) a FST (full syntax tree) for python, like an AST but with the garantie that <code>dump(load(source_code)) == source_code</code> - main dev, I've basically done 95% of the job
+- **2013** AfpyroBE, python meetup in Belgium launched by [GMLudo](http://blog.gmludo.eu/) - co-organised some in 2013 and did one talk there
 
-Of course, the objective is a wider adoption of this tool by politically
-involved NGOs or individuals. This is my current focus since, as of today, la
-Quadrature du Net is the only one to use it.
+#### Minor or unfinished things
 
-It's a tool, initially made by [Gibus](http://pascontent.sedrati-dinet.net/)
-for [la Quadrature du Net](https://laquadrature.net), of which I've been the
-main dev of the second (and current) version with a lot of [awesome
-contributors](https://github.com/Psycojoker/memopol2/blob/master/CREDITS.txt).
-I'm currently focusing my effort in making this tool generic and usable by
-humans with the idea of seeing a wider adoption of it.
+- **2016** [Aviron](https://github.com/Psycojoker/aviron) a project that was a prototype to answer the question of "what could be the <i>vi</i> of RedBaron?" (in the same logic that vi was the UI of ed), I have quite some notes of what that could be, I'll might write them down one day
+- **2013** [ast2json](https://github.com/Psycojoker/ast2json) a generic script to convert python's ast to json
 
-### [Toutatis](http://toutatis.mm.staz.be/) and [Compotista](http://compotista.mm.staz.be/)
+## Other Projects
 
-As part of the Political Memory new generic version, I've written 2 tools with
-[staz](http://staz.be) to ease this work and extract things from the Political
-Memory that shouldn't be in it.
+- **2017 - now** [t2m](https://github.com/Psycojoker/t2m) a script to forward tweets from a twitter account to a mastodon account
+- **2016** - [PvPads](https://github.com/Psycojoker/pvpads/) a tool to solve the problem of organisation that have a lot of meeting's note in etherpad all around internet and put them in the same place
+- **2015 - now** [Prosopopee](https://github.com/psycojoker/prosopopee) a "tell a story with your pictures" static website generator - initiator, done all the initial work, beudbeud and other contributors helped a lot
+- **2015 - now** [Manger-Veggie.be](https://manger-veggie.be/) a website for [Vegetik](http://www.vegetik.org/) to help find places to eat vegetarian/vegan food, it is also used for [mobile website]( https://m.vegoresto.fr/) of [VegoResto](https://vegoresto.fr) by [L214](https://www.l214.com/) - made this with gdesmott and a bit of help from staz and rony
+- **2013 - 2014** [ipython-beautifulsoup](https://github.com/Psycojoker/ipython-beautifulsoup) integration of [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) (a html parser in python) into the [ipython/jupyter notebook](https://ipython.org/notebook.html)
+- **2011 - 2015** [DierenTheater](http://dierentheater.be/) a tool that parses and extract data from the Belgian Parliament website and offers them to the world - did all the work
+- **2012** - P402 a student document sharing tool based on [one of my article](http://worlddomination.be/blog/2012/idee-dun-plateforme-dentre-aide-pour-edutiants.html) and launched by a friend, now relaunched by c4 at UrLab and named [DocHub](https://github.com/UrLab/DocHub/) - "there is some of my code in it" ™
 
-Toutatis is a tool whose role is to make the matching between voting results
-produced by the European Parliament, which only contain the last name of the
-Member of the European Parliament, and a real member of the European Parliament.
-I'm not going into detail about this problem here, but it's way harder than it seems.
+<!--
+## Programming
 
-Compotista is a tool to convert the Member of the European Parliament data
-coming from [parltrack](http://parltrack.euwiki.org/) into the *representative
-format* which we have written with [stf](http://www.ctrlc.hu/~stef/blog/).
-
-## [NURPA](http://nurpa.be)
-
-NURPA is a citizen group that defend our Fundamental Freedom of the Internet.
-We are active in the Belgium level and the European level.
-
-I'm a co-founder and I'm involved in the technical and networking (with humans)
-level.
-
-## [Baron](https://github.com/Psycojoker/baron)
-
-Baron is a project to build a *lossless AST* (abstract syntactic tree) for
-Python, the building block to easy write refactoring, code generation and code
-inspection tools for Python. A more detailed explanation can be found
-[here](/blog/2013/the-baron-project-part-1-what-and-why.html).
-
-The project is moving well and I'm already able to parse a not so small subset
-of python, but, considering the size of the task, I still have a lot to do.
-
-## [UrLab](http://urlab.be)
-
-UrLab is (mostly) a student Hackerspace located in the ULB (Free University of
-Brussels). We organise a lot of conferences and workshops and try to focus on
-knowledge sharing, openness and a friendly and open atmosphere.
-
-I'm not as present at it as I used to be, since full time employment is
-destroying my free time, but I've made (and continue to do) several talks and
-workshop at it, including (but not only):
-
-<div style="text-align: left; width: 70%;">
-
-<ul>
-<li>a <a href="http://docs.saltstack.com/index.html">salt</a> introduction workshop, <a href="http://psycojoker.github.io/salt_workshop_slides/">slides</a></li>
-<li>a presentation of <a href="http://www.haskell.org/haskellwiki/Haskell">haskell</a> and <a href="http://www.erlang.org/">erlang</a> <a href="https://github.com/Psycojoker/slides_haskell_or_erlang">slides</a></li>
-<li>an introduction to <a href="https://docs.djangoproject.com/en/1.6/">Django</a> where I live coded a very simple blog</li>
-<li>I've also made an introduction workshop to Django</li>
-<li>a return of experience on using <a href="http://www.zabbix.com/">Zabbix</a> at work</li>
-</ul>
-
-</div>
-
-I also really enjoy finding people to do talks at UrLab. Most of the people do
-interesting things but won't spontaneously do a talk about it. This is also a
-great occasion to build bridges between communities.
-
-I'm part of the co-initiators but this project is really a collective
-realisation and I'm proud of it.
-
-## [❤ Belgium Hacker Agenda ❤](http://hackeragenda.urlab.be/)
-
-The ❤* Belgium Hacker Agenda *❤ started as a one weekend project on "how could
-I help the members of a community that I love to know and interact more"
-(namely, the hackerspaces community of Belgium). My answer has been to scrap
-the events of every hackerspace/similar organisation of Belgium (yes, scrap,
-except one, no one is offering a .ics ..) and centralise it in one website so that
-everyone can be informed of what everyone else is doing.
-
-Since this one weekend, the project hasn't moved a lot, but I hope to be able
-to add filtering possibilities in it then add a lot more other sources of
-events in it.
-
-## [Afpyro-BE](https://groups.google.com/forum/#!forum/afpyro-be)
-
-Afpryro are python lover *apero* (aperitif) where we meet each others and
-sometimes do talks. [Ludo](https://twitter.com/GMLudo) has launched the Belgium
-version of them and I've had the pleasure to organise one edition (with [staz](http://staz.be)) and do a talk
-(["Les outils de debug en python et
-django"](http://psycojoker.github.io/slides-afpyro/#slide1)) at another one.
-
-## [FOSDEM](https://fosdem.org)'s [Python Devroom](https://www.python-fosdem.org/)
-
-I've accepted to give a hand to help organising the python devroom during the
-next FOSDEM, but to be honest I haven't done that much yet.
-
-FOSDEM is the biggest European freesoftware developers meeting. It happens
-during the first weekend of February at the ULB at Brussels.
-
-## [DierenTheater](http://dierentheater.be/)
-
-DierenTheater is a tool that parses the Belgian federal Parliament (namely "la
-Chambre" or "de Kamer"), extracts data from it and offers them to the world via
-Rest API and database dumps. The hope is to see people reuse this data to build
-wonderful tools for citizens use.
-
-I've made this project in [django-nonrel](http://django-nonrel.org/) to be able
-to use [MongoDB](http://www.mongodb.org/) as a database and I'm pretty happy
-about it for this kind of usage.
-
-## [NosÉlus.Be](http://noselus.be)
-
-NosÉlus.Be is a new project, born at the [eGov Wallonia
-Hackathon](http://hackathonegovwallonia.net/) (where I wasn't present), that
-aims to give a better vision to citizens of what their MPs are doing. The current
-focus is written questions. They have used my data from DierenTheater.
-
-I've recently went to a meeting with the initiator of that project and other
-people and I hope that we can build something beautiful together.
-
-## [Regards Citoyens](http://www.regardscitoyens.org/) ([nosdéputés.fr](http://www.nosdeputes.fr/) and [nossénateurs.fr](http://www.nossenateurs.fr/))
-
-Regards Citoyens is a French initiative that aim to simplify the process of our
-democratic institutions. One of its most know action is the website
-[nosdéputés.fr](http://www.nosdeputes.fr/) but it's only a part of what is being
-done.
-
-I'm not that much involved in it, only giving small tip from time to time, but
-I really love what they are doing so I put them here to give them some
-advertisement.
+- Python since **2008
+- Django since **2009
+-->
 
 ## Other
-<div style="text-align: left;">
 
-<ul>
-<li><a href="http://lists.entransition.be/wws/info/communs-fest">Le Festival des biens communs</a> (*Common Good Festival*) is a regular meeting in Brussels around the theme of the common goods. Their current focus is the citizen re-appropriation of the Josafat fallow land (but not only). I've had the pleasure to explain how internet and the freesoftware are a good example of common goods and how they are managed.</li>
-<li><a href="http://www.meetup.com/OpenTechSchool-Brussels/">OpenTechSchool Brussels</a> is the Brussels "chapter" of <a href="http://www.opentechschool.org/">OpenTechSchool</a> initiative. I've been a coatch for the python workshops and hope to have other occasions to learn and share.</li>
-<li><a href="https://hackerspace.be/welcome/index.html">HSBXL</a> is the oldest Hackerspace of Brussels where I go from time to time since they are doing cool things.</li>
-</ul>
+- **2015 - now** [Src](https://src.brussels/), a radio emission on freesoftware at radio campus Brussels - was doing interview and finding people/theme to talk about (but not the lead, it was Sara), also did the website in lektor - restarted mid 2017 with Fredux
+- **2013 - 2015** [Poop](http://poop.leloop.org), a diy-queer-hacker-feminist-vegan festival in Paris - was variously involved during the 3 editions
+- **2014 - 2017** [Abelli](http://www.abelli-asbl.be/), a Free software Belgian association that has done [AssociaLibre](http://associalibre.be), events build to show to the associative world what the freesoftware world can do for them
+- **2013** [Brussels' RMLL](https://2013.rmll.info), Libre Software Meeting and French yearly event for the whole freesoftware community - this edition was in a very bad state, I've been part of the group that try (and managed) to save it, doing meeting coordination
+- **2013** done some coatching at [OpenTechSchool Brussels](https://www.meetup.com/fr-FR/OpenTechSchool-Brussels/)
+- **2010** [Seeks](https://github.com/beniz/seeks) a (now dead :() decentralized federated search engine by beniz, [searx](https://asciimoo.github.io/searx/) is somehow (but now really) it's successor - I've been contributing to some of the parsers
+- **2011 - 2012** [WarGod](https://github.com/Psycojoker/wargod) a "river of flow" rss reader that generate static html pages
+- **2009 - 2010** secretary of the [BES](http://www.besciences.be/) at the ULB
+- **2009** - was involved into vim-fr.org (now dead)
+- **2006 - 2011** active member of the [Cercle Informatique of the ULB](http://cerkinfo.be) - I've had several post including vice-president
 
-</div>
+## Some of my talks
 
--
+- **2017** - [YunoHost](https://fosdem.org/2017/schedule/event/yunohost/) at FOSDEM
+- **2016** - [Un an et demi de Brique Internet](http://videos2016.capitoledulibre.org/communaute-du-libre/bram-1-an-et-demi-de-brique-internet.mp4)
+- **2016** - [Comment faire de la brique Internet](https://psycojoker.github.io/comment_faire_de_la_brique/template.html) during FFDN's 2016 GA
+- **2016** - [Comment parser et scripter le web en python](https://psycojoker.github.io/parsing_and_script_the_web_in_python/slides.slides.html) done at UrLab
+- **2014** - 2015 - presentation of RedBaron at various place (pyconf, e-novance, OSDC, UrLab, FOSDEM) here are [some slides](https://psycojoker.github.io/pyconfr-redbaron/presentation.html#slide1) and [one recording](https://youtu.be/iSWOXpPo7Us) (in french, the FOSDEM one is broken
+- **2014** - a [presentation of HackerAgenda](/blog/2015/conference-poop-2014-hackeragenda-aidons-nous-a-mieux-nous-parler.html) at POOP 2014
+- **2014** - a [presentation of Baron](https://github.com/Psycojoker/poop2-baron) at POOP 2014 (RedBaron wasn't there yet)
+- **2013** - "[Les outils de debug en python et django"](http://psycojoker.github.io/slides-afpyro/#slide1)"
+- **2013** - a <a href="http://docs.saltstack.com/index.html">salt</a> introduction workshop, <a href="http://psycojoker.github.io/salt_workshop_slides/">slides</a>
+- **2013** - a presentation of <a href="http://www.haskell.org/haskellwiki/Haskell">haskell</a> and <a href="http://www.erlang.org/">erlang</a> <a href="https://github.com/Psycojoker/slides_haskell_or_erlang">slides</a>
+- **2013** - an introduction to <a href="https://docs.djangoproject.com/en/1.6/">Django</a> where I live coded a very simple blog
+- **2013** - « [Quand le libre se mêle de démocratie](https://www.april.org/quand-le-libre-se-mele-de-democratie) » round table at the RMLL 2013
+- **2013** - presentation to relaunch Neutrinet at RMLL 2013 (was a success)
+- **2013** - presenation of the Political Memory at RMLL 2013
+- **2012** - I've also made an introduction workshop to Django that I did several times at UrLab
+- **2012** - a return of experience on using <a href="http://www.zabbix.com/">Zabbix</a> at work
+- I know that I have done more than 40 talks/workshops/other and stopped counting after that
 
-# Past
+<!--
+rdb
+-->
 
--
+*You can contact me at <a href="mailto://brain AT worlddomination dot be">brain@worlddomination.be</a>, but don't expect a quick answer I receive a lot of emails.*
 
-## [La Quadrature du Net](https://laquadrature.net)
-
-La Quadrature du Net is a citizen group that defend our Fundamental rights on
-the Internet at the French and at the European level (and probably more). They
-have been very active against
-[ACTA](https://en.wikipedia.org/wiki/Anti-Counterfeiting_Trade_Agreement) and
-many other subjects and bad law projects.
-
-I've been helping them for more than 3 years by working in the press review
-team, writing script, irc bot, websites (the Political Memory, "Pas Peur
-d'Hadopi" with mathieui, ...), making signature statistics for the written
-declaration 12, finding people to help during the written declaration 12 and
-many other.
-
-## [Software Freedom Day 2013](https://hackerspace.be/Software_Freedom_Day_2013) at the [HSBXL](https://hackerspace.be/welcome/index.html)
-
-Software Freedom Day is a worldwide event where local freesoftware enthusiast
-are encouraged to make celebration events. Jurgen has been doing this at the
-[HSBXL](https://hackerspace.be/welcome/index.html) for some years already. This
-year, Sid and I joined our forces with Jurgen, and with the help of members of
-the HSBXL, it ended up being a [very cool
-event](https://hackerspace.be/Software_Freedom_Day_2013).
-
-## [RMLL 2013](https://2013.rmll.info/en/index.html)
-
-The RMLL (LSM for Libre Software Meeting in english) is an annual freesoftware
-meeting that happens in France, Belgium and Switzerland. I've joined the team of
-the 2013 edition the first time this project nearly failed due to the
-resignation of one of the key members. My main contribution has been to manage
-the meetings since we were organizing ourselves in a do-ocratie way.
-
-I've also made two presentations in the, very cool, Hackerspace Room, one about
-the Political Memory and one to relaunch Neutrinet with the help of
-[Taziden](http://www.libre-parcours.net/) and
-[Bouska](https://twitter.com/b0uska). I've also participated to a round table
-organised by [Teymour](http://www.april.org/trombinoscope.php?membre=tmorlier)
-for Regards Citoyens (or maybe April? Not that sure) called « *Quand le libre
-se mêle de démocratie* ».
-
-## [P402](https://hackerspace.be/welcome/index.html)
-
-P402 is a student collaborative platform built for the ULB by a friend (he
-usually doesn't like being quoted online) following [a
-post](http://worlddomination.be/blog/2012/idee-dun-plateforme-dentre-aide-pour-edutiants.html)
-(in french) on how this kind of platform could be.
-
-I've also contributed a bit to the code.
-
-## [Seeks](https://beniz.github.io/seeks/)
-
-Seeks used to be, for me, our best chance to have a good alternative to google
-search engine. The main idea was make a network that put people that do similar
-research together and to share this knowledge in a DHT. Sadly, its main
-contributor has stopped working on it and the source code in C++, written in a very
-"scientific" style, makes it hard for anyone to take over the project.
-
-I've written a good part of the search engine parsers used in it. I'm still
-waiting (because of the lack of time for me to do it myself) for a successor
-project to emerge. And no, [searx](https://github.com/asciimoo/searx) is not
-its successor, it's only an anomysing meta-search engine.
-
-## [WarGod](https://github.com/Psycojoker/wargod)
-
-Not that much an important thing, but since I'm still using it almost every day
-I'll put it here. WarGod is a very simple RSS reader that generate static html
-pages and that allow me to write simple xpath query to grab the content of a
-post.
-
-## [Cercle Informatique de l'ULB](http://cerkinfo.be)
-
-The Cercle Informatique de l'ULB is a student society in which I've been
-involved for many years during my studies. I've been lesson delegate, vice
-president, (lost at presidency) and propaganda delegate. I've spent many years
-doing a lot of things there, including [painting some
-walls](/blog/2010/oh-noes-internet-invades-my-frats-local.html) and serving
-beers at the FOSDEM.
-
-Related to the Cercle Informatique, I've been fux for 2 years then Grand Senior
-for 2 years in it's guilde, the Guilde Gates (it's a student group that
-organises [cantus](https://fr.wikipedia.org/wiki/Cantus)).
-
-## [BES](http://www.besciences.be/)
-
-The BES, Bureau des Étudiants en Science, is a student representation
-organisation at the ULB. I was secretary in it for one year.
-
-# Misc
-
-I'm also a member of [April](https://www.april.org/) and [Afpy](http://www.afpy.org/) and RAT (Régie Alternative Télécom, don't have a website yet).
-
-I was told one day that I was supposed to be a Belgian Telecomix agent. I still don't know what this is supposed to mean.
-
-*The content of this website is <a href="https://github.com/Psycojoker/worlddomination.be">versioned with git</a>. If you want to change/improve something just send me a patch.*
-
-*Feel free to contact me on <a href="mailto://brain AT worlddomination dot be">brain@worlddomination.be</a>.*
 

@@ -3,9 +3,12 @@ body {
     margin: auto;
     max-width: 848px;
     color: #647a90;
+    line-height: 1.4;
 }
 
-ul { margin: 0; }
+ul {
+    margin: 0;
+}
 
 #footer {
     text-align: center;
@@ -14,7 +17,9 @@ ul { margin: 0; }
     font-size: 0.7em;
 }
 
-a { color: #55757B; }
+a {
+    color: #55757B;
+}
 
 #header {
     padding: 0;
@@ -73,7 +78,7 @@ ul.breadcrumbs {
 
 #sitenav a {
     text-decoration: none;
-    padding: 0.2em;
+    padding: 0.4em;
     background-color: #b5cce3;
     color: #4d6680;
 }

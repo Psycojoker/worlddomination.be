@@ -1,4 +1,4 @@
-title:  Little utility to add an event to Neutrinet's wiki
+title: Little utility to add an event to Neutrinet's wiki
 ---
 body:
 
@@ -25,7 +25,7 @@ important), I took the time to make this script super nice and fancy.
 
 Here its help page:
 
-```
+```text
 usage: add_event [-h] -d D [-m M] [--hour HOUR] [-y Y] [--min MIN]
                  [--location LOCATION] [-t TITLE]
 
@@ -60,4 +60,4 @@ Source code of the script: [https://github.com/psycojoker/neutrinet_add_event](h
 
 
 ---
-pub_date:  2015-07-07
+pub_date: 2015-07-07
