@@ -6,3 +6,6 @@ name = Internet Cube
 enable = yes
 default = yes
 target = rsync://psycojoker@worlddomination.be/var/www/my_webapp
+
+[packages]
+lektor-markdown-highlighter = 0.3.2
