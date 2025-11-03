@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
+<feed xmlns="https://www.w3.org/2005/Atom">
 <title>WorldDomination.be</title>
-<link href="http://worlddomination.be/atom.xml" rel="self"/>
-<link href="http://worlddomination.be/atom.xml"/>
+<link href="https://www.worlddomination.be/atom.xml" rel="self"/>
+<link href="https://www.worlddomination.be/atom.xml"/>
 
 {% for post in site.query("/blog").limit(10)|rejectattr("private") %}
     {% if loop.index == 1 %}
         <updated>{{ post.pub_date }}</updated>
-        <id>http://worlddomination.be</id>
+        <id>https://www.worlddomination.be</id>
     {% endif %}
     {% if loop.index <= 10 %}
         <entry>
             <title>{{ post.title }}</title>
             <author><name>Laurent Peuch</name></author>
-            <link href="http://worlddomination.be/{{ post|url }}"/>
+            <link href="https://www.worlddomination.be/{{ post|url }}"/>
             <published>{{ post.pub_date }}</published>
             <updated>{{ post.pub_date }}</updated>
-            <id>http://worlddomination.be/{{ post|url }}</id>
+            <id>https://www.worlddomination.be/{{ post|url }}</id>
             <content type="html">
                 {{ post.body|forceescape }}
             </content>
