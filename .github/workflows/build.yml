@@ -1,0 +1,39 @@
+---
+name: Build the blog
+
+on:
+  push:
+    branches:
+      - "*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.7"
+
+      - name: Install dependencies
+        run: |
+          python3 -m venv ve
+          ve/bin/pip install -r requirements.txt
+
+      - name: Re-add lektor plugins
+        run: |
+          ve/bin/lektor plugins reinstall
+
+      - name: Build the blog
+        run: |
+          ve/bin/lektor build -O build
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: build
