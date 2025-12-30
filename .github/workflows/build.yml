@@ -37,3 +37,18 @@ jobs:
         with:
           name: build
           path: build
+  deploy:
+    needs: build
+    runs-on: ubuntu-22.04
+    environment: deploy
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: build
+      - uses: actions/setup-node@v6
+      - name: deploy on deuxfleurs using dxfl
+        run: npx --yes dxfl deploy www.worlddomination.be ./build --yes
+        env:
+          AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+          AWS_SECRET_ACCESS_KEY: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
